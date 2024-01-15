@@ -1,0 +1,138 @@
+<!-- ingreso.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>TT.DD. Ingresos</title>
+  </head>
+  <body>
+    <header>
+      <h1>TECNOLOGÍAS DIGITALES - LABORATORIO</h1>
+    </header>
+    <h2>INGRESO DE EQUIPOS A REPARAR</h2>
+    <form id="ingreso-form">
+      <div>
+        <label for="fecha-ingreso">Fecha ingreso:</label>
+        <input
+          type="text"
+          id="fecha-ingreso"
+          name="fecha-ingreso"
+          placeholder="dd/mm/aa"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="ingresa">Enviado por:</label>
+        <input
+          type="text"
+          id="ingresa"
+          name="ingresa"
+          placeholder="Nombre y Apellido"
+          maxlength="30"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="email@email.com"
+          maxlength="40"
+        />
+      </div>
+
+      <div>
+        <label for="interno">Interno:</label>
+        <input
+          type="tel"
+          id="interno"
+          name="interno"
+          maxlength="10"
+          placeholder="Ingrese su interno"
+          oninput="validarNumeros(this)"
+        />
+      </div>
+
+      <div>
+        <label for="equipo">Equipo:</label>
+        <input
+          type="text"
+          id="equipo"
+          name="equipo"
+          placeholder="Ingrese su equipo / producto"
+          maxlength="30"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="marca">Marca:</label>
+        <input
+          type="text"
+          id="marca"
+          name="marca"
+          placeholder="Ingrese la marca del equipo"
+          maxlength="30"
+        />
+      </div>
+
+      <div>
+        <label for="nserie">N° de Serie:</label>
+        <input
+          type="text"
+          id="nserie"
+          name="nserie"
+          placeholder="Ingrese N° de Serie"
+          maxlength="30"
+        />
+      </div>
+
+      <div>
+        <label for="falla">Descripción de la falla:</label>
+        <input
+          type="text"
+          id="falla"
+          name="falla"
+          placeholder="Breve descripción de la falla"
+          maxlength="100"
+        />
+      </div>
+
+      <div>
+        <label for="linea">Línea:</label>
+        <select type="text" id="linea" name="linea">
+          <option value="N/A">N/A</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="H">H</option>
+          <option value="P">P</option>
+          <option value="U">U</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="sector">Sector:</label>
+        <input
+          type="text"
+          id="sector"
+          name="sector"
+          placeholder="Ingrese su área, jefatura o sector"
+          maxlength="30"
+        />
+      </div>
+
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <script src="form.js"></script>
+  </body>
+</html>
