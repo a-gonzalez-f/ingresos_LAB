@@ -132,8 +132,6 @@ td:nth-child(2) {
   height: 3rem;
   text-align: center;
   margin-bottom: 0;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
 }
 
 #cantidad::-webkit-inner-spin-button,
