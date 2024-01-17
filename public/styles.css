@@ -73,7 +73,7 @@ select {
   box-sizing: border-box;
 }
 
-button {
+.submitbutton {
   font-size: 20px;
   position: fixed;
   bottom: 30px;
@@ -87,7 +87,7 @@ button {
   transition: all 0.3s;
 }
 
-button:hover {
+.submitbutton:hover {
   color: var(--color-1);
   background-color: #4caf51;
   border-radius: 15px;
@@ -128,10 +128,33 @@ td:nth-child(2) {
 }
 
 #cantidad {
-  width: 5rem;
+  width: 3.5rem;
+  height: 3rem;
   text-align: center;
   margin-bottom: 0;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 }
-#divcantidad {
+
+#cantidad::-webkit-inner-spin-button,
+#cantidad::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Eliminar el margen en Safari */
+}
+
+.divcantidad {
   margin: 0 10rem;
+}
+.row {
+  display: flex;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+}
+.increment,
+.decrement {
+  height: 50%;
 }

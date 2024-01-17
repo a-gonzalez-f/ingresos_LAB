@@ -10,6 +10,19 @@ function validarNumeros(input) {
   input.value = input.value.replace(/[^0-9]/g, "");
 }
 
+function incrementCantidad() {
+  var cantidadInput = document.getElementById("cantidad");
+  cantidadInput.value = parseInt(cantidadInput.value) + 1;
+}
+
+function decrementCantidad() {
+  var cantidadInput = document.getElementById("cantidad");
+  var currentCantidad = parseInt(cantidadInput.value);
+  if (currentCantidad > 1) {
+    cantidadInput.value = currentCantidad - 1;
+  }
+}
+
 // envio formulario a la db
 document
   .getElementById("ingreso-form")
