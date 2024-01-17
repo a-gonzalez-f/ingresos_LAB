@@ -16,6 +16,7 @@
   --color-5: #3c2373;
   --color-6: #5aff81;
   --color-7: #53ea76;
+  --color-8: #f14d3b;
 }
 
 body {
@@ -95,15 +96,14 @@ select {
 }
 
 table {
-  width: 95%;
+  width: 90%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 th {
   background-color: #f2f2f2;
   padding: 10px;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
   border: 1px solid #ddd;
 }
@@ -111,6 +111,22 @@ th {
 td {
   padding: 10px;
   border: 1px solid #ddd;
+  text-align: center;
+}
+
+td > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: font-weight 0.1s;
+  color: var(--color-4);
+  font-size: 16px;
+  padding: 0;
+}
+
+td > button:hover {
+  color: var(--color-8);
+  font-weight: 600;
 }
 
 tr:nth-child(even) {

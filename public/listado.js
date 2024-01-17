@@ -1,5 +1,4 @@
 // listado.js
-
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const response = await fetch("http://localhost:3000/listar-equipos");
@@ -47,8 +46,46 @@ function fillTable(data) {
       }
     }
 
+    // Agregar botones de eliminación
+    const deleteCell = document.createElement("td");
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+
+    // Agregar confirmación al hacer clic en el botón "Eliminar"
+    deleteButton.addEventListener("click", () => {
+      const confirmacion = window.confirm(
+        "¿Estás seguro de que quieres eliminar este equipo?"
+      );
+      if (confirmacion) {
+        deleteEquipo(equipo._id);
+      }
+    });
+
+    deleteCell.appendChild(deleteButton);
+    row.appendChild(deleteCell);
+
     tbody.appendChild(row);
   });
 
   table.appendChild(tbody);
+}
+
+async function deleteEquipo(id) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/eliminar-equipo/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al eliminar el equipo");
+    }
+
+    // Recargar la página después de la eliminación
+    window.location.reload();
+  } catch (error) {
+    console.error(error.message);
+  }
 }

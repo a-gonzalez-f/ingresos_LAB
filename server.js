@@ -41,5 +41,24 @@ app.get("/listar-equipos", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes DELETE en "/eliminar-equipo/:id"
+app.delete("/eliminar-equipo/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const resultado = await Modelo.findByIdAndDelete(equipoId);
+
+    if (!resultado) {
+      // Si no se encuentra el equipo con el ID dado
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    res.status(200).send("Equipo eliminado correctamente");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al eliminar el equipo");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
