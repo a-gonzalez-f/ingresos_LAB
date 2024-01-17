@@ -11,9 +11,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     fillTable(data);
   } catch (error) {
     console.error(error.message);
-    // Puedes agregar lógica adicional para manejar el error, como mostrar un mensaje al usuario.
   }
 });
+
+function formatDate(dateString) {
+  const options = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    timeZone: "UTC",
+  };
+  return new Date(dateString).toLocaleDateString("es-AR", options);
+}
 
 function fillTable(data) {
   const table = document.getElementById("equipos-table");
@@ -23,9 +32,19 @@ function fillTable(data) {
     const row = document.createElement("tr");
 
     for (const key in equipo) {
-      const cell = document.createElement("td");
-      cell.textContent = equipo[key];
-      row.appendChild(cell);
+      // Excluir _id y __v
+      if (key !== "_id" && key !== "__v") {
+        const cell = document.createElement("td");
+
+        // Formatear fecha si la clave es "fechaIngreso"
+        if (key === "fechaIngreso") {
+          cell.textContent = formatDate(equipo[key]);
+        } else {
+          cell.textContent = equipo[key];
+        }
+
+        row.appendChild(cell);
+      }
     }
 
     tbody.appendChild(row);

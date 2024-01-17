@@ -14,12 +14,13 @@
     <h2>INGRESO DE EQUIPOS A REPARAR</h2>
     <form id="ingreso-form">
       <div>
-        <label for="fecha-ingreso">Fecha ingreso:</label>
+        <label for="fechaIngreso">Fecha ingreso:</label>
         <input
-          type="text"
-          id="fecha-ingreso"
-          name="fecha-ingreso"
-          placeholder="dd/mm/aa"
+          type="date"
+          id="fechaIngreso"
+          name="fechaIngreso"
+          min="2000-01-01"
+          max="2100-01-01"
           required
         />
       </div>
@@ -83,11 +84,11 @@
       </div>
 
       <div>
-        <label for="nserie">N° de Serie:</label>
+        <label for="nSerie">N° de Serie:</label>
         <input
           type="text"
-          id="nserie"
-          name="nserie"
+          id="nSerie"
+          name="nSerie"
           placeholder="Ingrese N° de Serie"
           maxlength="30"
         />

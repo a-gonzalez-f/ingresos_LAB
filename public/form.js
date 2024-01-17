@@ -1,18 +1,15 @@
 // form.js
 
-// fecha del día por defecto
-var fechaIngresoInput = document.getElementById("fecha-ingreso");
-var fechaActual = new Date();
-var dia = fechaActual.getDate().toString().padStart(2, "0");
-var mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0");
-var año = fechaActual.getFullYear().toString().slice(2);
-var fechaFormateada = `${dia}/${mes}/${año}`;
-fechaIngresoInput.value = fechaFormateada;
+//FECHA
+// Establecer la fecha actual por defecto
+const today = new Date().toISOString().split("T")[0];
+document.getElementById("fechaIngreso").value = today;
 
 // interno solo numero
 function validarNumeros(input) {
   input.value = input.value.replace(/[^0-9]/g, "");
 }
+
 // envio formulario a la db
 document
   .getElementById("ingreso-form")
@@ -22,11 +19,7 @@ document
     const formData = new FormData(this);
     const jsonData = {};
     formData.forEach((value, key) => {
-      if (key === "fecha-ingreso") {
-        jsonData[key] = new Date(value); // Convertir la cadena de fecha a objeto Date
-      } else {
-        jsonData[key] = value;
-      }
+      jsonData[key] = value;
     });
 
     const response = await fetch("http://localhost:3000/guardar-dato", {
