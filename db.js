@@ -1,4 +1,5 @@
 // db.js
+
 const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27017/ingresosLAB");
@@ -18,4 +19,13 @@ const schema = new mongoose.Schema({
 
 const Modelo = mongoose.model("ingresos", schema);
 
-module.exports = Modelo;
+const schemaInterno = new mongoose.Schema({
+  LINEA: String,
+  REF1: String,
+  REF2: String,
+  INTERNO: String,
+});
+
+const ModeloInternos = mongoose.model("internos", schemaInterno);
+
+module.exports = { Modelo, ModeloInternos };

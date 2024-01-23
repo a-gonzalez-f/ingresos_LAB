@@ -3,7 +3,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const Modelo = require("./db");
+const { Modelo, ModeloInternos } = require("./db");
 
 app.use(express.json());
 
@@ -57,6 +57,21 @@ app.delete("/eliminar-equipo/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al eliminar el equipo");
+  }
+});
+
+// Ruta para mostrar internos.html
+app.get("/internos", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "internos.html"));
+});
+
+// Ruta para manejar solicitudes GET en "/listar-internos"
+app.get("/listar-internos", async (req, res) => {
+  try {
+    const internos = await ModeloInternos.find();
+    res.json(internos);
+  } catch (error) {
+    res.status(500).send("Error al obtener la lista de internos");
   }
 });
 

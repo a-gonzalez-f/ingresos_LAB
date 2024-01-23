@@ -1,0 +1,83 @@
+/* styles-datatables.css */
+
+@import url(styles.css);
+
+table {
+  width: 95vw;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+table th {
+  background-color: #eee;
+  padding: 10px 27px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+table td {
+  padding: 10px 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+td > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: font-weight 0.1s;
+  color: var(--color-4);
+  font-size: 16px;
+  padding: 0;
+}
+
+td > button:hover {
+  color: var(--color-8);
+  font-weight: 600;
+}
+
+.checkbox-cell input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.checkbox-cell input[type="checkbox"]:checked {
+  background-color: var(--color-5);
+  border-color: var(--color-5);
+  color: #fff;
+  border-radius: 50%;
+}
+
+.marcada {
+  background-color: #e4e4e4 !important;
+}
+
+#equipos-table_wrapper,
+#internos-table_wrapper {
+  margin-bottom: 5rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+}
+
+.dataTables_filter {
+  padding: 15px 0 0 15px;
+}
+
+.dataTables_filter input {
+  width: 200px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#internos-table th {
+  padding: 0;
+  border: 0;
+}

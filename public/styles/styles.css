@@ -31,6 +31,9 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: var(--color-6);
   width: 100%;
   display: flex;
@@ -50,7 +53,7 @@ h2 {
   justify-content: center;
   gap: 10%;
   width: 60vw;
-  padding: 40px 40px 10px 40px;
+  padding: 2rem 3rem 1rem 3rem;
   background-color: var(--color-1);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -94,61 +97,6 @@ label {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-table {
-  width: 90%;
-  border-collapse: collapse;
-  margin-bottom: 2rem;
-}
-
-th {
-  background-color: #f2f2f2;
-  padding: 10px 0px;
-  text-align: center;
-  font-weight: bold;
-  border: 1px solid #ddd;
-}
-
-td {
-  padding: 0px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-td > button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: font-weight 0.1s;
-  color: var(--color-4);
-  font-size: 16px;
-  padding: 0;
-}
-
-td > button:hover {
-  color: var(--color-8);
-  font-weight: 600;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-th:nth-child(1),
-td:nth-child(1) {
-  min-width: 7%;
-  width: 8%;
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-  min-width: 15%;
-}
-
-.checkbox-cell {
-  padding: 10px;
-  width: 50px;
-}
-
 #cantidad {
   width: 3.5rem;
   height: 3rem;
@@ -159,7 +107,7 @@ td:nth-child(2) {
 #cantidad::-webkit-inner-spin-button,
 #cantidad::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0; /* Eliminar el margen en Safari */
+  margin: 0;
 }
 
 .divcantidad {
@@ -181,8 +129,8 @@ td:nth-child(2) {
 
 .eliminarbutton {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 20px;
+  right: 20px;
   background-color: var(--color-4);
   padding: 10px 15px;
   border: none;
@@ -199,23 +147,4 @@ td:nth-child(2) {
   background-color: var(--color-8);
   border-radius: 15px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-cell input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.checkbox-cell input[type="checkbox"]:checked {
-  background-color: var(--color-5);
-  border-color: var(--color-5);
-  color: #fff;
-  border-radius: 50%;
 }

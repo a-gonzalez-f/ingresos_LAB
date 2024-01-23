@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await response.json();
     fillTable(data);
+    $("#equipos-table").DataTable({
+      paging: false,
+      ordering: true,
+      info: false,
+      searching: true,
+      language: {
+        search: "Buscar:",
+      },
+      columnDefs: [
+        { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11] }, // columnas no ordenables
+      ],
+    });
   } catch (error) {
     console.error(error.message);
   }
@@ -54,14 +66,21 @@ function fillTable(data) {
     deleteCell.appendChild(deleteButton);
     row.appendChild(deleteCell);
 
-    // Nueva celda para la casilla de verificación
     const checkboxCell = document.createElement("td");
-    checkboxCell.classList.add("checkbox-cell"); // Agrega la clase
+    checkboxCell.classList.add("checkbox-cell");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.value = equipo._id; // Puedes usar el ID como valor
+    checkbox.value = equipo._id;
     checkboxCell.appendChild(checkbox);
     row.appendChild(checkboxCell);
+
+    checkbox.addEventListener("change", function () {
+      if (this.checked) {
+        row.classList.add("marcada");
+      } else {
+        row.classList.remove("marcada");
+      }
+    });
 
     tbody.appendChild(row);
   });
