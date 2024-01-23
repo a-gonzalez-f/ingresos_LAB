@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       searching: true,
       language: {
         search: "Buscar:",
+        zeroRecords: "No se encontraron registros",
+        emptyTable: "No hay datos disponibles en la tabla",
       },
       ajax: {
         url: "http://localhost:3000/listar-internos",
