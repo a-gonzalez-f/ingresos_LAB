@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       searching: true,
       language: {
         search: "Buscar:",
+        zeroRecords: "No se encontraron registros",
+        emptyTable: "No hay datos disponibles en la tabla",
       },
       columnDefs: [
         { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11] }, // columnas no ordenables
