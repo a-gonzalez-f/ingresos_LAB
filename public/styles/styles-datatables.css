@@ -3,17 +3,21 @@
 @import url(styles.css);
 
 table {
-  width: 95vw;
+  width: 90vw;
   border-collapse: collapse;
   margin-bottom: 2rem;
+  font-size: 15px;
 }
 
 table th {
   background-color: #eee;
-  padding: 10px 27px;
+  padding: 10px 25px;
   text-align: center;
   font-weight: bold;
   border: 1px solid #ddd;
+}
+table.dataTable thead th {
+  text-align: center;
 }
 
 table td {
@@ -93,4 +97,47 @@ td:nth-child(4) {
 td:nth-child(2),
 td:nth-child(3) {
   width: 40%;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 0;
+  margin: auto;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.A {
+  background-color: var(--color-A);
+}
+.B {
+  background-color: var(--color-B);
+}
+.C {
+  background-color: var(--color-C);
+}
+.D {
+  background-color: var(--color-D);
+}
+.E {
+  background-color: var(--color-E);
+}
+.H {
+  background-color: var(--color-H);
+}
+.P {
+  background-color: var(--color-P);
+}
+.U {
+  background-color: var(--color-U);
+}
+.n-a {
+  color: var(--color-4);
+  font-size: 14px;
 }

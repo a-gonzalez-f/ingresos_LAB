@@ -17,6 +17,14 @@
   --color-6: #5aff81;
   --color-7: #53ea76;
   --color-8: #f14d3b;
+  --color-A: #1b93c2;
+  --color-B: #cf1222;
+  --color-C: #015a9b;
+  --color-D: #05735f;
+  --color-E: #661371;
+  --color-H: #f0cd1f;
+  --color-P: #ffb71b;
+  --color-U: #da6c2b;
 }
 
 html {
@@ -65,6 +73,7 @@ h2 {
   background-color: var(--color-1);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 #ingreso-form > div {
@@ -138,8 +147,9 @@ label {
 }
 
 .eliminarbutton {
-  position: absolute;
-  right: 10px;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
   background-color: var(--color-4);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   padding: 10px 15px;
@@ -198,12 +208,22 @@ main {
 }
 
 footer {
-  position: relative;
   bottom: 0;
   background-color: var(--color-5);
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
+  box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+  margin-top: 2rem;
 }
 
 .footer-img {

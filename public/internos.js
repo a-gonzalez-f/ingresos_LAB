@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         dataSrc: "",
       },
       columns: [
-        // Definir tus columnas aquí
         { data: "LINEA" },
         { data: "REFERENCIA 1" },
         { data: "REFERENCIA 2" },

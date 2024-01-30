@@ -48,12 +48,25 @@ function fillTable(data) {
     for (const key in equipo) {
       if (key !== "_id" && key !== "__v") {
         const cell = document.createElement("td");
+        const contentDiv = document.createElement("div");
+
         // Formatear fecha si la clave es "fechaIngreso"
         if (key === "fechaIngreso") {
-          cell.textContent = formatDate(equipo[key]);
+          contentDiv.textContent = formatDate(equipo[key]);
         } else {
-          cell.textContent = equipo[key];
+          contentDiv.textContent = equipo[key];
+
+          // Agregar clase al div según el valor de la propiedad "linea"
+          if (key === "linea") {
+            contentDiv.classList.add(equipo[key], "circle");
+
+            if (equipo[key] === "N/A") {
+              contentDiv.classList.add("n-a");
+            }
+          }
         }
+
+        cell.appendChild(contentDiv);
         row.appendChild(cell);
       }
     }
@@ -61,7 +74,8 @@ function fillTable(data) {
     // Nueva celda para el botón de eliminación
     const deleteCell = document.createElement("td");
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Eliminar";
+    deleteButton.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"/></svg>';
     deleteButton.addEventListener("click", () => {
       deleteEquipo(equipo._id);
     });
