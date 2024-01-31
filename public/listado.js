@@ -1,4 +1,19 @@
 // listado.js
+const columnVisibility = [
+  true, // 0: Ingreso
+  true, // 1: Ingresado por
+  false, // 2: Email
+  false, // 3: Interno
+  true, // 4: Equipo
+  true, // 5: Marca
+  false, // 6: N° Serie
+  true, // 7: Descripción de la Falla
+  true, // 8: Línea
+  false, // 9: Sector
+  true, // 10: Botón de Eliminación
+  true, // 11: Checkbox de Selección
+];
+
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const response = await fetch("http://localhost:3000/listar-equipos");
@@ -20,12 +35,27 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
       columnDefs: [
         { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11] }, // columnas no ordenables
+        { visible: columnVisibility[2], targets: 2 }, // email
+        { visible: columnVisibility[3], targets: 3 }, // interno
+        { visible: columnVisibility[6], targets: 6 }, // nserie
+        { visible: columnVisibility[9], targets: 9 }, // sector
       ],
     });
   } catch (error) {
     console.error(error.message);
   }
 });
+
+function toggleColumn(columnIndex) {
+  columnVisibility[columnIndex] = !columnVisibility[columnIndex];
+  $("#equipos-table")
+    .DataTable()
+    .column(columnIndex)
+    .visible(columnVisibility[columnIndex]);
+
+  const buttonText = columnVisibility[columnIndex] ? "Ocultar" : "Mostrar";
+  $(`#toggleBtn-${columnIndex}`).text(buttonText);
+}
 
 function formatDate(dateString) {
   const options = {

@@ -207,6 +207,36 @@ main {
   justify-content: center;
 }
 
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter > button {
+  background-color: #c8c8c8;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  transition: all 0.2s;
+}
+
+.filter > button:hover {
+  background-color: #aaa;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
 footer {
   bottom: 0;
   background-color: var(--color-5);
@@ -223,7 +253,6 @@ footer {
 
 .fixed {
   position: fixed;
-  margin-top: 2rem;
 }
 
 .footer-img {
