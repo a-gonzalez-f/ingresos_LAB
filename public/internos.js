@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const data = await response.json();
     fillTable(data);
 
-    $("#internos-table").DataTable({
+    const dataTable = $("#internos-table").DataTable({
       paging: false,
       ordering: false,
       info: false,
@@ -29,6 +29,24 @@ document.addEventListener("DOMContentLoaded", async function () {
         { data: "REFERENCIA 2" },
         { data: "INTERNO" },
       ],
+    });
+
+    // Evento search.dt se dispara después de cada búsqueda
+    dataTable.on("search.dt", function () {
+      // Verificar si la búsqueda está vacía
+      const isEmpty = !dataTable.search();
+
+      // Mostrar u ocultar la tabla según si la búsqueda está vacía
+      $("#internos-table").css("display", isEmpty ? "none" : "table");
+    });
+
+    // Evento preDraw.dt se dispara antes de redibujar la tabla
+    dataTable.on("preDraw.dt", function () {
+      // Verificar si la búsqueda está vacía
+      const isEmpty = !dataTable.search();
+
+      // Mostrar u ocultar la tabla según si la búsqueda está vacía
+      $("#internos-table").css("display", isEmpty ? "none" : "table");
     });
   } catch (error) {
     console.error(error.message);

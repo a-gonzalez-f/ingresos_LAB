@@ -10,8 +10,9 @@ const columnVisibility = [
   true, // 7: Descripción de la Falla
   true, // 8: Línea
   false, // 9: Sector
-  true, // 10: Botón de Eliminación
-  true, // 11: Checkbox de Selección
+  true, // 10: Estado
+  true, // 11: Eliminar
+  true, // 12: Checkbox
 ];
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -34,16 +35,34 @@ document.addEventListener("DOMContentLoaded", async function () {
         emptyTable: "No hay datos disponibles en la tabla",
       },
       columnDefs: [
-        { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11] }, // columnas no ordenables
+        { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 11, 12] }, // columnas no ordenables
         { visible: columnVisibility[2], targets: 2 }, // email
         { visible: columnVisibility[3], targets: 3 }, // interno
         { visible: columnVisibility[6], targets: 6 }, // nserie
         { visible: columnVisibility[9], targets: 9 }, // sector
+        { visible: columnVisibility[10], targets: 10 }, // estado
+        { visible: columnVisibility[11], targets: 11 }, // eliminar
+        { visible: columnVisibility[12], targets: 12 }, // checkbox
       ],
+      autoWidth: false,
     });
   } catch (error) {
     console.error(error.message);
   }
+  const checkboxes = document.querySelectorAll(
+    '.checkbox-cell input[type="checkbox"]'
+  );
+  const eliminarButton = document.querySelector(".eliminarbutton");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      if (this.checked) {
+        eliminarButton.classList.add("marcado");
+      } else {
+        eliminarButton.classList.remove("marcado");
+      }
+    });
+  });
 });
 
 function toggleColumn(columnIndex) {
@@ -73,6 +92,7 @@ function fillTable(data) {
 
   data.forEach((equipo) => {
     const row = document.createElement("tr");
+    row.id = `equipo-${equipo._id}`;
 
     // Resto de las celdas (excluir _id y __v)
     for (const key in equipo) {
@@ -101,7 +121,7 @@ function fillTable(data) {
       }
     }
 
-    // Nueva celda para el botón de eliminación
+    // Celda para el botón de eliminación
     const deleteCell = document.createElement("td");
     const deleteButton = document.createElement("button");
     deleteButton.innerHTML =

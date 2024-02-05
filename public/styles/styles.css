@@ -147,14 +147,16 @@ label {
 }
 
 .eliminarbutton {
+  display: flex;
+  gap: 1rem;
   position: fixed;
-  right: 30px;
-  bottom: 30px;
+  right: -200px;
+  bottom: 10vh;
   background-color: var(--color-4);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   padding: 10px 15px;
   border: none;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   font-size: 15px;
   font-weight: 500;
   color: var(--color-1);
@@ -166,7 +168,24 @@ label {
 .eliminarbutton:hover {
   color: var(--color-4);
   background-color: var(--color-8);
-  border-radius: 15px;
+  right: 0;
+}
+
+.marcado {
+  animation: moverbtn 0.5s ease-in-out;
+}
+
+@keyframes moverbtn {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10%);
+    background-color: var(--color-8);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 ul {
@@ -175,7 +194,7 @@ ul {
 }
 
 li {
-  margin-bottom: 20px;
+  margin-bottom: 3rem;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -259,4 +278,22 @@ footer {
   width: 20vw;
   height: auto;
   margin: 30px;
+}
+
+.context-menu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.context-menu div {
+  padding: 8px;
+  white-space: nowrap;
+}
+
+.context-menu div:hover {
+  background-color: #f0f0f0;
 }
