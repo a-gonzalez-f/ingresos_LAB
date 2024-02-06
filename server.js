@@ -75,5 +75,29 @@ app.get("/listar-internos", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes PATCH en "/cambiar-estado/:id"
+app.patch("/cambiar-estado/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const nuevoEstado = req.body.estado;
+
+    const resultado = await Modelo.findByIdAndUpdate(
+      equipoId,
+      { estado: nuevoEstado },
+      { new: true }
+    );
+
+    if (!resultado) {
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    res.status(200).send("Estado del equipo actualizado correctamente");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al actualizar el estado del equipo");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));

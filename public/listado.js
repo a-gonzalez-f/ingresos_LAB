@@ -15,6 +15,70 @@ const columnVisibility = [
   true, // 12: Checkbox
 ];
 
+// Variable para mantener una referencia al menú contextual actualmente abierto
+let activeContextMenu = null;
+
+document.addEventListener("contextmenu", function (event) {
+  // Prevenir el comportamiento por defecto del menú contextual
+  event.preventDefault();
+});
+
+document
+  .getElementById("equipos-table")
+  .addEventListener("contextmenu", handleContextMenu);
+
+async function handleContextMenu(event) {
+  event.preventDefault();
+
+  // Si hay un menú contextual activo, ciérralo antes de abrir uno nuevo
+  if (activeContextMenu) {
+    activeContextMenu.remove();
+  }
+
+  const targetElement = event.target.closest("tr");
+
+  if (targetElement) {
+    const equipoId = targetElement.id.split("-")[1];
+
+    const contextMenu = document.createElement("div");
+    contextMenu.className = "context-menu";
+    contextMenu.innerHTML = `
+      <div onclick="changeStatus('${equipoId}', 'No iniciado')">No iniciado</div>
+      <div onclick="changeStatus('${equipoId}', 'Iniciado')">Iniciado</div>
+      <div onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
+      <div onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
+      <div onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
+    `;
+
+    const posX = event.clientX;
+    const posY = event.clientY;
+
+    const windowHeight = window.innerHeight;
+    const menuHeight = contextMenu.clientHeight;
+    if (posY + menuHeight > windowHeight) {
+      posY -= menuHeight;
+    }
+
+    contextMenu.style.left = `${posX}px`;
+    contextMenu.style.top = `${posY}px`;
+
+    document.body.appendChild(contextMenu);
+    activeContextMenu = contextMenu;
+
+    // Agregar un event listener para cerrar el menú contextual al hacer clic en cualquier parte del documento
+    document.addEventListener("click", closeContextMenu);
+  }
+}
+
+function closeContextMenu(event) {
+  // Si se hace clic fuera del menú contextual, ciérralo
+  if (activeContextMenu && !activeContextMenu.contains(event.target)) {
+    activeContextMenu.remove();
+    activeContextMenu = null;
+    document.removeEventListener("click", closeContextMenu);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const response = await fetch("http://localhost:3000/listar-equipos");
@@ -93,6 +157,9 @@ function fillTable(data) {
   data.forEach((equipo) => {
     const row = document.createElement("tr");
     row.id = `equipo-${equipo._id}`;
+
+    // Agregar una clase al tr según el estado actual del equipo
+    row.classList.add(equipo.estado.toLowerCase().replace(" ", "-"));
 
     // Resto de las celdas (excluir _id y __v)
     for (const key in equipo) {
@@ -209,5 +276,29 @@ function deleteSelectedEquipos() {
   if (confirmacion) {
     deleteConfirmationReceived = true;
     equipoIds.forEach((equipoId) => deleteEquipo(equipoId));
+  }
+}
+
+async function changeStatus(equipoId, nuevoEstado) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/cambiar-estado/${equipoId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ estado: nuevoEstado }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al cambiar el estado del equipo");
+    }
+
+    window.location.reload();
+  } catch (error) {
+    console.error(error.message);
+    alert("Error al cambiar el estado del equipo");
   }
 }
