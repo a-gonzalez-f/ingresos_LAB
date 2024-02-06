@@ -302,3 +302,14 @@ async function changeStatus(equipoId, nuevoEstado) {
     alert("Error al cambiar el estado del equipo");
   }
 }
+
+function filterByEstado() {
+  const selectedEstado = document.getElementById("estadoFilter").value;
+  const table = $("#equipos-table").DataTable();
+
+  if (selectedEstado === "") {
+    table.columns(10).search("").draw();
+  } else {
+    table.columns(10).search(`^${selectedEstado}$`, true, false).draw();
+  }
+}

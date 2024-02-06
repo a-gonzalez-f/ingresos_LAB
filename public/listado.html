@@ -42,6 +42,17 @@
         <h6>Sector</h6>
         <button id="toggleBtn-9" onclick="toggleColumn(9)">Mostrar</button>
       </div>
+      <div class="filter">
+        <h6>Estado</h6>
+        <select id="estadoFilter" onchange="filterByEstado()">
+          <option value="">Todos</option>
+          <option value="No iniciado">No iniciado</option>
+          <option value="Iniciado">Iniciado</option>
+          <option value="En espera">En espera</option>
+          <option value="Sin arreglo">Sin arreglo</option>
+          <option value="Reparado">Reparado</option>
+        </select>
+      </div>
     </div>
     <table id="equipos-table" class="table table-hover display">
       <thead>

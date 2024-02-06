@@ -256,7 +256,9 @@ main {
   gap: 5px;
 }
 
-.filter > button {
+.filter > button,
+.filter > select {
+  text-align: left;
   background-color: #c8c8c8;
   box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
   border: none;
@@ -265,10 +267,15 @@ main {
   transition: all 0.2s;
 }
 
-.filter > button:hover {
+.filter > button:hover,
+.filter > select:hover {
   background-color: #aaa;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+select {
+  width: auto;
 }
 
 footer {
