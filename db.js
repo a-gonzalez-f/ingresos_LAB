@@ -16,6 +16,7 @@ const schema = new mongoose.Schema({
   linea: String,
   sector: String,
   estado: { type: String, default: "No iniciado" },
+  trabajador: String,
 });
 
 const Modelo = mongoose.model("ingresos", schema);

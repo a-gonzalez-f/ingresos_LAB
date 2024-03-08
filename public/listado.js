@@ -42,22 +42,47 @@ async function handleContextMenu(event) {
 
     const contextMenu = document.createElement("div");
     contextMenu.className = "context-menu";
-    contextMenu.innerHTML = `
-      <div onclick="changeStatus('${equipoId}', 'No iniciado')">No iniciado</div>
-      <div onclick="changeStatus('${equipoId}', 'Iniciado')">Iniciado</div>
-      <div onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
-      <div onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
-      <div onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
-    `;
 
-    const posX = event.clientX;
-    const posY = event.clientY;
+    const estadoSubMenu = document.createElement("div");
+    estadoSubMenu.classList.add("sub-menu", "hover");
 
-    const windowHeight = window.innerHeight;
-    const menuHeight = contextMenu.clientHeight;
-    if (posY + menuHeight > windowHeight) {
-      posY -= menuHeight;
-    }
+    estadoSubMenu.innerHTML = `
+        <span>Estado<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
+        <div>
+          <div class="hover p10" onclick="changeStatus('${equipoId}', 'No iniciado')">No iniciado</div>
+          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Iniciado')">Iniciado</div>
+          <div class="hover p10" onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
+          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
+          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
+        </div>
+      `;
+
+    const arregladoSubMenu = document.createElement("div");
+    arregladoSubMenu.classList.add("sub-menu", "hover");
+    arregladoSubMenu.innerHTML = `
+        <span>Visto por<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
+        <div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Agus')">Agus</div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Dani')">Dani</div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>          
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Junmi')">Junmi</div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pablo')">Pablo</div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pedro')">Pedro</div>
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Sergio')">Sergio</div>
+        </div>
+      `;
+
+    contextMenu.appendChild(estadoSubMenu);
+    contextMenu.appendChild(arregladoSubMenu);
+
+    const posX = event.clientX + 3;
+    const posY = event.clientY + window.scrollY;
+
+    // const windowHeight = window.innerHeight;
+    // const menuHeight = contextMenu.clientHeight;
+    // if (posY + menuHeight > windowHeight) {
+    //   posY -= menuHeight;
+    // }
 
     contextMenu.style.left = `${posX}px`;
     contextMenu.style.top = `${posY}px`;
@@ -163,7 +188,7 @@ function fillTable(data) {
 
     // Resto de las celdas (excluir _id y __v)
     for (const key in equipo) {
-      if (key !== "_id" && key !== "__v") {
+      if (key !== "_id" && key !== "__v" && key !== "trabajador") {
         const cell = document.createElement("td");
         const contentDiv = document.createElement("div");
 
@@ -300,6 +325,30 @@ async function changeStatus(equipoId, nuevoEstado) {
   } catch (error) {
     console.error(error.message);
     alert("Error al cambiar el estado del equipo");
+  }
+}
+
+async function assignedWorker(equipoId, worker) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/asignar-trabajador/${equipoId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ trabajador: worker }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al asignar el trabajador al equipo");
+    }
+
+    window.location.reload();
+  } catch (error) {
+    console.error(error.message);
+    alert("Error al asignar el trabajador al equipo");
   }
 }
 

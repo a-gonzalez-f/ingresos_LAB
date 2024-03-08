@@ -180,6 +180,7 @@ svg {
   cursor: pointer;
   transition: all 0.3s;
   z-index: 100;
+  opacity: 0;
 }
 
 .eliminarbutton:hover {
@@ -189,15 +190,16 @@ svg {
 }
 
 .marcado {
-  animation: moverbtn 0.5s ease-in-out;
+  animation: moverbtn 0.4s ease-in-out;
+  opacity: 1;
 }
 
 @keyframes moverbtn {
   0% {
-    transform: translateX(0);
+    transform: translateX(10%);
   }
   50% {
-    transform: translateX(-10%);
+    transform: translateX(-8%);
     background-color: var(--color-8);
   }
   100% {
@@ -303,6 +305,7 @@ footer {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 3;
   cursor: pointer;
+  width: 110px;
 }
 
 .context-menu div {
@@ -310,8 +313,50 @@ footer {
   white-space: nowrap;
 }
 
-.context-menu div:hover {
-  background-color: #f0f0f0;
+.hover:hover {
+  background-color: #eee;
+}
+
+.sub-menu {
+  position: relative;
+  padding: 0;
+}
+
+.sub-menu > div {
+  display: none;
+  position: absolute;
+  padding: 0;
+  top: 0;
+  left: 105px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.sub-menu:hover > div {
+  display: block;
+}
+
+.context-menu > .sub-menu > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p10 {
+  padding-right: 20px !important;
+}
+
+.arrow {
+  rotate: 90deg;
+  margin: 0;
+  transition: rotate 0.3s;
+}
+
+.sub-menu:hover .arrow {
+  rotate: 180deg;
 }
 
 .iniciado {
@@ -325,4 +370,8 @@ footer {
 }
 .reparado {
   background-color: rgb(0, 204, 102, 0.8) !important;
+}
+
+.center {
+  text-align: center !important;
 }

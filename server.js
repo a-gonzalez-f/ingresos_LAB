@@ -99,5 +99,29 @@ app.patch("/cambiar-estado/:id", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes PATCH en "/asignar-trabajador/:id"
+app.patch("/asignar-trabajador/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const trabajador = req.body.trabajador;
+
+    const resultado = await Modelo.findByIdAndUpdate(
+      equipoId,
+      { trabajador: trabajador },
+      { new: true }
+    );
+
+    if (!resultado) {
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    res.status(200).send("Trabajador asignado correctamente al equipo");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al asignar el trabajador al equipo");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
