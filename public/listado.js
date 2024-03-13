@@ -78,12 +78,6 @@ async function handleContextMenu(event) {
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
 
-    // const windowHeight = window.innerHeight;
-    // const menuHeight = contextMenu.clientHeight;
-    // if (posY + menuHeight > windowHeight) {
-    //   posY -= menuHeight;
-    // }
-
     contextMenu.style.left = `${posX}px`;
     contextMenu.style.top = `${posY}px`;
 
