@@ -1,19 +1,4 @@
 // listado.js
-const columnVisibility = [
-  true, // 0: Ingreso
-  true, // 1: Ingresado por
-  false, // 2: Email
-  false, // 3: Interno
-  true, // 4: Equipo
-  true, // 5: Marca
-  false, // 6: N° Serie
-  true, // 7: Descripción de la Falla
-  true, // 8: Línea
-  false, // 9: Sector
-  true, // 10: Estado
-  true, // 11: Eliminar
-  true, // 12: Checkbox
-];
 
 // Variable para mantener una referencia al menú contextual actualmente abierto
 let activeContextMenu = null;
@@ -98,6 +83,22 @@ function closeContextMenu(event) {
   }
 }
 
+const columnVisibility = [
+  true, // 0: Ingreso
+  false, // 1: Ingresado por
+  false, // 2: Email
+  false, // 3: Interno
+  true, // 4: Equipo
+  true, // 5: Marca
+  false, // 6: N° Serie
+  true, // 7: Descripción de la Falla
+  true, // 8: Línea
+  false, // 9: Sector
+  true, // 10: Estado
+  true, // 11: Eliminar
+  true, // 12: Checkbox
+];
+
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const response = await fetch("http://localhost:3000/listar-equipos");
@@ -119,9 +120,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
       columnDefs: [
         { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 11, 12] }, // columnas no ordenables
+        { visible: columnVisibility[0], targets: 0 }, // fecha
+        { visible: columnVisibility[1], targets: 1 }, // ingresó
         { visible: columnVisibility[2], targets: 2 }, // email
         { visible: columnVisibility[3], targets: 3 }, // interno
+        { visible: columnVisibility[4], targets: 4 }, // equipo
+        { visible: columnVisibility[5], targets: 5 }, // marca
         { visible: columnVisibility[6], targets: 6 }, // nserie
+        { visible: columnVisibility[7], targets: 7 }, // descripcion
+        { visible: columnVisibility[8], targets: 8 }, // linea
         { visible: columnVisibility[9], targets: 9 }, // sector
         { visible: columnVisibility[10], targets: 10 }, // estado
         { visible: columnVisibility[11], targets: 11 }, // eliminar

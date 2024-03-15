@@ -146,12 +146,14 @@ header {
 }
 
 .lim {
-  display: none;
-  position: absolute;
-  top: 25px;
-  right: -15px;
+  position: fixed;
+  top: 0px;
+  right: -10vw;
+  width: 10vw;
+  height: 100vh;
   background-color: var(--color-4);
   border-radius: 5px;
+  transition: right ease-in 0.5s;
 }
 
 .am {
