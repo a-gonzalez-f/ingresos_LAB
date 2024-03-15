@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
   falla: String,
   linea: String,
   sector: String,
-  trabajador: String,
+  trabajador: { type: String, default: "" },
   estado: { type: String, default: "No iniciado" },
 });
 

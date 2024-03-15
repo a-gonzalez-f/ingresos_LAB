@@ -94,9 +94,10 @@ const columnVisibility = [
   true, // 7: Descripción de la Falla
   true, // 8: Línea
   false, // 9: Sector
-  true, // 10: Estado
-  true, // 11: Eliminar
-  true, // 12: Checkbox
+  true, // 10: Trabajador
+  true, // 11: Estado
+  true, // 12: Eliminar
+  true, // 13: Checkbox
 ];
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -130,9 +131,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         { visible: columnVisibility[7], targets: 7 }, // descripcion
         { visible: columnVisibility[8], targets: 8 }, // linea
         { visible: columnVisibility[9], targets: 9 }, // sector
-        { visible: columnVisibility[10], targets: 10 }, // estado
-        { visible: columnVisibility[11], targets: 11 }, // eliminar
-        { visible: columnVisibility[12], targets: 12 }, // checkbox
+        { visible: columnVisibility[10], targets: 10 }, // trabajador
+        { visible: columnVisibility[11], targets: 11 }, // estado
+        { visible: columnVisibility[12], targets: 12 }, // eliminar
+        { visible: columnVisibility[13], targets: 13 }, // checkbox
       ],
       autoWidth: false,
     });
@@ -189,7 +191,7 @@ function fillTable(data) {
 
     // Resto de las celdas (excluir _id y __v)
     for (const key in equipo) {
-      if (key !== "_id" && key !== "__v" && key !== "trabajador") {
+      if (key !== "_id" && key !== "__v") {
         const cell = document.createElement("td");
         const contentDiv = document.createElement("div");
 
@@ -358,8 +360,8 @@ function filterByEstado() {
   const table = $("#equipos-table").DataTable();
 
   if (selectedEstado === "") {
-    table.columns(10).search("").draw();
+    table.columns(11).search("").draw();
   } else {
-    table.columns(10).search(`^${selectedEstado}$`, true, false).draw();
+    table.columns(11).search(`^${selectedEstado}$`, true, false).draw();
   }
 }
