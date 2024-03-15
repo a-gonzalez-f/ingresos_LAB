@@ -94,7 +94,7 @@ const columnVisibility = [
   true, // 7: Descripción de la Falla
   true, // 8: Línea
   false, // 9: Sector
-  true, // 10: Trabajador
+  false, // 10: Trabajador
   true, // 11: Estado
   true, // 12: Eliminar
   true, // 13: Checkbox
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         emptyTable: "No hay datos disponibles en la tabla",
       },
       columnDefs: [
-        { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 11, 12] }, // columnas no ordenables
+        { orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 9, 12, 13] }, // columnas no ordenables
         { visible: columnVisibility[0], targets: 0 }, // fecha
         { visible: columnVisibility[1], targets: 1 }, // ingresó
         { visible: columnVisibility[2], targets: 2 }, // email
