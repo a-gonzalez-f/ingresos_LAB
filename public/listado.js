@@ -30,7 +30,6 @@ async function handleContextMenu(event) {
 
     const estadoSubMenu = document.createElement("div");
     estadoSubMenu.classList.add("sub-menu", "hover");
-
     estadoSubMenu.innerHTML = `
         <span>Estado<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
         <div>
@@ -49,7 +48,7 @@ async function handleContextMenu(event) {
         <div>
           <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Agus')">Agus</div>
           <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Dani')">Dani</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>          
+          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>
           <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Junmi')">Junmi</div>
           <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pablo')">Pablo</div>
           <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pedro')">Pedro</div>
@@ -59,6 +58,63 @@ async function handleContextMenu(event) {
 
     contextMenu.appendChild(estadoSubMenu);
     contextMenu.appendChild(arregladoSubMenu);
+
+    const comentarioSubMenu = document.createElement("div");
+    comentarioSubMenu.classList.add("sub-menu", "hover");
+    comentarioSubMenu.innerHTML = `
+        <span>Comentario</span>
+      `;
+
+    // Listener de evento para el span de comentarios
+    comentarioSubMenu
+      .querySelector("span")
+      .addEventListener("click", (event) => {
+        // Crear input para ingresar comentario
+        const comentarioInput = document.createElement("input");
+        comentarioInput.classList.add("comment");
+        comentarioInput.type = "text";
+        comentarioInput.placeholder = "Ingrese su comentario";
+        comentarioInput.addEventListener("keypress", async (event) => {
+          if (event.key === "Enter") {
+            const comentario = comentarioInput.value;
+            if (comentario.trim() !== "") {
+              await guardarComentario(equipoId, comentario);
+              contextMenu.remove(); // Cerrar el menú contextual después de agregar el comentario
+            }
+          }
+        });
+
+        // Agregar el input al menú contextual
+        contextMenu.appendChild(comentarioInput);
+      });
+
+    contextMenu.appendChild(comentarioSubMenu);
+
+    // Función para guardar el comentario en la base de datos
+    async function guardarComentario(equipoId, comentario) {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/agregar-comentario/${equipoId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ comentario }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al agregar el comentario");
+        }
+
+        alert("Comentario agregado correctamente");
+        window.location.reload(); // Recargar la página para reflejar el cambio
+      } catch (error) {
+        console.error(error.message);
+        alert("Error al agregar el comentario");
+      }
+    }
 
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
@@ -189,9 +245,9 @@ function fillTable(data) {
     // Agregar una clase al tr según el estado actual del equipo
     row.classList.add(equipo.estado.toLowerCase().replace(" ", "-"));
 
-    // Resto de las celdas (excluir _id y __v)
+    // Resto de las celdas (excluir _id , __v , comentario)
     for (const key in equipo) {
-      if (key !== "_id" && key !== "__v") {
+      if (key !== "_id" && key !== "__v" && key !== "comentario") {
         const cell = document.createElement("td");
         const contentDiv = document.createElement("div");
 

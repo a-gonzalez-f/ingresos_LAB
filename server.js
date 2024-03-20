@@ -123,5 +123,29 @@ app.patch("/asignar-trabajador/:id", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes PATCH en "/agregar-comentario/:id"
+app.patch("/agregar-comentario/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const comentario = req.body.comentario;
+
+    const resultado = await Modelo.findByIdAndUpdate(
+      equipoId,
+      { comentario: comentario },
+      { new: true }
+    );
+
+    if (!resultado) {
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    res.status(200).send("Comentario agregado correctamente al equipo");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al agregar el comentario al equipo");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
