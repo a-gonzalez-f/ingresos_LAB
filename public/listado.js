@@ -65,57 +65,6 @@ async function handleContextMenu(event) {
         <span>Comentario</span>
       `;
 
-    // Listener de evento para el span de comentarios
-    comentarioSubMenu
-      .querySelector("span")
-      .addEventListener("click", (event) => {
-        // Crear input para ingresar comentario
-        const comentarioInput = document.createElement("input");
-        comentarioInput.classList.add("comment");
-        comentarioInput.type = "text";
-        comentarioInput.placeholder = "Ingrese su comentario";
-        comentarioInput.addEventListener("keypress", async (event) => {
-          if (event.key === "Enter") {
-            const comentario = comentarioInput.value;
-            if (comentario.trim() !== "") {
-              await guardarComentario(equipoId, comentario);
-              contextMenu.remove(); // Cerrar el menú contextual después de agregar el comentario
-            }
-          }
-        });
-
-        // Agregar el input al menú contextual
-        contextMenu.appendChild(comentarioInput);
-      });
-
-    contextMenu.appendChild(comentarioSubMenu);
-
-    // Función para guardar el comentario en la base de datos
-    async function guardarComentario(equipoId, comentario) {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/agregar-comentario/${equipoId}`,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ comentario }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Error al agregar el comentario");
-        }
-
-        alert("Comentario agregado correctamente");
-        window.location.reload(); // Recargar la página para reflejar el cambio
-      } catch (error) {
-        console.error(error.message);
-        alert("Error al agregar el comentario");
-      }
-    }
-
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
 
@@ -124,10 +73,10 @@ async function handleContextMenu(event) {
 
     document.body.appendChild(contextMenu);
     activeContextMenu = contextMenu;
-
-    // Agregar un event listener para cerrar el menú contextual al hacer clic en cualquier parte del documento
-    document.addEventListener("click", closeContextMenu);
   }
+
+  // Agregar un event listener para cerrar el menú contextual al hacer clic en cualquier parte del documento
+  document.addEventListener("click", closeContextMenu);
 }
 
 function closeContextMenu(event) {
@@ -245,9 +194,9 @@ function fillTable(data) {
     // Agregar una clase al tr según el estado actual del equipo
     row.classList.add(equipo.estado.toLowerCase().replace(" ", "-"));
 
-    // Resto de las celdas (excluir _id , __v , comentario)
+    // Resto de las celdas (excluir _id , __v , comentarios)
     for (const key in equipo) {
-      if (key !== "_id" && key !== "__v" && key !== "comentario") {
+      if (key !== "_id" && key !== "__v" && key !== "comentarios") {
         const cell = document.createElement("td");
         const contentDiv = document.createElement("div");
 
