@@ -56,14 +56,15 @@ async function handleContextMenu(event) {
         </div>
       `;
 
-    contextMenu.appendChild(estadoSubMenu);
-    contextMenu.appendChild(arregladoSubMenu);
-
     const comentarioSubMenu = document.createElement("div");
     comentarioSubMenu.classList.add("sub-menu", "hover");
     comentarioSubMenu.innerHTML = `
         <span>Comentario</span>
       `;
+
+    contextMenu.appendChild(estadoSubMenu);
+    contextMenu.appendChild(arregladoSubMenu);
+    contextMenu.appendChild(comentarioSubMenu);
 
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
