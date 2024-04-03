@@ -397,11 +397,10 @@ footer {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 3;
   cursor: pointer;
-  width: 110px;
 }
 
 .context-menu div {
-  padding: 8px;
+  padding: 0.5rem;
   white-space: nowrap;
 }
 
@@ -419,7 +418,7 @@ footer {
   position: absolute;
   padding: 0;
   top: 0;
-  left: 105px;
+  left: 119px;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -451,7 +450,7 @@ footer {
   rotate: 180deg;
 }
 
-.comment {
+.comments-card {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -460,25 +459,72 @@ footer {
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
   border: none;
-  width: 25vw;
-  height: 20vh;
+  width: 33vw;
+  min-height: 50vh;
+  max-height: 75vh;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 101;
+  overflow-y: auto;
 }
 
-.comment input[type="text"] {
+#inputComment {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-items: end;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#inputComment input[type="text"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   box-sizing: border-box;
-  margin-bottom: 10px;
 }
 
-.comment input[type="text"]:focus {
+#inputComment input[type="text"]:focus {
   outline: none !important;
   border-color: #007bff !important;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+#inputComment button {
+  background-color: #ccc;
+  border: none;
+  padding: 15px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+#inputComment button:hover {
+  background-color: #aaa;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.comments-card > div > h3,
+p {
+  margin-bottom: 0.5rem;
+}
+
+.lic {
+  margin: 0.5rem 0.5rem 0.5rem 0 !important;
+  text-align: left;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 1rem;
+  overflow: auto;
 }
 
 .iniciado {

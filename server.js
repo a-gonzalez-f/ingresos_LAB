@@ -123,5 +123,52 @@ app.patch("/asignar-trabajador/:id", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes GET en "/obtener-equipo/:id"
+app.get("/obtener-equipo/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const equipo = await Modelo.findById(equipoId);
+
+    if (!equipo) {
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    res.json(equipo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al obtener los detalles del equipo");
+  }
+});
+
+// Ruta para manejar solicitudes POST en "/enviar-comentario/:id"
+app.post("/enviar-comentario/:id", async (req, res) => {
+  try {
+    const equipoId = req.params.id;
+    const comentario = req.body.comentario;
+
+    // Buscar el equipo en la base de datos
+    const equipo = await Modelo.findById(equipoId);
+
+    if (!equipo) {
+      // Si no se encuentra el equipo, enviar una respuesta de error
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    // Agregar el comentario al arreglo de comentarios del equipo
+    equipo.comentarios.push(comentario);
+
+    // Guardar el equipo actualizado en la base de datos
+    await equipo.save();
+
+    // Enviar una respuesta de éxito al cliente
+    res.status(200).send("Comentario enviado exitosamente");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al enviar el comentario");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));

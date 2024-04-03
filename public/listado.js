@@ -31,36 +31,86 @@ async function handleContextMenu(event) {
     const estadoSubMenu = document.createElement("div");
     estadoSubMenu.classList.add("sub-menu", "hover");
     estadoSubMenu.innerHTML = `
-        <span>Estado<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
-        <div>
-          <div class="hover p10" onclick="changeStatus('${equipoId}', 'No iniciado')">No iniciado</div>
-          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Iniciado')">Iniciado</div>
-          <div class="hover p10" onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
-          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
-          <div class="hover p10" onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
-        </div>
-      `;
+          <span>Estado<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
+          <div>
+            <div class="hover p10" onclick="changeStatus('${equipoId}', 'No iniciado')">No iniciado</div>
+            <div class="hover p10" onclick="changeStatus('${equipoId}', 'Iniciado')">Iniciado</div>
+            <div class="hover p10" onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
+            <div class="hover p10" onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
+            <div class="hover p10" onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
+          </div>
+        `;
 
     const arregladoSubMenu = document.createElement("div");
     arregladoSubMenu.classList.add("sub-menu", "hover");
     arregladoSubMenu.innerHTML = `
-        <span>Visto por<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
-        <div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Agus')">Agus</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Dani')">Dani</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Junmi')">Junmi</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pablo')">Pablo</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pedro')">Pedro</div>
-          <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Sergio')">Sergio</div>
-        </div>
-      `;
+          <span>Visto por<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path fill="currentColor" d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
+          <div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Agus')">Agus</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Dani')">Dani</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Junmi')">Junmi</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pablo')">Pablo</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pedro')">Pedro</div>
+            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Sergio')">Sergio</div>
+          </div>
+        `;
 
     const comentarioSubMenu = document.createElement("div");
     comentarioSubMenu.classList.add("sub-menu", "hover");
     comentarioSubMenu.innerHTML = `
-        <span>Comentario</span>
-      `;
+          <span>Comentarios</span>
+        `;
+
+    comentarioSubMenu.addEventListener("click", async () => {
+      // Cierra el menú contextual
+      if (activeContextMenu) {
+        activeContextMenu.remove();
+        activeContextMenu = null;
+      }
+      // Obtener datos necesarios para el comentarioCard
+      const response = await fetch(
+        `http://localhost:3000/obtener-equipo/${equipoId}`
+      );
+      const equipoData = await response.json();
+      const { fechaIngreso, equipo, comentarios } = equipoData;
+
+      // Crear el comentarioCard
+      const comentariosCard = document.createElement("div");
+      comentariosCard.className = "comments-card";
+
+      // Crear y agregar contenido al comentarioCard
+      comentariosCard.innerHTML = `
+          <div>
+            <h3>Detalles</h3>
+            <p>Fecha de Ingreso: ${formatDate(fechaIngreso)}</p>
+            <p>Equipo: ${equipo}</p>
+            <p>Comentarios:</p>
+            <ul>
+              ${comentarios
+                .map((comment) => `<li class="lic">${comment}</li>`)
+                .join("")}
+            </ul>
+          </div>
+          <div id="inputComment">
+            <input type="text" id="commentText" placeholder="Escribe tu comentario aquí">
+            <button onclick="sendComment('${equipoId}')">Añadir</button>
+          </div>
+        `;
+
+      document.body.appendChild(comentariosCard);
+
+      // Agregar un event listener para cerrar el comentarioCard al hacer clic fuera de él
+      document.addEventListener("click", closeCommentCard);
+    });
+
+    function closeCommentCard(event) {
+      const comentariosCard = document.querySelector(".comments-card");
+      if (comentariosCard && !comentariosCard.contains(event.target)) {
+        comentariosCard.remove();
+        document.removeEventListener("click", closeCommentCard);
+      }
+    }
 
     contextMenu.appendChild(estadoSubMenu);
     contextMenu.appendChild(arregladoSubMenu);
@@ -369,5 +419,36 @@ function filterByEstado() {
     table.columns(11).search("").draw();
   } else {
     table.columns(11).search(`^${selectedEstado}$`, true, false).draw();
+  }
+}
+
+// Función para enviar el comentario a la base de datos
+async function sendComment(equipoId) {
+  const commentText = document.getElementById("commentText").value;
+
+  // Verificar si el comentario está vacío
+  if (commentText.trim() === "") {
+    alert("El comentario está vacío");
+    return;
+  }
+
+  // Enviar el comentario a la base de datos
+  const response = await fetch(
+    `http://localhost:3000/enviar-comentario/${equipoId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comentario: commentText }),
+    }
+  );
+
+  // Verificar si la operación fue exitosa
+  if (response.ok) {
+    window.location.reload();
+  } else {
+    // Manejar el error en caso de que la operación no sea exitosa
+    console.error("Error al enviar el comentario a la base de datos");
   }
 }
