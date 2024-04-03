@@ -466,8 +466,7 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  z-index: 101;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 #inputComment {
@@ -525,6 +524,20 @@ p {
   border-radius: 4px;
   padding: 1rem;
   overflow: auto;
+}
+
+.lic:hover {
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.commentsList {
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.ec {
+  z-index: 102 !important;
 }
 
 .iniciado {

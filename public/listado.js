@@ -73,7 +73,16 @@ async function handleContextMenu(event) {
         `http://localhost:3000/obtener-equipo/${equipoId}`
       );
       const equipoData = await response.json();
-      const { fechaIngreso, equipo, comentarios } = equipoData;
+      const {
+        equipo,
+        marca,
+        fechaIngreso,
+        nSerie,
+        falla,
+        trabajador,
+        estado,
+        comentarios,
+      } = equipoData;
 
       // Crear el comentarioCard
       const comentariosCard = document.createElement("div");
@@ -81,22 +90,31 @@ async function handleContextMenu(event) {
 
       // Crear y agregar contenido al comentarioCard
       comentariosCard.innerHTML = `
-          <div>
-            <h3>Detalles</h3>
-            <p>Fecha de Ingreso: ${formatDate(fechaIngreso)}</p>
-            <p>Equipo: ${equipo}</p>
-            <p>Comentarios:</p>
-            <ul>
+    <div>
+        <h3>Detalles ${equipo}</h3>        
+        <p>Marca: ${marca}</p>
+        <p>Fecha de Ingreso: ${formatDate(fechaIngreso)}</p>
+        <p>N° Serie: ${nSerie}</p>
+        <p>Falla: ${falla}</p>
+        <p>Visto por: ${trabajador}</p>
+        <p>Estado: ${estado}</p>
+        <p>Comentarios:</p>
+        <div class="commentsList">
+          <ul>
               ${comentarios
-                .map((comment) => `<li class="lic">${comment}</li>`)
+                .map(
+                  (comment, index) =>
+                    `<li class="lic" id="comment-${index}" oncontextmenu="showCommentContextMenu(event, '${equipoId}', ${index})">${comment}</li>`
+                )
                 .join("")}
-            </ul>
-          </div>
-          <div id="inputComment">
-            <input type="text" id="commentText" placeholder="Escribe tu comentario aquí">
-            <button onclick="sendComment('${equipoId}')">Añadir</button>
-          </div>
-        `;
+          </ul>
+        </div>
+    </div>
+    <div id="inputComment">
+        <input type="text" id="commentText" placeholder="Escribe tu comentario aquí">
+        <button onclick="sendComment('${equipoId}')">Añadir</button>
+    </div>
+`;
 
       document.body.appendChild(comentariosCard);
 
@@ -128,6 +146,65 @@ async function handleContextMenu(event) {
 
   // Agregar un event listener para cerrar el menú contextual al hacer clic en cualquier parte del documento
   document.addEventListener("click", closeContextMenu);
+}
+
+let contextMenu = null;
+
+function showCommentContextMenu(event, equipoId, index) {
+  if (contextMenu !== null) {
+    contextMenu.remove(); // Si ya hay un menú abierto, cerrarlo
+  }
+
+  event.preventDefault();
+
+  contextMenu = document.createElement("div");
+  contextMenu.className = "context-menu";
+  contextMenu.innerHTML = `
+    <div class="sub-menu" onclick="deleteComment('${equipoId}', ${index})">Eliminar comentario</div>
+  `;
+
+  const posX = event.clientX + 3;
+  const posY = event.clientY + window.scrollY;
+
+  contextMenu.style.left = `${posX}px`;
+  contextMenu.style.top = `${posY}px`;
+
+  document.body.appendChild(contextMenu);
+
+  // Remover el menú contextual cuando se haga clic en cualquier parte del documento
+  const removeContextMenu = () => {
+    contextMenu.remove();
+    contextMenu = null;
+    document.removeEventListener("click", removeContextMenu);
+  };
+
+  document.addEventListener("click", removeContextMenu);
+}
+
+async function deleteComment(equipoId, index) {
+  const confirmacion = window.confirm(
+    "¿Estás seguro de que quieres eliminar este comentario?"
+  );
+
+  if (confirmacion) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/eliminar-comentario/${equipoId}/${index}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar el comentario");
+      }
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error.message);
+      alert("Error al eliminar el comentario");
+    }
+  }
 }
 
 function closeContextMenu(event) {

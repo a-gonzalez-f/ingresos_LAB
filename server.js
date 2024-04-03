@@ -170,5 +170,40 @@ app.post("/enviar-comentario/:id", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes DELETE en "/eliminar-comentario/:equipoId/:index"
+app.delete("/eliminar-comentario/:equipoId/:index", async (req, res) => {
+  try {
+    const equipoId = req.params.equipoId;
+    const index = parseInt(req.params.index);
+
+    // Buscar el equipo en la base de datos
+    const equipo = await Modelo.findById(equipoId);
+
+    if (!equipo) {
+      // Si no se encuentra el equipo, enviar una respuesta de error
+      res.status(404).send("Equipo no encontrado");
+      return;
+    }
+
+    // Verificar si el índice está dentro del rango de comentarios del equipo
+    if (index < 0 || index >= equipo.comentarios.length) {
+      res.status(400).send("Índice de comentario fuera de rango");
+      return;
+    }
+
+    // Eliminar el comentario del arreglo de comentarios del equipo
+    equipo.comentarios.splice(index, 1);
+
+    // Guardar el equipo actualizado en la base de datos
+    await equipo.save();
+
+    // Enviar una respuesta de éxito al cliente
+    res.status(200).send("Comentario eliminado exitosamente");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al eliminar el comentario");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
