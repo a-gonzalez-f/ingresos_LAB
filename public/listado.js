@@ -160,7 +160,7 @@ function showCommentContextMenu(event, equipoId, index) {
   contextMenu = document.createElement("div");
   contextMenu.className = "context-menu";
   contextMenu.innerHTML = `
-    <div class="sub-menu" onclick="deleteComment('${equipoId}', ${index})">Eliminar comentario</div>
+    <div class="sub-menu dc" onclick="deleteComment('${equipoId}', ${index})">Eliminar</div>
   `;
 
   const posX = event.clientX + 3;

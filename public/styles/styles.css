@@ -536,8 +536,15 @@ p {
   max-height: 200px;
 }
 
-.ec {
-  z-index: 102 !important;
+.dc {
+  background-color: #cf1222;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dc:hover {
+  background-color: #9f1222;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .iniciado {
