@@ -26,7 +26,8 @@ table td {
   text-align: center;
 }
 
-td > button {
+td > button,
+.dbtn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -36,7 +37,8 @@ td > button {
   padding: 0;
 }
 
-td > button:hover {
+td > button:hover,
+.dbtn:hover {
   color: var(--color-8);
   font-weight: 600;
 }
@@ -108,6 +110,10 @@ td:nth-child(1) {
 }
 td:nth-child(2) {
   width: 130px;
+}
+/*columna checkbox*/
+td:nth-last-child(1) {
+  width: 50px !important;
 }
 
 .circle {

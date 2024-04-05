@@ -14,6 +14,9 @@ document
 
 async function handleContextMenu(event) {
   event.preventDefault();
+  if (event.target.tagName === "TH") {
+    return;
+  }
 
   // Si hay un menú contextual activo, ciérralo antes de abrir uno nuevo
   if (activeContextMenu) {
@@ -62,6 +65,20 @@ async function handleContextMenu(event) {
           <span>Comentarios</span>
         `;
 
+    const eliminarEquipoSubMenu = document.createElement("div");
+    eliminarEquipoSubMenu.classList.add("sub-menu", "hover", "center");
+    eliminarEquipoSubMenu.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24" class="dbtn"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"/></svg>
+        `;
+    eliminarEquipoSubMenu.addEventListener("click", () => {
+      const confirmacion = window.confirm(
+        "¿Estás seguro de que quieres eliminar este equipo?"
+      );
+      if (confirmacion) {
+        deleteEquipo(equipoId);
+      }
+    });
+
     comentarioSubMenu.addEventListener("click", async () => {
       // Cierra el menú contextual
       if (activeContextMenu) {
@@ -104,7 +121,12 @@ async function handleContextMenu(event) {
               ${comentarios
                 .map(
                   (comment, index) =>
-                    `<li class="lic" id="comment-${index}" oncontextmenu="showCommentContextMenu(event, '${equipoId}', ${index})">${comment}</li>`
+                    `<li class="lic" id="comment-${index}" oncontextmenu="showCommentContextMenu(event, '${equipoId}', ${index})">
+                    ${comment}
+                    <button onclick="deleteComment('${equipoId}', ${index})">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24" class="dbtn"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z"/></svg>
+                    </button>
+                    </li>`
                 )
                 .join("")}
           </ul>
@@ -133,6 +155,7 @@ async function handleContextMenu(event) {
     contextMenu.appendChild(estadoSubMenu);
     contextMenu.appendChild(arregladoSubMenu);
     contextMenu.appendChild(comentarioSubMenu);
+    contextMenu.appendChild(eliminarEquipoSubMenu);
 
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
@@ -146,39 +169,6 @@ async function handleContextMenu(event) {
 
   // Agregar un event listener para cerrar el menú contextual al hacer clic en cualquier parte del documento
   document.addEventListener("click", closeContextMenu);
-}
-
-let contextMenu = null;
-
-function showCommentContextMenu(event, equipoId, index) {
-  if (contextMenu !== null) {
-    contextMenu.remove(); // Si ya hay un menú abierto, cerrarlo
-  }
-
-  event.preventDefault();
-
-  contextMenu = document.createElement("div");
-  contextMenu.className = "context-menu";
-  contextMenu.innerHTML = `
-    <div class="sub-menu dc" onclick="deleteComment('${equipoId}', ${index})">Eliminar</div>
-  `;
-
-  const posX = event.clientX + 3;
-  const posY = event.clientY + window.scrollY;
-
-  contextMenu.style.left = `${posX}px`;
-  contextMenu.style.top = `${posY}px`;
-
-  document.body.appendChild(contextMenu);
-
-  // Remover el menú contextual cuando se haga clic en cualquier parte del documento
-  const removeContextMenu = () => {
-    contextMenu.remove();
-    contextMenu = null;
-    document.removeEventListener("click", removeContextMenu);
-  };
-
-  document.addEventListener("click", removeContextMenu);
 }
 
 async function deleteComment(equipoId, index) {
@@ -229,7 +219,7 @@ const columnVisibility = [
   false, // 9: Sector
   false, // 10: Trabajador
   true, // 11: Estado
-  true, // 12: Eliminar
+  false, // 12: Eliminar
   true, // 13: Checkbox
 ];
 

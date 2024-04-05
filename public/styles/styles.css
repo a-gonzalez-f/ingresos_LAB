@@ -392,8 +392,8 @@ footer {
 
 .context-menu {
   position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 3;
   cursor: pointer;
@@ -406,6 +406,7 @@ footer {
 
 .hover:hover {
   background-color: #eee;
+  color: black;
 }
 
 .sub-menu {
@@ -419,8 +420,8 @@ footer {
   padding: 0;
   top: 0;
   left: 119px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1;
   transition: background-color 0.3s;
@@ -434,6 +435,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 .p10 {
@@ -524,6 +530,9 @@ p {
   border-radius: 4px;
   padding: 1rem;
   overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .lic:hover {
@@ -536,15 +545,18 @@ p {
   max-height: 200px;
 }
 
-.dc {
-  background-color: #cf1222;
-  border-radius: 4px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+li > button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0 0 0 10px;
+  opacity: 0.25;
+  transition: opacity 0.3s;
 }
 
-.dc:hover {
-  background-color: #9f1222;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+li > button:hover {
+  opacity: 1;
 }
 
 .iniciado {
