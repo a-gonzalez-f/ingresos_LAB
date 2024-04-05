@@ -499,6 +499,43 @@ async function sendComment(equipoId) {
     return;
   }
 
+  // Obtener la fecha actual
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth() + 1;
+  const year = currentDate.getFullYear();
+  const hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+
+  // Formatear los minutos para asegurarse de que tenga dos dígitos
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  // Crear la cadena de fecha formateada
+  const formattedDate = `${day}/${month}/${year}`;
+  const formattedTime = `${hours}:${formattedMinutes}`;
+
+  // Crear un div para contener la fecha y el horario
+  const divDate = document.createElement("div");
+  divDate.classList.add("divDate");
+
+  // Crear un span para mostrar la fecha
+  const dateSpan = document.createElement("span");
+  dateSpan.classList.add("dateSpan");
+  dateSpan.textContent = formattedDate;
+
+  // Crear un span para mostrar el horario
+  const timeSpan = document.createElement("span");
+  timeSpan.classList.add("timeSpan");
+  timeSpan.textContent = formattedTime;
+
+  // Agregar los spans al div
+  divDate.appendChild(dateSpan);
+  divDate.appendChild(timeSpan);
+
+  // Crear un span para mostrar el comentario
+  const commentSpan = document.createElement("span");
+  commentSpan.textContent = commentText;
+
   // Enviar el comentario a la base de datos
   const response = await fetch(
     `http://localhost:3000/enviar-comentario/${equipoId}`,
@@ -507,7 +544,9 @@ async function sendComment(equipoId) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ comentario: commentText }),
+      body: JSON.stringify({
+        comentario: `${divDate.outerHTML} ${commentSpan.outerHTML}`,
+      }),
     }
   );
 
