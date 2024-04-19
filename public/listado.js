@@ -269,15 +269,26 @@ document.addEventListener("DOMContentLoaded", async function () {
   );
   const eliminarButton = document.querySelector(".eliminarbutton");
 
+  function actualizarEstadoBoton() {
+    // Verificar si algún checkbox está marcado
+    const algunCheckboxMarcado = Array.from(checkboxes).some(
+      (checkbox) => checkbox.checked
+    );
+
+    // Si no hay ningún checkbox marcado, quitar la clase 'marcado' del botón
+    if (!algunCheckboxMarcado) {
+      eliminarButton.classList.remove("marcado");
+    } else {
+      eliminarButton.classList.add("marcado");
+    }
+  }
+
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", function () {
-      if (this.checked) {
-        eliminarButton.classList.add("marcado");
-      } else {
-        eliminarButton.classList.remove("marcado");
-      }
-    });
+    checkbox.addEventListener("change", actualizarEstadoBoton);
   });
+
+  // Llamar a la función al cargar la página para asegurarse de que el estado inicial del botón sea correcto
+  actualizarEstadoBoton();
 });
 
 function toggleColumn(columnIndex) {
