@@ -161,20 +161,34 @@ header {
   right: -10vw;
   width: 10vw;
   height: 100vh;
-  background-color: var(--primary-color);
-  border-radius: 5px;
+  background-color: var(--secondary-color);
   transition: right ease-in 0.5s;
 }
 
 .am {
+  background-color: var(--secondary-color);
   padding: 10px;
-  background-color: var(--primary-color);
+  background-color: inherit;
   border-radius: 0;
+}
+
+#themeBtn {
+  padding: 10px 0;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  scale: 1.1;
+  cursor: pointer;
+}
+
+h1 {
+  color: white;
 }
 
 h1,
 h2 {
   margin: 15px;
+  font-weight: 400;
 }
 
 #ingreso-form {
