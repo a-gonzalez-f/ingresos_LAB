@@ -3,7 +3,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const { Modelo, ModeloInternos } = require("./db");
+const { Modelo, ModeloInternos, ModeloTea, ModeloTelemandos } = require("./db");
 
 app.use(express.json());
 

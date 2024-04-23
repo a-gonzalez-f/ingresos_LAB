@@ -1,0 +1,101 @@
+<!-- ingreso.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Ingresos - LAB</title>
+    <link rel="icon" href="img/favicon-emova.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon-emova.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body class="flex">
+    <header>
+      <h1>TECNOLOGÍAS DIGITALES - LABORATORIO</h1>
+      <div class="menu">
+        <div class="hmb">
+          <div class="l"></div>
+          <div class="l"></div>
+          <div class="l"></div>
+        </div>
+        <div class="lim">
+          <div class="il">
+            <a class="am" href="./index.html">Home</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./ingreso.html">Ingresos</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./listado.html">Listado</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./internos.html">Internos</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./preventivos.html">Preventivos</a>
+          </div>
+          <div>
+            <button id="themeBtn">
+              <i class="iconify" data-icon="mdi:white-balance-sunny"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <h2>MANTENIMIENTOS PREVENTIVOS</h2>
+    <div>
+      <select class="prvSlct" id="mesSelect">
+        <option class="prvOpt" value="enero">Enero</option>
+        <option class="prvOpt" value="febrero">Febrero</option>
+        <option class="prvOpt" value="marzo">Marzo</option>
+        <option class="prvOpt" value="abril">Abril</option>
+        <option class="prvOpt" value="mayo">Mayo</option>
+        <option class="prvOpt" value="junio">Junio</option>
+        <option class="prvOpt" value="julio">Julio</option>
+        <option class="prvOpt" value="agosto">Agosto</option>
+        <option class="prvOpt" value="septiembre">Septiembre</option>
+        <option class="prvOpt" value="octubre">Octubre</option>
+        <option class="prvOpt" value="noviembre">Noviembre</option>
+        <option class="prvOpt" value="diciembre">Diciembre</option>
+      </select>
+    </div>
+    <section class="preventivos">
+      <section class="tea">
+        <h3>Carteles TEA</h3>
+        <div class="card realizado">
+          <h4 id="unidad">Peru</h4>
+          <p id="linea">Linea A</p>
+          <p id="estado">Realizado</p>
+          <p id="trabajador">Agustin</p>
+          <p id="comentario">Se cambio puente</p>
+        </div>
+      </section>
+      <section class="telemandos">
+        <h3>Telemandos</h3>
+        <div class="card">
+          <p id="linea"></p>
+          <p id="sistema"></p>
+          <p id="unidad"></p>
+          <p id="estado"></p>
+          <p id="trabajador"></p>
+          <p id="comentario"></p>
+        </div>
+      </section>
+    </section>
+    <footer>
+      <img
+        src="./img/emova-aplicacion-footer-2.png"
+        alt="emova"
+        class="footer-img"
+      />
+    </footer>
+    <script src="preventivos.js"></script>
+    <script src="menu.js"></script>
+    <script src="theme.js"></script>
+  </body>
+</html>

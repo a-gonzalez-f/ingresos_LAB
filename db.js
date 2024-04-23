@@ -31,4 +31,27 @@ const schemaInterno = new mongoose.Schema({
 
 const ModeloInternos = mongoose.model("internos", schemaInterno);
 
-module.exports = { Modelo, ModeloInternos };
+const schemaTea = new mongoose.Schema({
+  linea: String,
+  unidad: String,
+  mes: String,
+  estado: { type: String, default: "No realizado" },
+  trabajadores: { type: String, default: "" },
+  comentarios: [{ type: String, default: "" }],
+});
+
+const ModeloTea = mongoose.model("tea", schemaTea);
+
+const schemaTelemandos = new mongoose.Schema({
+  linea: String,
+  sistema: String,
+  unidad: String,
+  mes: String,
+  estado: { type: String, default: "No realizado" },
+  trabajadores: { type: String, default: "" },
+  comentarios: [{ type: String, default: "" }],
+});
+
+const ModeloTelemandos = mongoose.model("telemandos", schemaTelemandos);
+
+module.exports = { Modelo, ModeloInternos, ModeloTea, ModeloTelemandos };
