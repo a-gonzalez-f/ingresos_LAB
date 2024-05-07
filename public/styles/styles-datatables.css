@@ -36,6 +36,7 @@ td > button,
   border: none;
   cursor: pointer;
   transition: font-weight 0.1s;
+  fill: var(--secondary-color);
   color: var(--color-4);
   font-size: 16px;
   padding: 0;
@@ -73,7 +74,7 @@ td > button:hover,
 #equipos-table_wrapper,
 #internos-table_wrapper {
   margin-bottom: 1rem;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
   padding: 1rem 2rem;
   margin-top: 1rem;
   margin-bottom: 12rem;
@@ -118,47 +119,4 @@ td:nth-child(2) {
 /*columna checkbox*/
 td:nth-last-child(1) {
   width: 50px !important;
-}
-
-.circle {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  padding: 0;
-  margin: auto;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.A {
-  background-color: var(--color-A);
-}
-.B {
-  background-color: var(--color-B);
-}
-.C {
-  background-color: var(--color-C);
-}
-.D {
-  background-color: var(--color-D);
-}
-.E {
-  background-color: var(--color-E);
-}
-.H {
-  background-color: var(--color-H);
-}
-.P {
-  background-color: var(--color-P);
-}
-.U {
-  background-color: var(--color-U);
-}
-.n-a {
-  color: var(--color-4);
-  font-size: 14px;
 }

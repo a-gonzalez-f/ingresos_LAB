@@ -443,6 +443,14 @@ footer {
   color: var(--color-0);
 }
 
+.hover:hover > span {
+  color: var(--color-0);
+}
+
+.hover:hover .arrow {
+  fill: var(--color-0);
+}
+
 .sub-menu {
   position: relative;
   padding: 0;
@@ -481,6 +489,7 @@ footer {
 }
 
 .arrow {
+  fill: var(--color-1);
   rotate: 90deg;
   margin: 0;
   transition: rotate 0.3s;
@@ -495,7 +504,8 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--color-0);
+  color: var(--color-1);
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
   border: none;
@@ -507,6 +517,10 @@ footer {
   justify-content: space-between;
   flex-direction: column;
   /* overflow-y: auto; */
+}
+
+.comments-card > div > h3 {
+  margin: 0;
 }
 
 #inputComment {
@@ -571,7 +585,7 @@ p {
 }
 
 .lic:hover {
-  border: 1px solid black;
+  border: 1px solid var(--color-1);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -604,11 +618,20 @@ li > button {
   padding: 0;
   margin: 0 0 0 10px;
   opacity: 0.25;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
 
 li > button:hover {
   opacity: 1;
+}
+
+#inputComment > button {
+  background-color: var(--p-color);
+  color: var(--color-0);
+}
+
+#inputComment > button:hover {
+  background-color: var(--p-color);
 }
 
 .iniciado {
@@ -644,21 +667,50 @@ li > button:hover {
   grid-template-columns: 1fr 1fr;
   width: 90%;
   justify-items: center;
-  border: 1px solid var(--color-1);
-  padding: 20px;
+}
+
+#teaCards,
+#telemandosCards {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.c {
+  text-align: center;
+}
+
+.unidad {
+  font-weight: 600;
 }
 
 .card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  background-color: var(--color-0);
   border: 1px solid var(--color-1);
   border-radius: 5px;
-  padding: 20px 20px 30px 20px;
+  padding: 1rem;
   gap: 10px;
+  width: 300px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 0 50px 10px var(--color-0);
 }
 
 .card > h4 {
   margin-bottom: 10px;
+}
+
+.linea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .realizado {
@@ -666,4 +718,47 @@ li > button:hover {
 }
 .vencido {
   box-shadow: 0px 0px 10px var(--n-color);
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 0;
+  margin: auto;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.A {
+  background-color: var(--color-A);
+}
+.B {
+  background-color: var(--color-B);
+}
+.C {
+  background-color: var(--color-C);
+}
+.D {
+  background-color: var(--color-D);
+}
+.E {
+  background-color: var(--color-E);
+}
+.H {
+  background-color: var(--color-H);
+}
+.P {
+  background-color: var(--color-P);
+}
+.U {
+  background-color: var(--color-U);
+}
+.n-a {
+  color: var(--color-4);
+  font-size: 14px;
 }

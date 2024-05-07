@@ -1,4 +1,4 @@
-<!-- ingreso.html -->
+<!-- preventivos.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -50,41 +50,28 @@
     <h2>MANTENIMIENTOS PREVENTIVOS</h2>
     <div>
       <select class="prvSlct" id="mesSelect">
-        <option class="prvOpt" value="enero">Enero</option>
-        <option class="prvOpt" value="febrero">Febrero</option>
-        <option class="prvOpt" value="marzo">Marzo</option>
-        <option class="prvOpt" value="abril">Abril</option>
-        <option class="prvOpt" value="mayo">Mayo</option>
-        <option class="prvOpt" value="junio">Junio</option>
-        <option class="prvOpt" value="julio">Julio</option>
-        <option class="prvOpt" value="agosto">Agosto</option>
-        <option class="prvOpt" value="septiembre">Septiembre</option>
-        <option class="prvOpt" value="octubre">Octubre</option>
-        <option class="prvOpt" value="noviembre">Noviembre</option>
-        <option class="prvOpt" value="diciembre">Diciembre</option>
+        <option class="prvOpt" value="ENERO">ENERO</option>
+        <option class="prvOpt" value="FEBRERO">FEBRERO</option>
+        <option class="prvOpt" value="MARZO">MARZO</option>
+        <option class="prvOpt" value="ABRIL">ABRIL</option>
+        <option class="prvOpt" value="MAYO">MAYO</option>
+        <option class="prvOpt" value="JUNIO">JUNIO</option>
+        <option class="prvOpt" value="JULIO">JULIO</option>
+        <option class="prvOpt" value="AGOSTO">AGOSTO</option>
+        <option class="prvOpt" value="SEPTIEMBRE">SEPTIEMBRE</option>
+        <option class="prvOpt" value="OCTUBRE">OCTUBRE</option>
+        <option class="prvOpt" value="NOVIEMBRE">NOVIEMBRE</option>
+        <option class="prvOpt" value="DICIEMBRE">DICIEMBRE</option>
       </select>
     </div>
     <section class="preventivos">
       <section class="tea">
-        <h3>Carteles TEA</h3>
-        <div class="card realizado">
-          <h4 id="unidad">Peru</h4>
-          <p id="linea">Linea A</p>
-          <p id="estado">Realizado</p>
-          <p id="trabajador">Agustin</p>
-          <p id="comentario">Se cambio puente</p>
-        </div>
+        <h3 class="c">T. E. A. <span id="propTea"></span></h3>
+        <div id="teaCards"></div>
       </section>
       <section class="telemandos">
-        <h3>Telemandos</h3>
-        <div class="card">
-          <p id="linea"></p>
-          <p id="sistema"></p>
-          <p id="unidad"></p>
-          <p id="estado"></p>
-          <p id="trabajador"></p>
-          <p id="comentario"></p>
-        </div>
+        <h3 class="c">Telemandos <span id="propTlmnd"></span></h3>
+        <div id="telemandosCards"></div>
       </section>
     </section>
     <footer>

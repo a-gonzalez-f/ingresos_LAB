@@ -60,21 +60,6 @@ app.delete("/eliminar-equipo/:id", async (req, res) => {
   }
 });
 
-// Ruta para mostrar internos.html
-app.get("/internos", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "internos.html"));
-});
-
-// Ruta para manejar solicitudes GET en "/listar-internos"
-app.get("/listar-internos", async (req, res) => {
-  try {
-    const internos = await ModeloInternos.find();
-    res.json(internos);
-  } catch (error) {
-    res.status(500).send("Error al obtener la lista de internos");
-  }
-});
-
 // Ruta para manejar solicitudes PATCH en "/cambiar-estado/:id"
 app.patch("/cambiar-estado/:id", async (req, res) => {
   try {
@@ -202,6 +187,46 @@ app.delete("/eliminar-comentario/:equipoId/:index", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al eliminar el comentario");
+  }
+});
+
+// Ruta para mostrar internos.html
+app.get("/internos", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "internos.html"));
+});
+
+// Ruta para manejar solicitudes GET en "/listar-internos"
+app.get("/listar-internos", async (req, res) => {
+  try {
+    const internos = await ModeloInternos.find();
+    res.json(internos);
+  } catch (error) {
+    res.status(500).send("Error al obtener la lista de internos");
+  }
+});
+
+// Ruta para mostrar preventivos
+app.get("/preventivos", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "preventivos.html"));
+});
+
+// Ruta para manejar solicitudes GET en "/mostrar-tea"
+app.get("/mostrar-tea", async (req, res) => {
+  try {
+    const tea = await ModeloTea.find();
+    res.json(tea);
+  } catch (error) {
+    res.status(500).send("Error al obtener la lista de internos");
+  }
+});
+
+// Ruta para manejar solicitudes GET en "/mostrar-telemandos"
+app.get("/mostrar-telemandos", async (req, res) => {
+  try {
+    const telemandos = await ModeloTelemandos.find();
+    res.json(telemandos);
+  } catch (error) {
+    res.status(500).send("Error al obtener la lista de internos");
   }
 });
 
