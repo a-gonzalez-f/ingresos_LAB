@@ -662,6 +662,10 @@ li > button:hover {
   border-radius: 3px;
 }
 
+.mesActual {
+  background-color: var(--secondary-color);
+}
+
 .preventivos {
   display: grid;
   grid-template-columns: 1fr 1fr;

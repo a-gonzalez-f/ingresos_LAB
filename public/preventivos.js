@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mesIndex = meses.indexOf(mesActual);
   if (mesIndex !== -1) {
     mesSelect.selectedIndex = mesIndex;
+    mesSelect.options[mesIndex].classList.add("mesActual");
   } else {
     console.error("El mes actual no se encontró en la lista de opciones.");
   }
