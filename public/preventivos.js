@@ -34,11 +34,22 @@ document.addEventListener("DOMContentLoaded", function () {
       );
   }
 
-  // Llamar a la función al cargar la página con el mes actual
+  // Obtener el mes actual y establecerlo como seleccionado por defecto
   const mesActual = new Date()
     .toLocaleString("es-ES", { month: "long" })
     .toUpperCase();
-  obtenerYMostrarDatos(mesActual);
+  const meses = Array.from(mesSelect.options).map((option) =>
+    option.value.toUpperCase()
+  );
+  const mesIndex = meses.indexOf(mesActual);
+  if (mesIndex !== -1) {
+    mesSelect.selectedIndex = mesIndex;
+  } else {
+    console.error("El mes actual no se encontró en la lista de opciones.");
+  }
+
+  // Llamar a la función para obtener y mostrar los datos del mes seleccionado
+  obtenerYMostrarDatos(mesSelect.value);
 
   // Evento change para el select
   mesSelect.addEventListener("change", function () {
