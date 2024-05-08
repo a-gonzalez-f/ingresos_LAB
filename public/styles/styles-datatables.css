@@ -30,24 +30,6 @@ table td {
   text-align: center;
 }
 
-td > button,
-.dbtn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: font-weight 0.1s;
-  fill: var(--secondary-color);
-  color: var(--color-4);
-  font-size: 16px;
-  padding: 0;
-}
-
-td > button:hover,
-.dbtn:hover {
-  color: var(--color-8);
-  font-weight: 600;
-}
-
 .checkbox-cell input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;

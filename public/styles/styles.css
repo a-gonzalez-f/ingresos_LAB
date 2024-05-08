@@ -499,6 +499,29 @@ footer {
   rotate: 180deg;
 }
 
+td > button,
+.dbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: font-weight 0.1s;
+  fill: var(--secondary-color);
+  color: var(--color-4);
+  font-size: 16px;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+td > button:hover,
+.dbtn:hover {
+  color: var(--color-8);
+  font-weight: 600;
+}
+
+svg.dbtn:hover {
+  fill: var(--n-color);
+}
+
 .comments-card {
   position: fixed;
   top: 50%;
@@ -617,7 +640,7 @@ li > button {
   border: none;
   padding: 0;
   margin: 0 0 0 10px;
-  opacity: 0.25;
+  opacity: 0.7;
   transition: opacity 0.2s;
 }
 
