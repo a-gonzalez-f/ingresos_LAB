@@ -1,4 +1,4 @@
-// contextMenu.Js
+// contextMenu.js
 
 // Variable para mantener una referencia al menú contextual actualmente abierto
 let activeContextMenu = null;
@@ -31,6 +31,40 @@ async function handleContextMenu(event) {
     const contextMenu = document.createElement("div");
     contextMenu.className = "context-menu";
 
+    // Cargar el archivo workers.json utilizando fetch
+    const response = await fetch("workers.json");
+    const workers = await response.json();
+
+    const arregladoSubMenu = document.createElement("div");
+    arregladoSubMenu.classList.add("sub-menu", "hover");
+    arregladoSubMenu.innerHTML = `
+          <span>Visto por<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path  d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
+        `;
+
+    // Crear un div contenedor para todos los trabajadores
+    const workersContainer = document.createElement("div");
+
+    // Iterar sobre cada objeto de trabajador en el arreglo 'workers'
+    workers.forEach((worker) => {
+      // Crear un div para cada trabajador
+      const workerDiv = document.createElement("div");
+      workerDiv.classList.add("hover", "p10");
+      // El nombre del trabajador se obtiene del atributo 'nombre' del objeto actual
+      workerDiv.textContent = worker.nombre;
+      // Asignar un evento 'click' para llamar a la función 'assignedWorker' con los parámetros adecuados
+      workerDiv.addEventListener("click", () =>
+        assignedWorker(equipoId, worker.nombre)
+      );
+      // Agregar el div del trabajador al contenedor de trabajadores
+      workersContainer.appendChild(workerDiv);
+    });
+
+    // Agregar el contenedor de trabajadores al menú contextual
+    arregladoSubMenu.appendChild(workersContainer);
+
+    // Agregar el menú contextual completo al menú principal
+    contextMenu.appendChild(arregladoSubMenu);
+
     const estadoSubMenu = document.createElement("div");
     estadoSubMenu.classList.add("sub-menu", "hover");
     estadoSubMenu.innerHTML = `
@@ -41,21 +75,6 @@ async function handleContextMenu(event) {
             <div class="hover p10" onclick="changeStatus('${equipoId}', 'En espera')">En espera</div>
             <div class="hover p10" onclick="changeStatus('${equipoId}', 'Sin arreglo')">Sin arreglo</div>
             <div class="hover p10" onclick="changeStatus('${equipoId}', 'Reparado')">Reparado</div>
-          </div>
-        `;
-
-    const arregladoSubMenu = document.createElement("div");
-    arregladoSubMenu.classList.add("sub-menu", "hover");
-    arregladoSubMenu.innerHTML = `
-          <span>Visto por<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="arrow" viewBox="0 0 1024 1024"><path  d="m488.832 344.32l-339.84 356.672a32 32 0 0 0 0 44.16l.384.384a29.44 29.44 0 0 0 42.688 0l320-335.872l319.872 335.872a29.44 29.44 0 0 0 42.688 0l.384-.384a32 32 0 0 0 0-44.16L535.168 344.32a32 32 0 0 0-46.336 0"/></svg></span>
-          <div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Agus')">Agus</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Dani')">Dani</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Fede')">Fede</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Junmi')">Junmi</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pablo')">Pablo</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Pedro')">Pedro</div>
-            <div class="hover p10" onclick="assignedWorker('${equipoId}', 'Sergio')">Sergio</div>
           </div>
         `;
 
@@ -153,7 +172,6 @@ async function handleContextMenu(event) {
     }
 
     contextMenu.appendChild(estadoSubMenu);
-    contextMenu.appendChild(arregladoSubMenu);
     contextMenu.appendChild(comentarioSubMenu);
     contextMenu.appendChild(eliminarEquipoSubMenu);
 

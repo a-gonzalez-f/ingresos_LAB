@@ -4,14 +4,6 @@ const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27017/ingresosLAB");
 
-const workers = new mongoose.Schema({
-  nombre: String,
-  apellido: String,
-  nacimiento: Date,
-  legajo: Number,
-  mail: String,
-});
-
 const schema = new mongoose.Schema({
   fechaIngreso: Date,
   ingresa: String,
