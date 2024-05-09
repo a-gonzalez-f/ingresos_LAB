@@ -1,4 +1,4 @@
-// contextMenu.js
+// listadoContextMenu.js
 
 // Variable para mantener una referencia al menú contextual actualmente abierto
 let activeContextMenu = null;
