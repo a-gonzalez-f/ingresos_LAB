@@ -428,19 +428,22 @@ footer {
   position: absolute;
   background-color: var(--primary-color);
   color: #fff;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px 10px rgba(130, 130, 130, 0.5);
   z-index: 3;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .context-menu div {
-  padding: 0.5rem;
+  padding: 0.6rem;
   white-space: nowrap;
+  min-width: 9rem;
 }
 
 .hover:hover {
   background-color: var(--color-1);
   color: var(--color-0);
+  border-radius: 0 10px 0 10px;
 }
 
 .hover:hover > span {
@@ -461,7 +464,7 @@ footer {
   position: absolute;
   padding: 0;
   top: 0;
-  left: 119px;
+  left: 9rem;
   background-color: var(--primary-color);
   color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -491,7 +494,7 @@ footer {
 .arrow {
   fill: var(--color-1);
   rotate: 90deg;
-  margin: 0;
+  margin: 0 0 0 5px;
   transition: rotate 0.3s;
 }
 
