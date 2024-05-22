@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     teaData.forEach((tea) => {
       const teaCard = document.createElement("div");
       teaCard.innerHTML = `
-        <div class="card">
+        <div class="card" id="${tea._id}">
             <div class="linea">
                 <p class="circle ${tea.LINEA}"> ${tea.LINEA}</p>
             </div>
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     telemandosData.forEach((telemando) => {
       const telemandoCard = document.createElement("div");
       telemandoCard.innerHTML = `
-        <div class="card">
+        <div class="card" id="${telemando._id}">
             <div class="linea">
                 <p class="circle ${telemando.LINEA}"> ${telemando.LINEA}</p>
             </div>
