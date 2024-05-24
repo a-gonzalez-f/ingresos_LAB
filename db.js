@@ -32,24 +32,24 @@ const schemaInterno = new mongoose.Schema({
 const ModeloInternos = mongoose.model("internos", schemaInterno);
 
 const schemaTea = new mongoose.Schema({
-  LINEA: String,
-  UNIDAD: String,
-  MES: String,
-  ESTADO: { type: String, default: "No realizado" },
-  TRABAJADORES: [{ type: String, default: "" }],
-  COMENTARIOS: [{ type: String, default: "" }],
+  linea: String,
+  unidad: String,
+  mes: String,
+  estado: String,
+  trabajador: [{ type: String, default: "" }],
+  comentarios: [{ type: String, default: "" }],
 });
 
-const ModeloTea = mongoose.model("tea", schemaTea);
+const ModeloTea = mongoose.model("teas", schemaTea);
 
 const schemaTelemandos = new mongoose.Schema({
-  LINEA: String,
-  SISTEMA: String,
-  UNIDAD: String,
-  MES: String,
-  ESTADO: { type: String, default: "No realizado" },
-  TRABAJADORES: { type: String, default: "" },
-  COMENTARIOS: [{ type: String, default: "" }],
+  linea: String,
+  sistema: String,
+  unidad: String,
+  mes: String,
+  estado: String,
+  trabajador: [{ type: String, default: "" }],
+  comentarios: [{ type: String, default: "" }],
 });
 
 const ModeloTelemandos = mongoose.model("telemandos", schemaTelemandos);

@@ -230,5 +230,31 @@ app.get("/mostrar-telemandos", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes PATCH en "/asignar-trabajador-tea/:teaId"
+app.patch("/asignar-trabajador-tea/:teaId", async (req, res) => {
+  try {
+    const { teaId } = req.params;
+    const { trabajador } = req.body;
+
+    console.log(
+      `Actualizando Tea con ID ${teaId} para asignar el trabajador ${trabajador}`
+    );
+
+    const resultado = await ModeloTea.findByIdAndUpdate(
+      teaId,
+      { trabajador: trabajador },
+      { new: true }
+    );
+
+    if (!resultado) {
+      return res.status(404).send("Tea no encontrado");
+    }
+    res.status(200).send("Trabajador asignado correctamente al Tea");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al asignar el trabajador al Tea");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));

@@ -25,7 +25,8 @@ async function handleContextMenu(event) {
 
   const targetCard = event.target.closest(".card");
   if (targetCard) {
-    const cardId = targetCard.id;
+    const teaId = targetCard.id;
+    console.log(teaId);
 
     // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");
@@ -44,9 +45,13 @@ async function handleContextMenu(event) {
       const workerDiv = document.createElement("div");
       workerDiv.classList.add("hover", "p10");
       workerDiv.textContent = worker.nombre;
-      workerDiv.addEventListener("click", () =>
-        assignedWorker(equipoId, worker.nombre)
-      );
+
+      workerDiv.addEventListener("click", async () => {
+        console.log(
+          `Asignando trabajador ${worker.nombre} al Tea con ID ${teaId}`
+        );
+        await assignedWorkerTea(teaId, worker.nombre);
+      });
       workersContainer.appendChild(workerDiv);
     });
 
@@ -74,5 +79,35 @@ function closeContextMenu(event) {
     activeContextMenu.remove();
     activeContextMenu = null;
     document.removeEventListener("click", closeContextMenu);
+  }
+}
+
+async function assignedWorkerTea(teaId, worker) {
+  try {
+    console.log(
+      `Enviando solicitud para asignar el trabajador ${worker} al Tea ${teaId}`
+    );
+    const response = await fetch(
+      `http://localhost:3000/asignar-trabajador-tea/${teaId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ trabajador: worker }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(errorMessage);
+    }
+
+    console.log("Trabajador asignado correctamente al Tea");
+    alert("Trabajador asignado correctamente al Tea");
+    window.location.reload();
+  } catch (error) {
+    console.error(error.message);
+    alert("Error al asignar el trabajador al Tea");
   }
 }

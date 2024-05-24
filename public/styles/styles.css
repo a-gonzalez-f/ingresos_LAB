@@ -440,6 +440,10 @@ footer {
   min-width: 9rem;
 }
 
+.hover {
+  transition: all 0.2s;
+}
+
 .hover:hover {
   background-color: var(--color-1);
   color: var(--color-0);

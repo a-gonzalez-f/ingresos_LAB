@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((teaData) => {
         // Filtrar los objetos TEA según el mes seleccionado
-        const filteredTea = teaData.filter((tea) => tea.MES === selectedMonth);
+        const filteredTea = teaData.filter((tea) => tea.mes === selectedMonth);
 
         // Mostrar los objetos TEA en el div correspondiente
         mostrarTea(filteredTea);
@@ -20,9 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`/mostrar-telemandos?mes=${selectedMonth}`)
       .then((response) => response.json())
       .then((telemandosData) => {
+        // Normalizar los datos de telemandos para asegurar que comentarios sea siempre un arreglo
+        telemandosData.forEach((telemando) => {
+          if (!Array.isArray(telemando.comentarios)) {
+            telemando.comentarios = [];
+          }
+        });
+
         // Filtrar los objetos Telemandos según el mes seleccionado
         const filteredTelemandos = telemandosData.filter(
-          (telemando) => telemando.MES === selectedMonth
+          (telemando) => telemando.mes === selectedMonth
         );
 
         // Mostrar los objetos Telemandos en el div correspondiente
@@ -67,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
       teaCard.innerHTML = `
         <div class="card" id="${tea._id}">
             <div class="linea">
-                <p class="circle ${tea.LINEA}"> ${tea.LINEA}</p>
+                <p class="circle ${tea.linea}"> ${tea.linea}</p>
             </div>
             <div>
-                <p class="unidad"> ${tea.UNIDAD}</p>
-                <p> ${tea.ESTADO}</p>
-                <p> ${tea.TRABAJADORES.join(", ")}</p>
-                <p> ${tea.COMENTARIOS.join(", ")}</p>
+                <p class="unidad"> ${tea.unidad}</p>
+                <p> ${tea.estado}</p>
+                <p> ${tea.trabajador.join(", ")}</p>
+                <p> ${tea.comentarios.join(", ")}</p>
             </div>
         </div>
       `;
@@ -90,14 +97,13 @@ document.addEventListener("DOMContentLoaded", function () {
       telemandoCard.innerHTML = `
         <div class="card" id="${telemando._id}">
             <div class="linea">
-                <p class="circle ${telemando.LINEA}"> ${telemando.LINEA}</p>
+                <p class="circle ${telemando.linea}"> ${telemando.linea}</p>
             </div>
             <div>
-                <p class="unidad"> ${telemando.UNIDAD}</p>
-                <p> ${telemando.SISTEMA}</p>
-                <p> ${telemando.ESTADO}</p>
-                <p> ${telemando.TRABAJADORES}</p>
-                <p> ${telemando.COMENTARIOS.join(", ")}</p>
+                <p class="unidad"> ${telemando.unidad}</p>
+                <p> ${telemando.sistema}</p>
+                <p> ${telemando.estado}</p>
+                <p> ${telemando.trabajador}</p>
             </div>
         </div>
       `;
@@ -109,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const teaCardsDiv = document.getElementById("teaCards");
     const totalTeaCards = teaData.length;
     const realizadosTeaCards = teaData.filter(
-      (tea) => tea.ESTADO === "Realizado"
+      (tea) => tea.estado === "Realizado"
     ).length;
 
     const propTeaSpan = document.getElementById("propTea");
@@ -120,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const telemandosCardsDiv = document.getElementById("telemandosCards");
     const totalTelemandosCards = telemandosData.length;
     const realizadosTelemandosCards = telemandosData.filter(
-      (telemando) => telemando.ESTADO === "Realizado"
+      (telemando) => telemando.estado === "Realizado"
     ).length;
 
     const propTelemandosSpan = document.getElementById("propTlmnd");
