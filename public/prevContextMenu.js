@@ -25,8 +25,9 @@ async function handleContextMenu(event) {
 
   const targetCard = event.target.closest(".card");
   if (targetCard) {
-    const teaId = targetCard.id;
-    console.log(teaId);
+    const itemId = targetCard.id;
+    const itemType = targetCard.closest("#teaCards") ? "tea" : "telemando"; // Detectar tipo de item
+    console.log(itemId, itemType);
 
     // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");
@@ -47,10 +48,7 @@ async function handleContextMenu(event) {
       workerDiv.textContent = worker.nombre;
 
       workerDiv.addEventListener("click", async () => {
-        console.log(
-          `Asignando trabajador ${worker.nombre} al Tea con ID ${teaId}`
-        );
-        await assignedWorkerTea(teaId, worker.nombre);
+        await assignedWorker(itemId, worker.nombre, itemType);
       });
       workersContainer.appendChild(workerDiv);
     });
@@ -82,32 +80,29 @@ function closeContextMenu(event) {
   }
 }
 
-async function assignedWorkerTea(teaId, worker) {
+async function assignedWorker(itemId, worker, itemType) {
+  const endpoint =
+    itemType === "tea"
+      ? `http://localhost:3000/asignar-trabajador-tea/${itemId}`
+      : `http://localhost:3000/asignar-trabajador-telemando/${itemId}`;
+
   try {
-    console.log(
-      `Enviando solicitud para asignar el trabajador ${worker} al Tea ${teaId}`
-    );
-    const response = await fetch(
-      `http://localhost:3000/asignar-trabajador-tea/${teaId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ trabajador: worker }),
-      }
-    );
+    const response = await fetch(endpoint, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ trabajador: worker }),
+    });
 
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(errorMessage);
     }
 
-    console.log("Trabajador asignado correctamente al Tea");
-    alert("Trabajador asignado correctamente al Tea");
     window.location.reload();
   } catch (error) {
     console.error(error.message);
-    alert("Error al asignar el trabajador al Tea");
+    alert("Error al asignar el trabajador");
   }
 }

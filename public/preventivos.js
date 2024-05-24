@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`/mostrar-tea?mes=${selectedMonth}`)
       .then((response) => response.json())
       .then((teaData) => {
+        // Normalizar los datos de telemandos para asegurar que comentarios sea siempre un arreglo
+        teaData.forEach((tea) => {
+          if (!Array.isArray(tea.comentarios)) {
+            tea.comentarios = [];
+          }
+        });
         // Filtrar los objetos TEA según el mes seleccionado
         const filteredTea = teaData.filter((tea) => tea.mes === selectedMonth);
 

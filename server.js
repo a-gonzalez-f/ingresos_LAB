@@ -256,5 +256,31 @@ app.patch("/asignar-trabajador-tea/:teaId", async (req, res) => {
   }
 });
 
+// Ruta para manejar solicitudes PATCH en "/asignar-trabajador-telemando/:telemandoId"
+app.patch("/asignar-trabajador-telemando/:telemandoId", async (req, res) => {
+  try {
+    const { telemandoId } = req.params;
+    const { trabajador } = req.body;
+
+    console.log(
+      `Actualizando Telemando con ID ${telemandoId} para asignar el trabajador ${trabajador}`
+    );
+
+    const resultado = await ModeloTelemandos.findByIdAndUpdate(
+      telemandoId,
+      { trabajador: trabajador },
+      { new: true }
+    );
+
+    if (!resultado) {
+      return res.status(404).send("Telemando no encontrado");
+    }
+    res.status(200).send("Trabajador asignado correctamente al Telemando");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al asignar el trabajador al Telemando");
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
