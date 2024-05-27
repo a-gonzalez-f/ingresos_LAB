@@ -267,13 +267,18 @@ app.patch("/asignar-trabajador-tea/:teaId", async (req, res) => {
       return res.status(404).send("Tea no encontrado");
     }
 
-    // Añadir trabajador al array
-    if (!tea.trabajador.includes(trabajador)) {
+    // Verificar si el trabajador ya está en el array
+    const index = tea.trabajador.indexOf(trabajador);
+    if (index !== -1) {
+      // Si el trabajador ya está presente, eliminarlo del array
+      tea.trabajador.splice(index, 1);
+    } else {
+      // Si el trabajador no está presente, agregarlo al array
       tea.trabajador.push(trabajador);
     }
 
     // Actualizar el estado
-    tea.estado = tea.trabajador.length > 0 ? "Realizado" : "No realizado";
+    tea.estado = tea.trabajador.length > 1 ? "Realizado" : "No realizado";
 
     // Guardar el documento actualizado
     await tea.save();
@@ -297,14 +302,19 @@ app.patch("/asignar-trabajador-telemando/:telemandoId", async (req, res) => {
       return res.status(404).send("Telemando no encontrado");
     }
 
-    // Añadir trabajador al array
-    if (!telemando.trabajador.includes(trabajador)) {
+    // Verificar si el trabajador ya está en el array
+    const index = telemando.trabajador.indexOf(trabajador);
+    if (index !== -1) {
+      // Si el trabajador ya está presente, eliminarlo del array
+      telemando.trabajador.splice(index, 1);
+    } else {
+      // Si el trabajador no está presente, agregarlo al array
       telemando.trabajador.push(trabajador);
     }
 
     // Actualizar el estado
     telemando.estado =
-      telemando.trabajador.length > 0 ? "Realizado" : "No realizado";
+      telemando.trabajador.length > 1 ? "Realizado" : "No realizado";
 
     // Guardar el documento actualizado
     await telemando.save();
