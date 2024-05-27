@@ -77,19 +77,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
     teaData.forEach((tea) => {
       const teaCard = document.createElement("div");
+      teaCard.classList.add("card");
+      teaCard.id = tea._id;
+
+      // Añadir la clase "realizado" si el estado es "Realizado"
+      if (tea.estado === "Realizado") {
+        teaCard.classList.add("realizado");
+      }
+
+      // Crear y agregar el contenido estático del teaCard
       teaCard.innerHTML = `
-        <div class="card" id="${tea._id}">
-            <div class="linea">
-                <p class="circle ${tea.linea}"> ${tea.linea}</p>
-            </div>
-            <div>
-                <p class="unidad"> ${tea.unidad}</p>
-                <p> ${tea.estado}</p>
-                <p> ${tea.trabajador.join(", ")}</p>
-                <p> ${tea.comentarios.join(", ")}</p>
-            </div>
+        <div class="linea">
+          <p class="circle ${tea.linea}"> ${tea.linea}</p>
+        </div>
+        <div class="info">
+          <p class="unidad"> ${tea.unidad}</p>
+          <p class="estado"> ${tea.estado}</p>
         </div>
       `;
+
+      // Asegurarse de que tea.trabajador sea un array
+      if (!Array.isArray(tea.trabajador)) {
+        tea.trabajador = [];
+      } else {
+        // Eliminar duplicados
+        tea.trabajador = Array.from(new Set(tea.trabajador));
+      }
+
+      // Crear el div para los trabajadores y agregar cada trabajador en su propio <p>
+      const trabajadoresDiv = document.createElement("div");
+      trabajadoresDiv.classList.add("divTrabajadores");
+      tea.trabajador.forEach((trabajador) => {
+        if (trabajador.trim() !== "") {
+          const trabajadorP = document.createElement("p");
+          trabajadorP.textContent = trabajador;
+          trabajadoresDiv.appendChild(trabajadorP);
+        }
+      });
+
+      // Crear el div para los comentarios y agregar cada comentario en su propio <p>
+      const comentariosDiv = document.createElement("div");
+      comentariosDiv.classList.add("divComentarios");
+      tea.comentarios.forEach((comentario) => {
+        if (comentario.trim() !== "") {
+          const comentarioP = document.createElement("p");
+          comentarioP.textContent = comentario;
+          comentariosDiv.appendChild(comentarioP);
+        }
+      });
+
+      // Agregar los divs de trabajadores y comentarios al teaCard
+      teaCard.appendChild(trabajadoresDiv);
+      teaCard.appendChild(comentariosDiv);
+
+      // Agregar el teaCard al contenedor principal
       teaCardsDiv.appendChild(teaCard);
     });
   }

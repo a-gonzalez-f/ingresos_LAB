@@ -5,6 +5,18 @@ const path = require("path");
 const app = express();
 const { Modelo, ModeloInternos, ModeloTea, ModeloTelemandos } = require("./db");
 
+// Encuentra y actualiza documentos donde 'trabajador' es una cadena
+// ModeloTea.updateMany(
+//   { trabajador: { $type: "string" } },
+//   { $set: { trabajador: [""] } }
+// )
+//   .then((result) => {
+//     console.log(`Se actualizaron ${result.nModified} documentos`);
+//   })
+//   .catch((error) => {
+//     console.error("Error al actualizar documentos:", error);
+//   });
+
 app.use(express.json());
 
 // Configura express.static para servir archivos estáticos desde el directorio 'public'
@@ -236,19 +248,24 @@ app.patch("/asignar-trabajador-tea/:teaId", async (req, res) => {
     const { teaId } = req.params;
     const { trabajador } = req.body;
 
-    console.log(
-      `Actualizando Tea con ID ${teaId} para asignar el trabajador ${trabajador}`
-    );
+    // Encuentra el documento y actualiza
+    const tea = await ModeloTea.findById(teaId);
 
-    const resultado = await ModeloTea.findByIdAndUpdate(
-      teaId,
-      { trabajador: trabajador },
-      { new: true }
-    );
-
-    if (!resultado) {
+    if (!tea) {
       return res.status(404).send("Tea no encontrado");
     }
+
+    // Añadir trabajador al array
+    if (!tea.trabajador.includes(trabajador)) {
+      tea.trabajador.push(trabajador);
+    }
+
+    // Actualizar el estado
+    tea.estado = tea.trabajador.length > 0 ? "Realizado" : "No realizado";
+
+    // Guardar el documento actualizado
+    await tea.save();
+
     res.status(200).send("Trabajador asignado correctamente al Tea");
   } catch (error) {
     console.error(error);
@@ -262,13 +279,9 @@ app.patch("/asignar-trabajador-telemando/:telemandoId", async (req, res) => {
     const { telemandoId } = req.params;
     const { trabajador } = req.body;
 
-    console.log(
-      `Actualizando Telemando con ID ${telemandoId} para asignar el trabajador ${trabajador}`
-    );
-
     const resultado = await ModeloTelemandos.findByIdAndUpdate(
       telemandoId,
-      { trabajador: trabajador },
+      { $push: { trabajador: trabajador } },
       { new: true }
     );
 

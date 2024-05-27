@@ -57,8 +57,6 @@ async function handleContextMenu(event) {
 
     contextMenu.appendChild(arregladoSubMenu);
 
-    // Add more submenus or actions as needed
-
     const posX = event.clientX + 3;
     const posY = event.clientY + window.scrollY;
 
