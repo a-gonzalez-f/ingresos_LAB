@@ -5,8 +5,20 @@ const path = require("path");
 const app = express();
 const { Modelo, ModeloInternos, ModeloTea, ModeloTelemandos } = require("./db");
 
-// Encuentra y actualiza documentos donde 'trabajador' es una cadena
+// Borrar trabajadores asignados en TEA
 // ModeloTea.updateMany(
+//   { trabajador: { $type: "string" } },
+//   { $set: { trabajador: [""] } }
+// )
+//   .then((result) => {
+//     console.log(`Se actualizaron ${result.nModified} documentos`);
+//   })
+//   .catch((error) => {
+//     console.error("Error al actualizar documentos:", error);
+//   });
+
+// Borrar trabajadores asignados en Telemandos
+// ModeloTelemandos.updateMany(
 //   { trabajador: { $type: "string" } },
 //   { $set: { trabajador: [""] } }
 // )
@@ -279,15 +291,24 @@ app.patch("/asignar-trabajador-telemando/:telemandoId", async (req, res) => {
     const { telemandoId } = req.params;
     const { trabajador } = req.body;
 
-    const resultado = await ModeloTelemandos.findByIdAndUpdate(
-      telemandoId,
-      { $push: { trabajador: trabajador } },
-      { new: true }
-    );
-
-    if (!resultado) {
+    // Encuentra el documento y actualiza
+    const telemando = await ModeloTelemandos.findById(telemandoId);
+    if (!telemando) {
       return res.status(404).send("Telemando no encontrado");
     }
+
+    // Añadir trabajador al array
+    if (!telemando.trabajador.includes(trabajador)) {
+      telemando.trabajador.push(trabajador);
+    }
+
+    // Actualizar el estado
+    telemando.estado =
+      telemando.trabajador.length > 0 ? "Realizado" : "No realizado";
+
+    // Guardar el documento actualizado
+    await telemando.save();
+
     res.status(200).send("Trabajador asignado correctamente al Telemando");
   } catch (error) {
     console.error(error);

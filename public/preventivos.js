@@ -141,19 +141,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
     telemandosData.forEach((telemando) => {
       const telemandoCard = document.createElement("div");
+      telemandoCard.classList.add("card");
+      telemandoCard.id = telemando._id;
+
+      // Añadir la clase "realizado" si el estado es "Realizado"
+      if (telemando.estado === "Realizado") {
+        telemandoCard.classList.add("realizado");
+      }
+
+      // Crear y agregar el contenido estático del telemandoCard
       telemandoCard.innerHTML = `
-        <div class="card" id="${telemando._id}">
-            <div class="linea">
-                <p class="circle ${telemando.linea}"> ${telemando.linea}</p>
-            </div>
-            <div>
-                <p class="unidad"> ${telemando.unidad}</p>
-                <p> ${telemando.sistema}</p>
-                <p> ${telemando.estado}</p>
-                <p> ${telemando.trabajador}</p>
-            </div>
+        <div class="linea">
+          <p class="circle ${telemando.linea}"> ${telemando.linea}</p>
+        </div>
+        <div class="info">
+          <p class="unidad"> ${telemando.unidad}</p>
+          <p class="sistema"> ${telemando.sistema}</p>
+          <p class="estado"> ${telemando.estado}</p>
         </div>
       `;
+
+      // Asegurarse de que telemando.trabajador sea un array
+      if (!Array.isArray(telemando.trabajador)) {
+        telemando.trabajador = [];
+      } else {
+        // Eliminar duplicados
+        telemando.trabajador = Array.from(new Set(telemando.trabajador));
+      }
+
+      // Crear el div para los trabajadores y agregar cada trabajador en su propio <p>
+      const trabajadoresDiv = document.createElement("div");
+      trabajadoresDiv.classList.add("divTrabajadores");
+      telemando.trabajador.forEach((trabajador) => {
+        if (trabajador.trim() !== "") {
+          const trabajadorP = document.createElement("p");
+          trabajadorP.textContent = trabajador;
+          trabajadoresDiv.appendChild(trabajadorP);
+        }
+      });
+
+      // Agregar el div de trabajadores al telemandoCard
+      telemandoCard.appendChild(trabajadoresDiv);
+
+      // Agregar el telemandoCard al contenedor principal
       telemandosCardsDiv.appendChild(telemandoCard);
     });
   }
