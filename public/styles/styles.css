@@ -737,7 +737,7 @@ li > button:hover {
 }
 
 .card:hover {
-  box-shadow: 0 0 50px 10px var(--color-0);
+  box-shadow: 0 0 30px 5px var(--color-0);
 }
 
 .card > h4 {
@@ -753,10 +753,14 @@ li > button:hover {
 
 .realizado {
   border: 3px solid var(--p-color);
-  box-shadow: 0px 0px 5px var(--p-color);
+  box-shadow: 0px 0px 3px var(--p-color);
+}
+.realizado:hover {
+  box-shadow: none;
 }
 .vencido {
-  box-shadow: 0px 0px 10px var(--n-color);
+  border: 3px solid var(--n-color);
+  box-shadow: 0px 0px 3px var(--n-color);
 }
 
 .circle {
