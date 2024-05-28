@@ -86,7 +86,6 @@ header {
   margin: 20px;
   width: 30px;
   height: 25px;
-  background-color: var(--secondary-color);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -158,16 +157,16 @@ header {
   z-index: 10;
   position: fixed;
   top: 0px;
-  left: -10vw;
-  width: 10vw;
+  left: -170px;
+  width: 170px;
   height: 100vh;
   background-color: var(--secondary-color);
-  transition: left ease-in 0.5s;
+  transition: left ease 0.4s;
 }
 
 .am {
   background-color: var(--secondary-color);
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   background-color: inherit;
   border-radius: 0;
 }

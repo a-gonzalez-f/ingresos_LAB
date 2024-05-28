@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const lim = document.querySelector(".lim");
   const menu = document.querySelector(".menu");
   let limVisible = false;
+  let mouseLeaveTimer;
 
   hmb.forEach(function (item) {
     item.addEventListener("click", function () {
@@ -10,14 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
         lim.style.left = "0";
         limVisible = true;
       } else {
-        lim.style.left = "-10vw";
+        lim.style.left = "-170px";
         limVisible = false;
       }
     });
   });
 
   menu.addEventListener("mouseleave", function () {
-    lim.style.left = "-10vw";
-    limVisible = false;
+    clearTimeout(mouseLeaveTimer);
+
+    mouseLeaveTimer = setTimeout(function () {
+      lim.style.left = "-170px";
+      limVisible = false;
+    }, 200);
+  });
+
+  menu.addEventListener("mouseenter", function () {
+    clearTimeout(mouseLeaveTimer);
   });
 });
