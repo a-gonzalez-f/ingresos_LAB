@@ -7,17 +7,17 @@ document.addEventListener("DOMContentLoaded", function () {
   hmb.forEach(function (item) {
     item.addEventListener("click", function () {
       if (!limVisible) {
-        lim.style.right = "0";
+        lim.style.left = "0";
         limVisible = true;
       } else {
-        lim.style.right = "-10vw";
+        lim.style.left = "-10vw";
         limVisible = false;
       }
     });
   });
 
   menu.addEventListener("mouseleave", function () {
-    lim.style.right = "-10vw";
+    lim.style.left = "-10vw";
     limVisible = false;
   });
 });

@@ -82,7 +82,7 @@ header {
 .menu {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   margin: 20px;
   width: 30px;
   height: 25px;
@@ -158,11 +158,11 @@ header {
   z-index: 10;
   position: fixed;
   top: 0px;
-  right: -10vw;
+  left: -10vw;
   width: 10vw;
   height: 100vh;
   background-color: var(--secondary-color);
-  transition: right ease-in 0.5s;
+  transition: left ease-in 0.5s;
 }
 
 .am {
