@@ -40,6 +40,7 @@ async function handleContextMenu(event) {
     `;
     // Crear un div contenedor para todos los trabajadores
     const workersContainer = document.createElement("div");
+    workersContainer.classList.add("subMenuLi");
 
     // Iterar sobre cada objeto de trabajador en el arreglo 'workers'
     workers.forEach((worker) => {
@@ -57,8 +58,20 @@ async function handleContextMenu(event) {
 
     contextMenu.appendChild(arregladoSubMenu);
 
-    const posX = event.clientX + 3;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    let posX = event.clientX + 3;
+    if (posX + contextMenu.offsetWidth > viewportWidth - 180) {
+      posX = viewportWidth - 180 - contextMenu.offsetWidth;
+      workersContainer.style.left = "-96%";
+    }
+    posX = Math.max(posX, 0);
+
     const posY = event.clientY + window.scrollY;
+    if (posY + contextMenu.offsetHeight > viewportHeight - 300) {
+      workersContainer.style.top = "-268px";
+    }
 
     contextMenu.style.left = `${posX}px`;
     contextMenu.style.top = `${posY}px`;

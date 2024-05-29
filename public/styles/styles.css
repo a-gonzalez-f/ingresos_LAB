@@ -190,6 +190,11 @@ header {
 
 h1 {
   color: white;
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 20px;
 }
 
 h1,
@@ -462,12 +467,13 @@ footer {
   padding: 0;
 }
 
-.sub-menu > div {
+.sub-menu > div,
+.subMenuLi {
   display: none;
   position: absolute;
   padding: 0;
   top: 0;
-  left: 9rem;
+  left: 100%;
   background-color: var(--primary-color);
   color: #fff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -698,17 +704,17 @@ li > button:hover {
 .preventivos {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 90%;
   justify-items: center;
 }
 
 #teaCards,
 #telemandosCards {
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
 }
 
 .c {
@@ -731,7 +737,7 @@ li > button:hover {
   border-radius: 5px;
   padding: 1rem;
   gap: 10px;
-  width: 300px;
+  width: 320px;
   transition: all 0.3s;
 }
 
@@ -748,6 +754,11 @@ li > button:hover {
   justify-content: center;
   align-items: center;
   padding: 10px;
+}
+
+.info > p:last-child,
+.divTrabajadores > p:last-child {
+  margin-bottom: 0;
 }
 
 .realizado {
