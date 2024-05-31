@@ -2,42 +2,42 @@
   {
     "nombre": "Agustin",
     "apellido": "Gonzalez Fidelibus",
-    "nacimiento": "27/9/1999",
+    "cumple": "27/9",
     "legajo": 11106,
     "mail": "aggonzalez@emova.com.ar"
   },
   {
     "nombre": "Pablo",
     "apellido": "Santacruz",
-    "nacimiento": "19/4/1999",
+    "cumple": "19/4",
     "legajo": 11246,
     "mail": "psantacruz@emova.com.ar"
   },
   {
     "nombre": "Daniel",
     "apellido": "Giorgevich",
-    "nacimiento": "18/10/2024",
+    "cumple": "18/10",
     "legajo": 7912,
     "mail": "dgiorgevich@emova.com.ar"
   },
   {
     "nombre": "Junmara",
     "apellido": "Piñango",
-    "nacimiento": "22/7/2024",
+    "cumple": "22/7",
     "legajo": 11459,
     "mail": "jpinango@emova.com.ar"
   },
   {
     "nombre": "Sergio",
     "apellido": "Majer",
-    "nacimiento": "9/5/2024",
+    "cumple": "9/5",
     "legajo": 10145,
     "mail": "smajer@emova.com.ar"
   },
   {
     "nombre": "Federico",
     "apellido": "Piñera",
-    "nacimiento": "18/1/2024",
+    "cumple": "18/1",
     "legajo": 8846,
     "mail": "lpinera@emova.com.ar"
   },

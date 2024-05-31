@@ -1,16 +1,15 @@
 [
   {
-    "nombre": "Alejandro ",
+    "nombre": "Alejandro",
     "apellido": "Vegezzi",
-    "nacimiento": "30/5/2024",
+    "cumple": "30/5",
     "legajo": 7357,
     "mail": "gvegezzi@emova.com.ar"
   },
-
   {
     "nombre": "Gonzalo",
     "apellido": "Merida",
-    "nacimiento": "6/5/2024",
+    "cumple": "6/5",
     "legajo": 1610,
     "mail": "gmerida@emova.com.ar"
   }
