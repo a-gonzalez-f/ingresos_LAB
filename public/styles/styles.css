@@ -68,6 +68,12 @@ input {
   flex-direction: column;
 }
 
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
 header {
   position: sticky;
   top: 0;
@@ -79,6 +85,53 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.cumpleContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  bottom: 100px;
+}
+
+.cumpleContainer > * {
+  margin-bottom: 10px;
+}
+
+.cumpleaños {
+  flex-direction: column !important;
+  width: 150px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s !important;
+}
+
+.hoy {
+  animation: intermitente 1s infinite;
+}
+
+@keyframes intermitente {
+  0%,
+  100% {
+    border: 1px solid yellow;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+  }
+  50% {
+    border: 1px solid var(--color-1);
+    box-shadow: none;
+  }
+}
+
+#siguiente {
+  background-color: transparent;
+  border: none;
+}
+
+.chevron {
+  color: var(--color-1) !important;
+  cursor: pointer;
+}
+
 .menu {
   position: absolute;
   top: 0;
@@ -87,59 +140,10 @@ header {
   width: 30px;
   height: 25px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.l {
-  width: 60%;
-  height: 2px;
-  background-color: white;
-  border-radius: 5px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.menu:hover .l:nth-child(1) {
-  animation-name: expandFirst;
-  animation-duration: 0.5s;
-  animation-delay: 0.2s;
-}
-
-.menu:hover .l:nth-child(2) {
-  animation-name: expandSecond;
-  animation-duration: 0.7s;
-  animation-delay: 0.1s;
-}
-
-.menu:hover .l:nth-child(3) {
-  animation-name: expandThird;
-  animation-duration: 0.9s;
-}
-
-@keyframes expandFirst {
-  from {
-    width: 0;
-  }
-  to {
-    width: 70%;
-  }
-}
-
-@keyframes expandSecond {
-  from {
-    width: 0;
-  }
-  to {
-    width: 70%;
-  }
-}
-
-@keyframes expandThird {
-  from {
-    width: 0;
-  }
-  to {
-    width: 70%;
-  }
+.material-symbols-outlined {
+  color: white;
 }
 
 .hmb {
@@ -199,7 +203,8 @@ h2 {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   margin: 15px;
   font-weight: 400;
 }
@@ -337,20 +342,25 @@ svg {
   }
 }
 
+.homeMenu {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
 ul {
   list-style: none;
   padding: 0;
 }
 
 li {
-  margin-bottom: 3rem;
   text-align: center;
   transition: all 0.3s ease;
 }
 
 a {
   display: block;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: var(--color-1);
   text-decoration: none;
   border-radius: 10px;
