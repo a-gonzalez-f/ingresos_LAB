@@ -176,6 +176,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
+      // Agregar el número de comentarios si hay al menos uno
+      if (telemando.comentarios.length > 0) {
+        const comentariosCount = document.createElement("p");
+        comentariosCount.classList.add("cantComm");
+        comentariosCount.textContent = `(${telemando.comentarios.length})`;
+        telemandoCard.appendChild(comentariosCount);
+      }
+
       // Agregar el div de trabajadores al telemandoCard
       telemandoCard.appendChild(trabajadoresDiv);
 
