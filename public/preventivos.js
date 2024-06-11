@@ -115,20 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Crear el div para los comentarios y agregar cada comentario en su propio <p>
-      const comentariosDiv = document.createElement("div");
-      comentariosDiv.classList.add("divComentarios");
-      tea.comentarios.forEach((comentario) => {
-        if (comentario.trim() !== "") {
-          const comentarioP = document.createElement("p");
-          comentarioP.textContent = comentario;
-          comentariosDiv.appendChild(comentarioP);
-        }
-      });
-
       // Agregar los divs de trabajadores y comentarios al teaCard
       teaCard.appendChild(trabajadoresDiv);
-      teaCard.appendChild(comentariosDiv);
+      // teaCard.appendChild(comentariosDiv);
 
       // Agregar el teaCard al contenedor principal
       teaCardsDiv.appendChild(teaCard);
