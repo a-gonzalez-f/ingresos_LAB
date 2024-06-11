@@ -552,7 +552,7 @@ svg.dbtn:hover {
   background-color: var(--color-0);
   color: var(--color-1);
   border-radius: 8px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
   border: none;
   width: 33vw;
   min-height: 50vh;
@@ -561,6 +561,7 @@ svg.dbtn:hover {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  z-index: 3;
   /* overflow-y: auto; */
 }
 
@@ -737,6 +738,13 @@ li > button:hover {
 
 .estado::first-letter {
   text-transform: uppercase;
+}
+
+.cantComm {
+  position: absolute;
+  color: var(--color-1);
+  font-size: 12px;
+  opacity: 0.5;
 }
 
 .card {

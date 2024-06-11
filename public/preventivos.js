@@ -117,7 +117,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Agregar los divs de trabajadores y comentarios al teaCard
       teaCard.appendChild(trabajadoresDiv);
-      // teaCard.appendChild(comentariosDiv);
+
+      // Agregar el número de comentarios si hay al menos uno
+      if (tea.comentarios.length > 0) {
+        const comentariosCount = document.createElement("p");
+        comentariosCount.classList.add("cantComm");
+        comentariosCount.textContent = `(${tea.comentarios.length})`;
+        teaCard.appendChild(comentariosCount);
+      }
 
       // Agregar el teaCard al contenedor principal
       teaCardsDiv.appendChild(teaCard);
