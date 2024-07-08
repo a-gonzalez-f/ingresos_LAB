@@ -9,6 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("fechaPlanificada").value = todayStr;
   document.getElementById("fechaRealizada").value = todayStr;
 
+  document.getElementById("inicio").addEventListener("change", calculateHours);
+  document.getElementById("final").addEventListener("change", calculateHours);
+
+  function calculateHours() {
+    var inicio = document.getElementById("inicio").value;
+    var final = document.getElementById("final").value;
+
+    if (inicio && final) {
+      var start = new Date(`1970-01-01T${inicio}:00`);
+      var end = new Date(`1970-01-01T${final}:00`);
+      var diff = (end - start) / (1000 * 60 * 60);
+
+      if (diff < 0) {
+        diff += 24;
+      }
+
+      document.getElementById("tmp-asgn-tareas-1").value = diff;
+      document.getElementById("tmp-ejct-tareas-1").value =
+        document.getElementById("tmp-asgn-tareas-1").value;
+    }
+  }
+
   document
     .getElementById("tmp-asgn-tareas-1")
     .addEventListener("input", function () {
