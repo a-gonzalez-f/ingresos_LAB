@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>Parte de Trabajo</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="icon" href="img/favicon-emova.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon-emova.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="styles/parte.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <main id="content">
+      <h3>PARTE DE TRABAJO</h3>
+      <section class="header">
+        <div>
+          <p><span class="bld">Solicitante: </span>11045 - Vanina Butta</p>
+          <p><span class="bld">Rubro: </span> Instalaciones Fijas</p>
+          <p>
+            <span class="bld">SubRubro: </span>IF - Mantenimiento
+            Infraestructura de Datos
+          </p>
+        </div>
+        <div>
+          <p class="fec">
+            <span class="bld">Fecha planificada: </span
+            ><span id="fechaPlanificada" class="bx">12/12/12</span>
+          </p>
+          <p class="fec">
+            <span class="bld">Fecha realizada: </span
+            ><span id="fechaRealizada" class="bx"></span>
+          </p>
+          <p class="fec">
+            <span class="bld">Unidad de Mantenimiento: </span
+            ><span id="unidadMantenimiento" class="bx"></span>
+          </p>
+        </div>
+      </section>
+      <p class="bld">Personal Asignado:</p>
+      <section class="tables">
+        <table class="t1">
+          <tr>
+            <th colspan="2">Legajo asignados</th>
+            <th colspan="2">Tiempo Asignado</th>
+            <th colspan="2">Tiempo Ejecutado</th>
+          </tr>
+          <tr>
+            <th>Nro.</th>
+            <th>Nombre</th>
+            <th>Tareas</th>
+            <th>Traslados</th>
+            <th>Tareas</th>
+            <th>Traslados</th>
+          </tr>
+          <tbody id="trabajadores">
+            <!-- Filas de trabajadores se insertarán aquí dinámicamente -->
+          </tbody>
+        </table>
+        <table class="t2">
+          <th>Traslado</th>
+          <tr>
+            <td>
+              <div>
+                <p class="bld">Desde:</p>
+                <span id="traslado-desde"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>
+                <p class="bld">Hasta:</p>
+                <span id="traslado-hasta"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>
+                <p class="bld">Hora Inicio:</p>
+                <span id="inicio"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div>
+                <p class="bld">Hora Final:</p>
+                <span id="final"></span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <section>
+        <p>
+          <span class="bld">Trabajo / Tarea: </span
+          ><span id="tarea-trabajo"></span>
+        </p>
+      </section>
+      <section class="toggle">
+        <table class="tareas">
+          <thead>
+            <tr>
+              <th rowspan="2">Trabajo / Tarea</th>
+              <th colspan="2">Tiempo</th>
+              <th colspan="2">Realizado</th>
+              <th rowspan="2">Medición Realizada</th>
+              <th rowspan="2">Observaciones</th>
+            </tr>
+            <tr>
+              <th>Asig.</th>
+              <th>Ejec.</th>
+              <th>SI</th>
+              <th>NO</th>
+            </tr>
+          </thead>
+          <tbody class="switch A1">
+            <tr>
+              <td>Limpieza exterior</td>
+              <td>0:15</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Revisión de alimentación</td>
+              <td>0:30</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Revisión de matriz LED</td>
+              <td>0:15</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Revisión de placa controladora</td>
+              <td>0:30</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Verificación de información</td>
+              <td>0:15</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Revisión de conectividad RS485</td>
+              <td>0:30</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Revisión de conectividad IP</td>
+              <td>0:15</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="tar bld">Duración total</td>
+              <td class="tal bld" colspan="6">2:30</td>
+            </tr>
+          </tbody>
+          <tbody class="switch C1">
+            <tr>
+              <td>Limpieza Telemandos de Estaciones</td>
+              <td>1:00</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Ensayos Telemandos de Estaciones</td>
+              <td>1:00</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="tar bld">Duración total</td>
+              <td class="tal bld" colspan="6">2:00</td>
+            </tr>
+          </tbody>
+          <tbody class="switch C3">
+            <tr>
+              <td>Limpieza Telemandos de Subestaciones</td>
+              <td>1:00</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Ensayos Telemandos de Subestaciones</td>
+              <td>1:00</td>
+              <td></td>
+              <td><input type="checkbox" name="si" checked /></td>
+              <td><input type="checkbox" name="no" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="tar bld">Duración total</td>
+              <td class="tal bld" colspan="6">2:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <p class="bld">Observaciones Generales</p>
+        <div class="obs">
+          <span id="observaciones"></span>
+        </div>
+      </section>
+      <section class="firmas">
+        <div id="firmasWorkers" class="firmasWorkers">
+          <!-- Firmas de trabajadores se insertarán aquí dinámicamente -->
+        </div>
+        <div class="supervisor">
+          <div class="f">
+            <div class="firma">
+              <img
+                id="firmaSup"
+                src="./img/firmas/vegezzi alejandro.png"
+                alt="Firma de Vegezzi Alejandro"
+              />
+            </div>
+            <div>
+              <span id="nombreSup">Vegezzi Alejandro</span>
+              <p>Nombre</p>
+            </div>
+            <div>
+              <span id="legajoSup">7357</span>
+              <p>Legajo</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="botones">
+      <button onclick="descargarParte()">Descargar Parte</button>
+    </div>
+    <script src="parte.js"></script>
+  </body>
+</html>

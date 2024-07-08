@@ -53,11 +53,11 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-2);
+  background-color: var(--color-0);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: black;
+  background-color: var(--color-1);
 }
 
 .flex {
