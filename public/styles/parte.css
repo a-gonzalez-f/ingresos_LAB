@@ -1,0 +1,201 @@
+/* parte.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 10mm;
+  width: 190mm;
+  max-width: 100%;
+  height: auto;
+}
+
+h3 {
+  margin: 1rem 0;
+}
+
+.bld {
+  font-weight: 700;
+}
+
+section {
+  border: 1px solid #00000050;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0rem;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+}
+
+.header div {
+  width: 50%;
+}
+
+.tables {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  height: 100%;
+}
+
+th {
+  background-color: #eee;
+}
+
+th,
+td {
+  border: 1px solid #00000050;
+  text-align: center;
+  padding: 4px;
+  height: 30px;
+}
+
+.t1 {
+  width: 85%;
+}
+
+.t2 {
+  width: 15%;
+}
+
+.header > div > p {
+  margin-bottom: 0.5rem;
+  height: 20px;
+}
+
+table.t2 td div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.obs {
+  padding: 1rem;
+}
+
+.A1,
+.C1,
+.C3 {
+  display: none;
+}
+
+.switch > tr > th,
+.switch > tr > td {
+  padding: 2px;
+  height: 0;
+}
+
+.tar {
+  text-align: right !important;
+  padding-right: 15px !important;
+}
+.tal {
+  text-align: left !important;
+  padding-left: 15px !important;
+}
+
+.firmas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.f {
+  height: 240px;
+  width: 150px;
+  border: 1px solid #00000050;
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 2rem;
+}
+
+.f > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.f > div > p {
+  border-top: 1px solid #00000050;
+  margin-top: 0.5rem;
+}
+
+.firma {
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  filter: contrast(100);
+}
+
+.firma > img {
+  width: 100%;
+  height: 100%;
+}
+
+.firmasWorkers {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 1rem;
+  font-size: 15px;
+  background-color: #0cd178;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px #00000050;
+  cursor: pointer;
+}
+
+.bx {
+  display: flex;
+  min-width: 60px;
+  height: 20px;
+  border: 1px solid #00000050;
+  margin-left: 1rem;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.fec {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.mw {
+  min-width: 30%;
+}
+
+.tareas {
+  width: 100%;
+}

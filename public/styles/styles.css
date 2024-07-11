@@ -90,7 +90,7 @@ header {
   align-items: center;
   flex-direction: column;
   position: absolute;
-  bottom: 100px;
+  bottom: 150px;
 }
 
 .cumpleContainer > * {
@@ -346,6 +346,31 @@ svg {
   display: flex;
   gap: 1rem;
   padding: 1rem;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.homeMenu > div {
+  width: 30%;
+}
+
+.homeMenu > div > a {
+  background-color: var(--color-0) !important;
+  color: var(--color-1) !important;
+  transition: background-color 0.3s;
+}
+.homeMenu > div > a:hover {
+  background-color: var(--color-2) !important;
+}
+.homeMenu > div > a > p {
+  margin: 0;
+}
+.homeMenu > div > a > p:first-child {
+  font-weight: 700;
+}
+.homeMenu > div > a > p:last-child {
+  opacity: 0.7;
 }
 
 ul {

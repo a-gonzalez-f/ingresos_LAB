@@ -21,35 +21,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const trabajadoresTable = document.getElementById("trabajadores");
     formData.workers.forEach((worker, index) => {
-      const row = trabajadoresTable.insertRow();
-      row.innerHTML = `
-        <td>${worker.legajo}</td>
-        <td>${worker.nombre}</td>
-        <td>${formData["tmp-asgn-tareas-1"]}</td>
-        <td>${formData["tmp-asgn-traslado-1"]}</td>
-        <td>${formData["tmp-ejct-tareas-1"]}</td>
-        <td>${formData["tmp-ejct-traslado-1"]}</td>
-      `;
+      if (worker.legajo && worker.nombre) {
+        const row = trabajadoresTable.insertRow();
+        row.innerHTML = `
+          <td>${worker.legajo}</td>
+          <td>${worker.nombre}</td>
+          <td>${formData["tmp-asgn-tareas-1"]}</td>
+          <td>${formData["tmp-asgn-traslado-1"]}</td>
+          <td>${formData["tmp-ejct-tareas-1"]}</td>
+          <td>${formData["tmp-ejct-traslado-1"]}</td>
+        `;
+      }
     });
 
     const firmasContainer = document.getElementById("firmasWorkers");
     formData.workers.forEach((worker) => {
-      const firmaDiv = document.createElement("div");
-      firmaDiv.classList.add("f");
-      firmaDiv.innerHTML = `
-        <div class="firma">
-          <img src="img/firmas/${worker.nombre}.png" alt="Firma de ${worker.nombre}">
-        </div>
-        <div>
-          <span>${worker.nombre}</span>
-          <p>Nombre</p>
-        </div>
-        <div>
-          <span>${worker.legajo}</span>
-          <p>Legajo</p>
-        </div>
-      `;
-      firmasContainer.appendChild(firmaDiv);
+      if (worker.legajo && worker.nombre) {
+        const firmaDiv = document.createElement("div");
+        firmaDiv.classList.add("f");
+        firmaDiv.innerHTML = `
+          <div class="firma">
+            <img src="img/firmas/${worker.nombre}.png" alt="Firma de ${worker.nombre}">
+          </div>
+          <div>
+            <span>${worker.nombre}</span>
+            <p>Nombre</p>
+          </div>
+          <div>
+            <span>${worker.legajo}</span>
+            <p>Legajo</p>
+          </div>
+        `;
+        firmasContainer.appendChild(firmaDiv);
+      }
     });
 
     localStorage.removeItem("formData");

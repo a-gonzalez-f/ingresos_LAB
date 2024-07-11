@@ -1,0 +1,166 @@
+main {
+  height: unset;
+  width: 100%;
+  padding: 1rem;
+}
+
+.c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+form {
+  min-width: 300px;
+  width: 40vw;
+  border: 1px solid #000;
+  background-color: #3d3d3d;
+  border-radius: 5px;
+  box-shadow: 0 5px 5px #00000050;
+  padding: 1rem 6rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 15px;
+}
+
+div.ins > div > h6 {
+  text-align: center;
+  width: 100%;
+}
+
+input,
+textarea,
+select {
+  background-color: #00000050;
+  border: none;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+option {
+  background-color: #000000;
+  font-size: 14px;
+}
+
+.ins {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.categ {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.categ > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="date"],
+input[type="time"] {
+  text-align: center;
+}
+
+input[type="number"] {
+  text-align: center;
+}
+
+.tmp {
+  display: flex;
+  flex-direction: row !important;
+  gap: 1rem !important;
+  width: 100%;
+}
+
+.tmp > div {
+  width: 100%;
+}
+
+#observaciones {
+  width: 100%;
+  height: 7rem;
+  resize: none;
+}
+
+.worker {
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.workers > div > div:nth-child(1) {
+  width: 30%;
+}
+.workers > div > div:nth-child(2) {
+  width: 70%;
+}
+
+.legajo::-webkit-outer-spin-button,
+.legajo::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.r {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+.add {
+  color: #000;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.add:hover {
+  color: #ddd;
+}
+
+.check {
+  position: absolute;
+  color: #48ce48;
+  cursor: pointer;
+  font-size: 50px;
+  right: 25vw;
+  bottom: 1rem;
+}
+
+.check:hover {
+  color: #69d469;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}

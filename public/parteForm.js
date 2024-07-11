@@ -47,7 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       window.trabajadores = data;
+      fillLegajosDatalist(data);
+      fillNombresDatalist(data);
       initLegajoListeners();
+      initNombreListeners();
     });
 });
 
@@ -56,6 +59,15 @@ function fillLegajosDatalist(workers) {
   workers.forEach((worker) => {
     const option = document.createElement("option");
     option.value = worker.legajo;
+    datalist.appendChild(option);
+  });
+}
+
+function fillNombresDatalist(workers) {
+  const datalist = document.getElementById("nombres-list");
+  workers.forEach((worker) => {
+    const option = document.createElement("option");
+    option.value = `${worker.nombre} ${worker.apellido}`;
     datalist.appendChild(option);
   });
 }
@@ -108,6 +120,56 @@ function initLegajoListeners() {
   });
 }
 
+function initNombreListeners() {
+  document.querySelectorAll("[id^='nombre-']").forEach((input) => {
+    input.addEventListener("input", function () {
+      const nombreValue = this.value.trim();
+      const legajoInput = document.getElementById(
+        `legajo-${this.id.split("-")[1]}`
+      );
+
+      if (this.value === "") {
+        legajoInput.value = "";
+      } else {
+        const trabajador = window.trabajadores.find(
+          (t) =>
+            `${t.nombre} ${t.apellido}`.toLowerCase() ===
+            nombreValue.toLowerCase()
+        );
+
+        if (trabajador) {
+          legajoInput.value = trabajador.legajo;
+        } else {
+          legajoInput.value = "";
+        }
+      }
+    });
+
+    // Mostrar datalist cuando se ingresan al menos dos caracteres
+    input.addEventListener("input", function () {
+      const nombreValue = this.value.trim().toLowerCase();
+
+      if (nombreValue.length >= 2) {
+        const datalist = document.getElementById("nombres-list");
+        datalist.innerHTML = "";
+
+        const filteredWorkers = window.trabajadores.filter((t) =>
+          `${t.nombre} ${t.apellido}`.toLowerCase().startsWith(nombreValue)
+        );
+
+        filteredWorkers.forEach((worker) => {
+          const option = document.createElement("option");
+          option.value = `${worker.nombre} ${worker.apellido}`;
+          datalist.appendChild(option);
+        });
+      } else {
+        const datalist = document.getElementById("nombres-list");
+        datalist.innerHTML = "";
+      }
+    });
+  });
+}
+
 let workerCount = 1;
 
 function addWorker() {
@@ -131,15 +193,16 @@ function addWorker() {
         </div>
         <div>
             <label for="nombre-${workerCount}">Nombre:</label>
-            <input type="text" name="nombre-${workerCount}" id="nombre-${workerCount}" />
+            <input type="text" name="nombre-${workerCount}" id="nombre-${workerCount}" list="nombres-list" />
         </div>
     `;
 
   const workersContainer = document.querySelector(".workers");
   workersContainer.insertBefore(newWorker, workersContainer.lastElementChild);
 
-  // Añadir event listener al nuevo input de legajo
+  // Añadir event listener al nuevo input de legajo y nombre
   initLegajoListeners();
+  initNombreListeners();
 }
 
 document.querySelector("form").addEventListener("submit", function (event) {
