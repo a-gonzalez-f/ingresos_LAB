@@ -401,6 +401,16 @@ a:hover {
   transform: scale(1.05);
 }
 
+.ar {
+  display: unset;
+  background-color: unset;
+  color: unset;
+  text-decoration: none;
+  border-radius: unset;
+  padding: unset;
+  font-weight: unset;
+}
+
 main {
   position: absolute;
   width: 100vw;
@@ -449,7 +459,7 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
   box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.2);
 }
 

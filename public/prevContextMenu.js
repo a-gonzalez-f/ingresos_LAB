@@ -94,7 +94,7 @@ async function handleContextMenu(event) {
               <h3>Detalles ${unidad}</h3>        
               <p>Linea: ${linea}</p>
               <p>Estado: ${estado}</p>
-              <p>Trabajadores: ${trabajador.join(", ")}</p>
+              <p>Trabajadores: ${trabajador.join(" - ")}</p>
               <p>Comentarios:</p>
               <div class="commentsList">
                 <ul>
