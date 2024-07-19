@@ -28,7 +28,37 @@ async function handleContextMenu(event) {
     const itemSystem = targetCard.sistema;
     const itemUnidad = targetCard.unidad;
     const itemWorker = targetCard.trabajador;
-    console.log(itemId, itemType, itemSystem, itemUnidad, itemWorker);
+    const itemLinea = targetCard.linea;
+    console.log(
+      itemId,
+      itemType,
+      itemSystem,
+      itemUnidad,
+      itemWorker,
+      itemLinea
+    );
+
+    const dataToSave = {
+      itemId,
+      itemType,
+      itemSystem,
+      itemUnidad,
+      itemLinea,
+      itemWorker,
+    };
+
+    // Guardar los datos en localStorage
+    localStorage.setItem("contextMenuData", JSON.stringify(dataToSave));
+
+    // Intentar recuperar los datos para confirmar que se guardaron correctamente
+    const savedData = JSON.parse(localStorage.getItem("contextMenuData"));
+
+    // Verificar si los datos guardados coinciden con los datos que intentaste guardar
+    if (JSON.stringify(savedData) === JSON.stringify(dataToSave)) {
+      console.log("Datos guardados correctamente en localStorage:", savedData);
+    } else {
+      console.error("Error al guardar los datos en localStorage.");
+    }
 
     // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");

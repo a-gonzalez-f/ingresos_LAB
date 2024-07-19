@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       teaCard.trabajador = tea.trabajador.filter(
         (element) => element !== null && element !== undefined && element !== ""
       );
+      teaCard.linea = tea.linea;
 
       // Añadir la clase "realizado" si el estado es "Realizado"
       if (tea.estado === "Realizado") {
@@ -148,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       telemandoCard.trabajador = telemando.trabajador.filter(
         (element) => element !== null && element !== undefined && element !== ""
       );
+      telemandoCard.linea = telemando.linea;
 
       // Añadir la clase "realizado" si el estado es "Realizado"
       if (telemando.estado === "Realizado") {

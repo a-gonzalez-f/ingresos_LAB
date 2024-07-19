@@ -236,3 +236,48 @@ document.querySelector("form").addEventListener("submit", function (event) {
 
   window.location.href = "parte.html";
 });
+
+//-----------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Obtener los datos del localStorage
+  const contextMenuData =
+    JSON.parse(localStorage.getItem("contextMenuData")) || {};
+  console.log("contextMenuData:", contextMenuData);
+
+  // Verificar si contextMenuData contiene datos necesarios
+  if (
+    contextMenuData &&
+    contextMenuData.itemLinea &&
+    contextMenuData.itemUnidad &&
+    contextMenuData.itemSystem
+  ) {
+    // Determinar el valor de itemSystem
+    let formattedSystem = contextMenuData.itemSystem;
+    if (contextMenuData.itemSystem === "SEÑALES Y AUXILIARES") {
+      formattedSystem = "Aux.";
+    } else if (contextMenuData.itemSystem === "SUBESTACIONES") {
+      formattedSystem = "S.E.";
+    }
+
+    // Eliminar "SER" y "LC" de itemUnidad si están presentes
+    let formattedUnidad = contextMenuData.itemUnidad
+      .replace("SER", "")
+      .replace("LC", "")
+      .trim();
+
+    // Formar la cadena con el formato deseado
+    const formattedValue = `L${contextMenuData.itemLinea} - ${formattedUnidad} ${formattedSystem}`;
+
+    // Asignar el valor al campo
+    const inputElement = document.getElementById("unidadMantenimiento");
+    if (inputElement) {
+      inputElement.value = formattedValue;
+      console.log("Valor establecido en el campo:", formattedValue);
+    } else {
+      console.error("Elemento #unidadMantenimiento no encontrado.");
+    }
+  } else {
+    console.log("No hay datos suficientes en contextMenuData.");
+  }
+});
