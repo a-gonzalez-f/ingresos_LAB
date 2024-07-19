@@ -24,8 +24,9 @@ async function handleContextMenu(event) {
   const targetCard = event.target.closest(".card");
   if (targetCard) {
     const itemId = targetCard.id;
-    const itemType = targetCard.closest("#teaCards") ? "tea" : "telemando"; // Detectar tipo de item
-    console.log(itemId, itemType);
+    const itemType = targetCard.closest("#teaCards") ? "tea" : "telemando";
+    const itemSystem = targetCard.sistema;
+    console.log(itemId, itemType, itemSystem);
 
     // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");

@@ -139,6 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const telemandoCard = document.createElement("div");
       telemandoCard.classList.add("card");
       telemandoCard.id = telemando._id;
+      telemandoCard.sistema = telemando.sistema;
+      telemandoCard.unidad = telemando.unidad;
 
       // Añadir la clase "realizado" si el estado es "Realizado"
       if (telemando.estado === "Realizado") {
