@@ -26,7 +26,9 @@ async function handleContextMenu(event) {
     const itemId = targetCard.id;
     const itemType = targetCard.closest("#teaCards") ? "tea" : "telemando";
     const itemSystem = targetCard.sistema;
-    console.log(itemId, itemType, itemSystem);
+    const itemUnidad = targetCard.unidad;
+    const itemWorker = targetCard.trabajador;
+    console.log(itemId, itemType, itemSystem, itemUnidad, itemWorker);
 
     // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");
@@ -78,7 +80,17 @@ async function handleContextMenu(event) {
         }
 
         const cardData = await response.json();
-        const { linea, unidad, estado, trabajador, comentarios } = cardData;
+        const {
+          linea,
+          unidad,
+          estado,
+          trabajador: rawTrabajador,
+          comentarios,
+        } = cardData;
+        const trabajador = rawTrabajador.filter(
+          (element) =>
+            element !== null && element !== undefined && element !== ""
+        );
 
         // Crear el comentarioCard
         const comentariosCard = document.createElement("div");
@@ -95,7 +107,7 @@ async function handleContextMenu(event) {
               <h3>Detalles ${unidad}</h3>        
               <p>Linea: ${linea}</p>
               <p>Estado: ${estado}</p>
-              <p>Trabajadores: ${trabajador.join(" - ")}</p>
+              <p>Trabajadores: ${trabajador.join(", ")}</p>
               <p>Comentarios:</p>
               <div class="commentsList">
                 <ul>

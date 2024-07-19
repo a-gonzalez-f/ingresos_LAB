@@ -79,6 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const teaCard = document.createElement("div");
       teaCard.classList.add("card");
       teaCard.id = tea._id;
+      teaCard.unidad = tea.unidad;
+      teaCard.trabajador = tea.trabajador.filter(
+        (element) => element !== null && element !== undefined && element !== ""
+      );
 
       // Añadir la clase "realizado" si el estado es "Realizado"
       if (tea.estado === "Realizado") {
@@ -141,6 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
       telemandoCard.id = telemando._id;
       telemandoCard.sistema = telemando.sistema;
       telemandoCard.unidad = telemando.unidad;
+      telemandoCard.trabajador = telemando.trabajador.filter(
+        (element) => element !== null && element !== undefined && element !== ""
+      );
 
       // Añadir la clase "realizado" si el estado es "Realizado"
       if (telemando.estado === "Realizado") {
