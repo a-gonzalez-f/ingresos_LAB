@@ -6,6 +6,8 @@
   font-family: "Montserrat", sans-serif;
   margin: 0px;
   box-sizing: border-box;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 :root {

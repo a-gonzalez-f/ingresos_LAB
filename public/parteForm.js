@@ -1,3 +1,4 @@
+// parteForm.js
 document.addEventListener("DOMContentLoaded", function () {
   var today = new Date();
   var yyyy = today.getFullYear();
@@ -52,6 +53,25 @@ document.addEventListener("DOMContentLoaded", function () {
       initLegajoListeners();
       initNombreListeners();
     });
+
+  const contextMenuData =
+    JSON.parse(localStorage.getItem("contextMenuData")) || {};
+  const tareaTrabajoElement = document.getElementById("tarea-trabajo");
+
+  if (contextMenuData.itemSystem) {
+    switch (contextMenuData.itemSystem) {
+      case "SEÑALES Y AUXILIARES":
+        tareaTrabajoElement.value = "C1 - Telemandos Aux.";
+        break;
+      case "SUBESTACIONES":
+        tareaTrabajoElement.value = "C3 - Telemandos Subest.";
+        break;
+      default:
+        tareaTrabajoElement.value = "A1 - Carteles TEA";
+    }
+  } else {
+    tareaTrabajoElement.value = "A1 - Carteles TEA";
+  }
 });
 
 function fillLegajosDatalist(workers) {
@@ -200,7 +220,6 @@ function addWorker() {
   const workersContainer = document.querySelector(".workers");
   workersContainer.insertBefore(newWorker, workersContainer.lastElementChild);
 
-  // Añadir event listener al nuevo input de legajo y nombre
   initLegajoListeners();
   initNombreListeners();
 }
@@ -249,15 +268,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (
     contextMenuData &&
     contextMenuData.itemLinea &&
-    contextMenuData.itemUnidad &&
-    contextMenuData.itemSystem
+    contextMenuData.itemUnidad
   ) {
     // Determinar el valor de itemSystem
-    let formattedSystem = contextMenuData.itemSystem;
-    if (contextMenuData.itemSystem === "SEÑALES Y AUXILIARES") {
-      formattedSystem = "Aux.";
-    } else if (contextMenuData.itemSystem === "SUBESTACIONES") {
-      formattedSystem = "S.E.";
+    let formattedSystem = "";
+    if (contextMenuData.itemSystem) {
+      if (contextMenuData.itemSystem === "SEÑALES Y AUXILIARES") {
+        formattedSystem = "Aux.";
+      } else if (contextMenuData.itemSystem === "SUBESTACIONES") {
+        formattedSystem = "S.E.";
+      } else {
+        formattedSystem = contextMenuData.itemSystem;
+      }
     }
 
     // Eliminar "SER" y "LC" de itemUnidad si están presentes

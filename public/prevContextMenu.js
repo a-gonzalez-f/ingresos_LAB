@@ -1,3 +1,4 @@
+// prevContextMenu.js
 let activeContextMenu = null;
 
 document.addEventListener("contextmenu", function (event) {
