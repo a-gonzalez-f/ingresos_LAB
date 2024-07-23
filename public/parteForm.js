@@ -299,6 +299,36 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.error("Elemento #unidadMantenimiento no encontrado.");
     }
+
+    // Función para formatear los nombres
+    const formatName = (name) => {
+      const nameMapping = {
+        Agustin: "Agustin Gonzalez Fidelibus",
+        Daniel: "Daniel Giorgevich",
+        Pablo: "Pablo Santacruz",
+        Federico: "Federico Piñera",
+        Junmara: "Junmara Piñango",
+        Sergio: "Sergio Majer",
+        Pedro: "Pedro Torcasso",
+        Nicolas: "Nicolas Barros",
+      };
+      return nameMapping[name] || name;
+    };
+
+    // Agregar los trabajadores al formulario
+    if (contextMenuData.itemWorker) {
+      contextMenuData.itemWorker.forEach((worker, index) => {
+        const workerIndex = index + 1;
+        // Asegurarse de que hay suficientes inputs para los trabajadores
+        while (workerIndex > workerCount) {
+          addWorker();
+        }
+        const formattedName = formatName(worker);
+        document.getElementById(`nombre-${workerIndex}`).value = formattedName;
+      });
+    } else {
+      console.log("No hay datos de trabajadores en contextMenuData.");
+    }
   } else {
     console.log("No hay datos suficientes en contextMenuData.");
   }
