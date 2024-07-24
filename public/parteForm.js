@@ -60,7 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     JSON.parse(localStorage.getItem("contextMenuData")) || {};
   const tareaTrabajoElement = document.getElementById("tarea-trabajo");
 
-  if (contextMenuData.itemSystem) {
+  if (!contextMenuData.itemSystem && !contextMenuData.itemUnidad) {
+    tareaTrabajoElement.value = "TE - Tarea Eventual";
+  } else if (contextMenuData.itemSystem) {
     switch (contextMenuData.itemSystem) {
       case "SEÑALES Y AUXILIARES":
         tareaTrabajoElement.value = "C1 - Telemandos Aux.";
@@ -71,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
       default:
         tareaTrabajoElement.value = "A1 - Carteles TEA";
     }
-  } else {
+  } else if (!contextMenuData.itemSystem && contextMenuData.itemUnidad) {
     tareaTrabajoElement.value = "A1 - Carteles TEA";
   }
 });
@@ -287,7 +289,6 @@ function autocompleteFields() {
     const inputElement = document.getElementById("unidadMantenimiento");
     if (inputElement) {
       inputElement.value = formattedValue;
-      console.log("Valor establecido en el campo:", formattedValue);
     } else {
       console.error("Elemento #unidadMantenimiento no encontrado.");
     }
@@ -329,3 +330,32 @@ function autocompleteFields() {
     console.log("No hay datos suficientes en contextMenuData.");
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const selector = document.getElementById("tarea-trabajo");
+  const tiempoInput = document.getElementById("tmp-asgn-tareas-1");
+  const tiempoEjc = document.getElementById("tmp-ejct-tareas-1");
+
+  function updateTiempo() {
+    let tiempoValue;
+
+    const selectorValue = selector.value;
+    if (selectorValue === "C3 - Telemandos Subest.") {
+      tiempoValue = "2";
+    } else if (selectorValue === "C1 - Telemandos Aux.") {
+      tiempoValue = "2";
+    } else if (selectorValue === "TE - Tarea Eventual") {
+      tiempoValue = "2";
+    } else if (selectorValue === "A1 - Carteles TEA") {
+      tiempoValue = "2.5";
+    } else {
+      tiempoValue = "";
+    }
+
+    tiempoInput.value = tiempoValue;
+    tiempoEjc.value = tiempoValue;
+  }
+
+  updateTiempo();
+  selector.addEventListener("change", updateTiempo);
+});
