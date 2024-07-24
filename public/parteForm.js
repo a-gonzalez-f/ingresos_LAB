@@ -1,4 +1,3 @@
-// parteForm.js
 document.addEventListener("DOMContentLoaded", function () {
   var today = new Date();
   var yyyy = today.getFullYear();
@@ -52,6 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
       fillNombresDatalist(data);
       initLegajoListeners();
       initNombreListeners();
+
+      // Iniciar la lógica de autocomplete después de cargar los trabajadores
+      autocompleteFields();
     });
 
   const contextMenuData =
@@ -239,12 +241,10 @@ document.querySelector("form").addEventListener("submit", function (event) {
     "tmp-asgn-traslado-1": document.getElementById("tmp-asgn-traslado-1").value,
     "tmp-ejct-tareas-1": document.getElementById("tmp-ejct-tareas-1").value,
     "tmp-ejct-traslado-1": document.getElementById("tmp-ejct-traslado-1").value,
-    "TE - Tarea Eventual": document.getElementById("tarea-trabajo").value,
-    observaciones: document.getElementById("observaciones").value,
+    tareaTrabajo: document.getElementById("tarea-trabajo").value,
     workers: [],
   };
 
-  // Recolectar datos de los trabajadores dinámicamente agregados
   for (let i = 1; i <= workerCount; i++) {
     const legajo = document.getElementById(`legajo-${i}`).value;
     const nombre = document.getElementById(`nombre-${i}`).value;
@@ -256,21 +256,16 @@ document.querySelector("form").addEventListener("submit", function (event) {
   window.location.href = "parte.html";
 });
 
-//-----------------------------------------------------------------
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Obtener los datos del localStorage
+function autocompleteFields() {
   const contextMenuData =
     JSON.parse(localStorage.getItem("contextMenuData")) || {};
   console.log("contextMenuData:", contextMenuData);
 
-  // Verificar si contextMenuData contiene datos necesarios
   if (
     contextMenuData &&
     contextMenuData.itemLinea &&
     contextMenuData.itemUnidad
   ) {
-    // Determinar el valor de itemSystem
     let formattedSystem = "";
     if (contextMenuData.itemSystem) {
       if (contextMenuData.itemSystem === "SEÑALES Y AUXILIARES") {
@@ -282,16 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Eliminar "SER" y "LC" de itemUnidad si están presentes
     let formattedUnidad = contextMenuData.itemUnidad
       .replace("SER", "")
       .replace("LC", "")
       .trim();
 
-    // Formar la cadena con el formato deseado
     const formattedValue = `L${contextMenuData.itemLinea} - ${formattedUnidad} ${formattedSystem}`;
 
-    // Asignar el valor al campo
     const inputElement = document.getElementById("unidadMantenimiento");
     if (inputElement) {
       inputElement.value = formattedValue;
@@ -300,7 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Elemento #unidadMantenimiento no encontrado.");
     }
 
-    // Función para formatear los nombres
     const formatName = (name) => {
       const nameMapping = {
         Agustin: "Agustin Gonzalez Fidelibus",
@@ -315,16 +306,21 @@ document.addEventListener("DOMContentLoaded", () => {
       return nameMapping[name] || name;
     };
 
-    // Agregar los trabajadores al formulario
     if (contextMenuData.itemWorker) {
       contextMenuData.itemWorker.forEach((worker, index) => {
         const workerIndex = index + 1;
-        // Asegurarse de que hay suficientes inputs para los trabajadores
         while (workerIndex > workerCount) {
           addWorker();
         }
         const formattedName = formatName(worker);
-        document.getElementById(`nombre-${workerIndex}`).value = formattedName;
+        const nombreInput = document.getElementById(`nombre-${workerIndex}`);
+        nombreInput.value = formattedName;
+
+        // Disparar evento input para autocompletar legajo
+        const event = new Event("input", { bubbles: true });
+        nombreInput.dispatchEvent(event);
+
+        localStorage.removeItem("contextMenuData");
       });
     } else {
       console.log("No hay datos de trabajadores en contextMenuData.");
@@ -332,4 +328,4 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.log("No hay datos suficientes en contextMenuData.");
   }
-});
+}
