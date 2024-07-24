@@ -74,8 +74,14 @@ async function handleContextMenu(event) {
     const comentarioSubMenu = document.createElement("div");
     comentarioSubMenu.classList.add("sub-menu", "hover");
     comentarioSubMenu.innerHTML = `
-          <span>Comentarios</span>
-        `;
+      <span>Comentarios</span>
+    `;
+
+    const parteSubMenu = document.createElement("div");
+    parteSubMenu.classList.add("sub-menu", "hover");
+    parteSubMenu.innerHTML = `
+      <span><a href="./parteForm.html" target="_blank" rel="noopener noreferrer">Parte</a></span>
+    `;
 
     // Crear un div contenedor para todos los trabajadores
     const workersContainer = document.createElement("div");
@@ -181,10 +187,9 @@ async function handleContextMenu(event) {
     }
 
     arregladoSubMenu.appendChild(workersContainer);
-
     contextMenu.appendChild(arregladoSubMenu);
-
     contextMenu.appendChild(comentarioSubMenu);
+    contextMenu.appendChild(parteSubMenu);
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
