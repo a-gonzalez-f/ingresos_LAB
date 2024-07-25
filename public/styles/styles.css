@@ -412,7 +412,15 @@ div.context-menu > div:nth-child(3) > span > a {
   height: 100%;
 }
 
-div.context-menu > div:nth-child(3) > span > a:hover {
+body > header > a {
+  padding: unset;
+  background-color: unset;
+  color: unset;
+  font-weight: unset;
+}
+
+div.context-menu > div:nth-child(3) > span > a:hover,
+body > header > a:hover {
   filter: unset;
   border-radius: unset;
   box-shadow: unset;
