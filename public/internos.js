@@ -1,7 +1,8 @@
 // internos.js
 document.addEventListener("DOMContentLoaded", async function () {
+  const SERVER_URL = "http://172.26.211.60:3000";
   try {
-    const response = await fetch("http://localhost:3000/listar-internos");
+    const response = await fetch(`${SERVER_URL}/listar-internos`);
     if (!response.ok) {
       throw new Error("Error al obtener la lista de internos");
     }
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         emptyTable: "No hay datos disponibles en la tabla",
       },
       ajax: {
-        url: "http://localhost:3000/listar-internos",
+        url: `${SERVER_URL}/listar-internos`,
         dataSrc: "",
       },
       columns: [

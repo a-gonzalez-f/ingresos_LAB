@@ -5,30 +5,6 @@ const path = require("path");
 const app = express();
 const { Modelo, ModeloInternos, ModeloTea, ModeloTelemandos } = require("./db");
 
-// Borrar trabajadores asignados en TEA
-// ModeloTea.updateMany(
-//   { trabajador: { $type: "string" } },
-//   { $set: { trabajador: [""] } }
-// )
-//   .then((result) => {
-//     console.log(`Se actualizaron ${result.nModified} documentos`);
-//   })
-//   .catch((error) => {
-//     console.error("Error al actualizar documentos:", error);
-//   });
-
-// Borrar trabajadores asignados en Telemandos
-// ModeloTelemandos.updateMany(
-//   { trabajador: { $type: "string" } },
-//   { $set: { trabajador: [""] } }
-// )
-//   .then((result) => {
-//     console.log(`Se actualizaron ${result.nModified} documentos`);
-//   })
-//   .catch((error) => {
-//     console.error("Error al actualizar documentos:", error);
-//   });
-
 app.use(express.json());
 
 // Configura express.static para servir archivos estáticos desde el directorio 'public'
@@ -219,7 +195,7 @@ app.get("/internos", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "internos.html"));
 });
 
-// Ruta para manejar solicitudes GET en "/listar-internos"
+// Ruta para manejar solicitudes GET en "/api/listar-internos"
 app.get("/listar-internos", async (req, res) => {
   try {
     const internos = await ModeloInternos.find();
@@ -363,33 +339,6 @@ app.get("/workers.json", (req, res) => {
 app.get("/supervisores.json", (req, res) => {
   res.sendFile(path.join(__dirname, "supervisores.json"));
 });
-
-// Ruta para manejar solicitudes POST en "/enviar-comentario/:itemType/:id"
-// server.js
-
-// Borrar trabajadores asignados en TEA
-// ModeloTea.updateMany(
-//   { trabajador: { $type: "string" } },
-//   { $set: { trabajador: [""] } }
-// )
-//   .then((result) => {
-//     console.log(`Se actualizaron ${result.nModified} documentos`);
-//   })
-//   .catch((error) => {
-//     console.error("Error al actualizar documentos:", error);
-//   });
-
-// Borrar trabajadores asignados en Telemandos
-// ModeloTelemandos.updateMany(
-//   { trabajador: { $type: "string" } },
-//   { $set: { trabajador: [""] } }
-// )
-//   .then((result) => {
-//     console.log(`Se actualizaron ${result.nModified} documentos`);
-//   })
-//   .catch((error) => {
-//     console.error("Error al actualizar documentos:", error);
-//   });
 
 app.use(express.json());
 
@@ -844,4 +793,5 @@ app.delete("/eliminar-comentario/:itemType/:id/:index", async (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
+const HOST = "172.26.211.60";
+app.listen(PORT, HOST, () => console.log(`Servidor en http://${HOST}:${PORT}`));

@@ -105,9 +105,8 @@ async function handleContextMenu(event) {
         activeContextMenu = null;
       }
       // Obtener datos necesarios para el comentarioCard
-      const response = await fetch(
-        `http://localhost:3000/obtener-equipo/${equipoId}`
-      );
+      const SERVER_URL = "http://172.26.211.60:3000";
+      const response = await fetch(`${SERVER_URL}/obtener-equipo/${equipoId}`);
       const equipoData = await response.json();
       const {
         equipo,

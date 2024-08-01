@@ -2,7 +2,22 @@
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/ingresosLAB");
+mongoose
+  .connect("mongodb://172.26.211.60:27017/ingresosLAB", {})
+  .then(() => console.log("Conexión a MongoDB exitosa"))
+  .catch((err) => console.error("Error de conexión a MongoDB:", err));
+
+mongoose.connection.on("connected", () => {
+  console.log("Conectado a MongoDB");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.error("Error de conexión a MongoDB:", err);
+});
+
+mongoose.connection.on("disconnected", () => {
+  console.log("Desconectado de MongoDB");
+});
 
 const schema = new mongoose.Schema({
   fechaIngreso: Date,

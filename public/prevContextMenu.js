@@ -1,6 +1,8 @@
 // prevContextMenu.js
 let activeContextMenu = null;
 
+const SERVER_URL = "http://172.26.211.60:3000";
+
 document.addEventListener("contextmenu", function (event) {
   event.preventDefault();
 });
@@ -109,7 +111,7 @@ async function handleContextMenu(event) {
 
         // Obtener datos necesarios para el comentarioCard
         const response = await fetch(
-          `http://localhost:3000/obtener-preventivo/${itemType}/${itemId}`
+          `${SERVER_URL}/obtener-preventivo/${itemType}/${itemId}`
         );
 
         if (!response.ok) {
@@ -227,8 +229,8 @@ function closeContextMenu(event) {
 async function assignedWorker(itemId, worker, itemType) {
   const endpoint =
     itemType === "tea"
-      ? `http://localhost:3000/asignar-trabajador-tea/${itemId}`
-      : `http://localhost:3000/asignar-trabajador-telemando/${itemId}`;
+      ? `${SERVER_URL}/asignar-trabajador-tea/${itemId}`
+      : `${SERVER_URL}/asignar-trabajador-telemando/${itemId}`;
 
   try {
     const response = await fetch(endpoint, {
@@ -271,7 +273,7 @@ async function sendComment(itemId, itemType) {
 
   // Enviar el comentario a la base de datos
   const response = await fetch(
-    `http://localhost:3000/enviar-comentario/${itemType}/${itemId}`,
+    `${SERVER_URL}/enviar-comentario/${itemType}/${itemId}`,
     {
       method: "POST",
       headers: {
@@ -304,7 +306,7 @@ async function deleteComment(itemId, index, itemType) {
   if (confirmacion) {
     try {
       const response = await fetch(
-        `http://localhost:3000/eliminar-comentario/${itemType}/${itemId}/${index}`,
+        `${SERVER_URL}/eliminar-comentario/${itemType}/${itemId}/${index}`,
         {
           method: "DELETE",
         }

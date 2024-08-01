@@ -17,9 +17,10 @@ const columnVisibility = [
   true, // 13: Checkbox
 ];
 
+const SERVER_URL = "http://172.26.211.60:3000";
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const response = await fetch("http://localhost:3000/listar-equipos");
+    const response = await fetch(`${SERVER_URL}/listar-equipos`);
     if (!response.ok) {
       throw new Error("Error al obtener la lista de equipos");
     }
@@ -180,23 +181,10 @@ function fillTable(data) {
 let deleteConfirmationReceived = false;
 
 async function deleteEquipo(id) {
-  if (!deleteConfirmationReceived) {
-    const confirmacion = window.confirm(
-      "¿Estás seguro de que quieres eliminar este equipo?"
-    );
-
-    if (!confirmacion) {
-      return;
-    }
-  }
-
   try {
-    const response = await fetch(
-      `http://localhost:3000/eliminar-equipo/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`${SERVER_URL}/eliminar-equipo/${id}`, {
+      method: "DELETE",
+    });
 
     if (!response.ok) {
       throw new Error("Error al eliminar el equipo");
@@ -232,21 +220,19 @@ function deleteSelectedEquipos() {
   if (confirmacion) {
     deleteConfirmationReceived = true;
     equipoIds.forEach((equipoId) => deleteEquipo(equipoId));
+    window.location.reload();
   }
 }
 
 async function changeStatus(equipoId, nuevoEstado) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/cambiar-estado/${equipoId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ estado: nuevoEstado }),
-      }
-    );
+    const response = await fetch(`${SERVER_URL}/cambiar-estado/${equipoId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ estado: nuevoEstado }),
+    });
 
     if (!response.ok) {
       throw new Error("Error al cambiar el estado del equipo");
@@ -262,7 +248,7 @@ async function changeStatus(equipoId, nuevoEstado) {
 async function assignedWorker(equipoId, worker) {
   try {
     const response = await fetch(
-      `http://localhost:3000/asignar-trabajador/${equipoId}`,
+      `${SERVER_URL}/asignar-trabajador/${equipoId}`,
       {
         method: "PATCH",
         headers: {
@@ -342,18 +328,15 @@ async function sendComment(equipoId) {
   commentSpan.textContent = commentText;
 
   // Enviar el comentario a la base de datos
-  const response = await fetch(
-    `http://localhost:3000/enviar-comentario/${equipoId}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comentario: `${divDate.outerHTML} ${commentSpan.outerHTML}`,
-      }),
-    }
-  );
+  const response = await fetch(`${SERVER_URL}/enviar-comentario/${equipoId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      comentario: `${divDate.outerHTML} ${commentSpan.outerHTML}`,
+    }),
+  });
 
   // Verificar si la operación fue exitosa
   if (response.ok) {
@@ -372,7 +355,7 @@ async function deleteComment(equipoId, index) {
   if (confirmacion) {
     try {
       const response = await fetch(
-        `http://localhost:3000/eliminar-comentario/${equipoId}/${index}`,
+        `${SERVER_URL}/eliminar-comentario/${equipoId}/${index}`,
         {
           method: "DELETE",
         }
@@ -381,7 +364,6 @@ async function deleteComment(equipoId, index) {
       if (!response.ok) {
         throw new Error("Error al eliminar el comentario");
       }
-
       window.location.reload();
     } catch (error) {
       console.error(error.message);

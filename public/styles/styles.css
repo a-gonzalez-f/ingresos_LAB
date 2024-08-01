@@ -503,7 +503,7 @@ footer {
   position: absolute;
   background-color: var(--primary-color);
   color: #fff;
-  box-shadow: 0 0 20px 10px rgba(130, 130, 130, 0.5);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
   z-index: 3;
   cursor: pointer;
   border-radius: 2px;

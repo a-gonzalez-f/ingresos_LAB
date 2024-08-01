@@ -41,7 +41,8 @@ document
     delete jsonData["cantidad"];
 
     for (let i = 0; i < cantidad; i++) {
-      const response = await fetch("http://localhost:3000/guardar-dato", {
+      const SERVER_URL = "http://172.26.211.60:3000";
+      const response = await fetch(`${SERVER_URL}/guardar-dato`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
