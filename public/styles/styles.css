@@ -601,7 +601,7 @@ td > button:hover,
   font-weight: 600;
 }
 
-svg.dbtn:hover {
+.hover:hover svg.dbtn {
   fill: var(--n-color);
 }
 
