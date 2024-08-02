@@ -98,7 +98,9 @@ td:nth-child(1) {
 td:nth-child(2) {
   width: 130px;
 }
-/*columna checkbox*/
 td:nth-last-child(1) {
   width: 50px !important;
+}
+#thLinea {
+  width: 50px;
 }

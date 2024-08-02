@@ -1,6 +1,6 @@
 // listado.js
 
-const columnVisibility = [
+let columnVisibility = [
   true, // 0: Ingreso
   false, // 1: Ingresado por
   false, // 2: Email
@@ -27,6 +27,17 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await response.json();
     fillTable(data);
+
+    const storedVisibility = localStorage.getItem("columnVisibility");
+    if (storedVisibility) {
+      columnVisibility = JSON.parse(storedVisibility);
+    }
+
+    columnVisibility.forEach((visible, index) => {
+      const buttonText = visible ? "Ocultar" : "Mostrar";
+      $(`#toggleBtn-${index}`).text(buttonText);
+    });
+
     $("#equipos-table").DataTable({
       paging: false,
       ordering: true,
@@ -59,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   } catch (error) {
     console.error(error.message);
   }
+
   const checkboxes = document.querySelectorAll(
     '.checkbox-cell input[type="checkbox"]'
   );
@@ -82,7 +94,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     checkbox.addEventListener("change", actualizarEstadoBoton);
   });
 
-  // Llamar a la función al cargar la página para asegurarse de que el estado inicial del botón sea correcto
   actualizarEstadoBoton();
 });
 
@@ -95,6 +106,8 @@ function toggleColumn(columnIndex) {
 
   const buttonText = columnVisibility[columnIndex] ? "Ocultar" : "Mostrar";
   $(`#toggleBtn-${columnIndex}`).text(buttonText);
+
+  localStorage.setItem("columnVisibility", JSON.stringify(columnVisibility));
 }
 
 function formatDate(dateString) {
