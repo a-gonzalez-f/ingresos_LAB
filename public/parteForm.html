@@ -53,6 +53,29 @@
           <h2>PARTE DE TRABAJO</h2>
         </div>
         <div class="ins">
+          <div>
+            <label for="unidadMantenimiento">Unidad de Mantenimiento</label>
+            <input
+              type="text"
+              name="unidadMantenimiento"
+              id="unidadMantenimiento"
+            />
+          </div>
+          <div>
+            <label for="tarea-trabajo">Tarea / Trabajo</label>
+            <select
+              id="tarea-trabajo"
+              name="TE - Tarea Eventual"
+              value="TE - Tarea Eventual"
+            >
+              <option value="TE - Tarea Eventual">TE - Tarea Eventual</option>
+              <option value="C1 - Telemandos Aux.">C1 - Telemandos Aux.</option>
+              <option value="C3 - Telemandos Subest.">
+                C3 - Telemandos Subest.
+              </option>
+              <option value="A1 - Carteles TEA">A1 - Carteles TEA</option>
+            </select>
+          </div>
           <h6>FECHA</h6>
           <div class="categ">
             <div>
@@ -67,41 +90,6 @@
               <label for="fechaRealizada">Realizada </label>
               <input type="date" name="fechaRealizada" id="fechaRealizada" />
             </div>
-          </div>
-          <h6>Traslados</h6>
-          <div class="categ">
-            <div>
-              <label for="traslado-desde">Desde </label>
-              <input
-                type="text"
-                value="Lacroze"
-                id="traslado-desde"
-                name="traslado-desde"
-              />
-            </div>
-            <div>
-              <label for="traslado-hasta">Hasta </label>
-              <input type="text" name="traslado-hasta" id="traslado-hasta" />
-            </div>
-          </div>
-          <h6>Horario</h6>
-          <div class="categ">
-            <div>
-              <label for="inicio">Inicio </label>
-              <input type="time" value="08:00" name="inicio" id="inicio" />
-            </div>
-            <div>
-              <label for="final">Final </label>
-              <input type="time" value="10:00" name="final" id="final" />
-            </div>
-          </div>
-          <div>
-            <label for="unidadMantenimiento">Unidad de Mantenimiento</label>
-            <input
-              type="text"
-              name="unidadMantenimiento"
-              id="unidadMantenimiento"
-            />
           </div>
           <div>
             <h6>TIEMPO</h6>
@@ -164,20 +152,32 @@
               </div>
             </div>
           </div>
-          <div>
-            <label for="tarea-trabajo">Tarea / Trabajo</label>
-            <select
-              id="tarea-trabajo"
-              name="TE - Tarea Eventual"
-              value="TE - Tarea Eventual"
-            >
-              <option value="TE - Tarea Eventual">TE - Tarea Eventual</option>
-              <option value="C1 - Telemandos Aux.">C1 - Telemandos Aux.</option>
-              <option value="C3 - Telemandos Subest.">
-                C3 - Telemandos Subest.
-              </option>
-              <option value="A1 - Carteles TEA">A1 - Carteles TEA</option>
-            </select>
+          <h6>Horario</h6>
+          <div class="categ">
+            <div>
+              <label for="inicio">Inicio </label>
+              <input type="time" value="08:00" name="inicio" id="inicio" />
+            </div>
+            <div>
+              <label for="final">Final </label>
+              <input type="time" value="10:00" name="final" id="final" />
+            </div>
+          </div>
+          <h6>Traslados</h6>
+          <div class="categ">
+            <div>
+              <label for="traslado-desde">Desde </label>
+              <input
+                type="text"
+                value="Lacroze"
+                id="traslado-desde"
+                name="traslado-desde"
+              />
+            </div>
+            <div>
+              <label for="traslado-hasta">Hasta </label>
+              <input type="text" name="traslado-hasta" id="traslado-hasta" />
+            </div>
           </div>
           <div>
             <label for="observaciones">Observaciones</label>

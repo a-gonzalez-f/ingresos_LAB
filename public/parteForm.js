@@ -9,25 +9,24 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("fechaPlanificada").value = todayStr;
   document.getElementById("fechaRealizada").value = todayStr;
 
-  document.getElementById("inicio").addEventListener("change", calculateHours);
-  document.getElementById("final").addEventListener("change", calculateHours);
+  document.getElementById("inicio").addEventListener("change", calculateFinal);
+  document
+    .getElementById("tmp-ejct-tareas-1")
+    .addEventListener("change", calculateFinal);
 
-  function calculateHours() {
+  function calculateFinal() {
     var inicio = document.getElementById("inicio").value;
-    var final = document.getElementById("final").value;
+    var hours = parseFloat(document.getElementById("tmp-ejct-tareas-1").value);
 
-    if (inicio && final) {
+    if (inicio && !isNaN(hours)) {
       var start = new Date(`1970-01-01T${inicio}:00`);
-      var end = new Date(`1970-01-01T${final}:00`);
-      var diff = (end - start) / (1000 * 60 * 60);
+      var end = new Date(start.getTime() + hours * 60 * 60 * 1000);
 
-      if (diff < 0) {
-        diff += 24;
-      }
+      var finalHours = end.getHours().toString().padStart(2, "0");
+      var finalMinutes = end.getMinutes().toString().padStart(2, "0");
+      var finalTime = `${finalHours}:${finalMinutes}`;
 
-      document.getElementById("tmp-asgn-tareas-1").value = diff;
-      document.getElementById("tmp-ejct-tareas-1").value =
-        document.getElementById("tmp-asgn-tareas-1").value;
+      document.getElementById("final").value = finalTime;
     }
   }
 
@@ -76,6 +75,34 @@ document.addEventListener("DOMContentLoaded", function () {
   } else if (!contextMenuData.itemSystem && contextMenuData.itemUnidad) {
     tareaTrabajoElement.value = "A1 - Carteles TEA";
   }
+
+  const selector = document.getElementById("tarea-trabajo");
+  const tiempoInput = document.getElementById("tmp-asgn-tareas-1");
+  const tiempoEjc = document.getElementById("tmp-ejct-tareas-1");
+
+  function updateTiempo() {
+    let tiempoValue;
+
+    const selectorValue = selector.value;
+    if (selectorValue === "C3 - Telemandos Subest.") {
+      tiempoValue = "2";
+    } else if (selectorValue === "C1 - Telemandos Aux.") {
+      tiempoValue = "2";
+    } else if (selectorValue === "TE - Tarea Eventual") {
+      tiempoValue = "2";
+    } else if (selectorValue === "A1 - Carteles TEA") {
+      tiempoValue = "2.5";
+    } else {
+      tiempoValue = "";
+    }
+
+    tiempoInput.value = tiempoValue;
+    tiempoEjc.value = tiempoValue;
+    calculateFinal();
+  }
+
+  updateTiempo();
+  selector.addEventListener("change", updateTiempo);
 });
 
 function fillLegajosDatalist(workers) {
@@ -330,32 +357,3 @@ function autocompleteFields() {
     console.log("No hay datos suficientes en contextMenuData.");
   }
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const selector = document.getElementById("tarea-trabajo");
-  const tiempoInput = document.getElementById("tmp-asgn-tareas-1");
-  const tiempoEjc = document.getElementById("tmp-ejct-tareas-1");
-
-  function updateTiempo() {
-    let tiempoValue;
-
-    const selectorValue = selector.value;
-    if (selectorValue === "C3 - Telemandos Subest.") {
-      tiempoValue = "2";
-    } else if (selectorValue === "C1 - Telemandos Aux.") {
-      tiempoValue = "2";
-    } else if (selectorValue === "TE - Tarea Eventual") {
-      tiempoValue = "2";
-    } else if (selectorValue === "A1 - Carteles TEA") {
-      tiempoValue = "2.5";
-    } else {
-      tiempoValue = "";
-    }
-
-    tiempoInput.value = tiempoValue;
-    tiempoEjc.value = tiempoValue;
-  }
-
-  updateTiempo();
-  selector.addEventListener("change", updateTiempo);
-});
