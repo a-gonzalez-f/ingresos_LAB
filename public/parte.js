@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("inicio").textContent = formData.inicio;
     document.getElementById("final").textContent = formData.final;
     document.getElementById("tarea-trabajo").textContent =
-      formData["TE - Tarea Eventual"];
+      formData["tareaTrabajo"];
     document.getElementById("observaciones").textContent =
       formData.observaciones;
 
@@ -58,26 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     localStorage.removeItem("formData");
   }
-});
 
-function descargarParte() {
-  const element = document.getElementById("content");
-  const formData = JSON.parse(localStorage.getItem("formData"));
-  const fechaRealizada = formData
-    ? formData.fechaRealizada
-    : new Date().toISOString().slice(0, 10);
-  const opt = {
-    margin: 1,
-    filename: `Parte-de-Trabajo-${fechaRealizada}.pdf`,
-    html2canvas: { scale: 2 },
-    image: { type: "jpeg", quality: 0.99 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-  };
-  html2pdf().set(opt).from(element).save();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
   const tareaTrabajo = document.getElementById("tarea-trabajo");
   const tbodyA1 = document.querySelector(".A1");
   const tbodyC1 = document.querySelector(".C1");
@@ -111,3 +92,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const observer = new MutationObserver(updateDisplay);
   observer.observe(tareaTrabajo, { childList: true, subtree: true });
 });
+
+function descargarParte() {
+  const element = document.getElementById("content");
+  const formData = JSON.parse(localStorage.getItem("formData"));
+  const fechaRealizada = formData
+    ? formData.fechaRealizada
+    : new Date().toISOString().slice(0, 10);
+  const opt = {
+    margin: 1,
+    filename: `Parte-de-Trabajo-${fechaRealizada}.pdf`,
+    html2canvas: { scale: 2 },
+    image: { type: "jpeg", quality: 0.99 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+  };
+  html2pdf().set(opt).from(element).save();
+}

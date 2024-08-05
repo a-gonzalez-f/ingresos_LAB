@@ -271,6 +271,7 @@ document.querySelector("form").addEventListener("submit", function (event) {
     "tmp-ejct-tareas-1": document.getElementById("tmp-ejct-tareas-1").value,
     "tmp-ejct-traslado-1": document.getElementById("tmp-ejct-traslado-1").value,
     tareaTrabajo: document.getElementById("tarea-trabajo").value,
+    observaciones: document.getElementById("observaciones").value,
     workers: [],
   };
 
