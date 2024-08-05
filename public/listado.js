@@ -203,19 +203,22 @@ async function deleteEquipo(id) {
       throw new Error("Error al eliminar el equipo");
     }
 
+    // Actualizar la tabla dinámicamente en lugar de recargar la página
+    $(`#equipo-${id}`).remove();
+
     // Si se ha confirmado la eliminación de los equipos seleccionados, no mostrar más confirmaciones
-    if (deleteConfirmationReceived) {
-      deleteConfirmationReceived = false;
-    } else {
-      window.location.reload();
-    }
+    // if (deleteConfirmationReceived) {
+    //   deleteConfirmationReceived = false;
+    // } else {
+    //   window.location.reload();
+    // }
   } catch (error) {
     console.error(error.message);
     alert("Error al eliminar el equipo");
   }
 }
 
-function deleteSelectedEquipos() {
+async function deleteSelectedEquipos() {
   const checkboxes = document.querySelectorAll(
     'input[type="checkbox"]:checked'
   );
@@ -232,9 +235,18 @@ function deleteSelectedEquipos() {
 
   if (confirmacion) {
     deleteConfirmationReceived = true;
-    equipoIds.forEach((equipoId) => deleteEquipo(equipoId));
-    window.location.reload();
+
+    for (const equipoId of equipoIds) {
+      await deleteEquipo(equipoId);
+    }
+
+    deleteConfirmationReceived = false; // Restablecer la confirmación
   }
+  // if (confirmacion) {
+  //   deleteConfirmationReceived = true;
+  //   equipoIds.forEach((equipoId) => deleteEquipo(equipoId));
+  //   window.location.reload();
+  // }
 }
 
 async function changeStatus(equipoId, nuevoEstado) {
