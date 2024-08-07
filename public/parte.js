@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
         row.innerHTML = `
           <td>${worker.legajo}</td>
           <td>${worker.nombre}</td>
-          <td>${formData["tmp-asgn-tareas-1"]}</td>
-          <td>${formData["tmp-asgn-traslado-1"]}</td>
-          <td>${formData["tmp-ejct-tareas-1"]}</td>
-          <td>${formData["tmp-ejct-traslado-1"]}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         `;
       }
     });
