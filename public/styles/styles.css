@@ -351,28 +351,83 @@ svg {
   margin-top: 20px;
   flex-wrap: wrap;
   justify-content: center;
+  width: 55vw;
 }
 
 .homeMenu > div {
-  width: 30%;
+  width: 300px;
 }
 
-.homeMenu > div > a {
+.homeMenu > div > a,
+div.equiposSubmenu > div.submenuContent > div > a,
+.equiposDefault {
   background-color: var(--color-0) !important;
   color: var(--color-1) !important;
   transition: background-color 0.3s;
 }
-.homeMenu > div > a:hover {
+.homeMenu > div > a:hover,
+div.equiposSubmenu > div.submenuContent > div > a:hover {
   background-color: var(--color-2) !important;
 }
-.homeMenu > div > a > p {
+.homeMenu > div > a > p,
+div.equiposSubmenu > div.submenuContent > div > a > p,
+div.equiposSubmenu > div.equiposDefault > p {
   margin: 0;
 }
-.homeMenu > div > a > p:first-child {
+.homeMenu > div > a > p:first-child,
+div.equiposSubmenu > div.submenuContent > div > a > p:first-child,
+div.equiposSubmenu > div.equiposDefault > p:first-child {
   font-weight: 700;
 }
-.homeMenu > div > a > p:last-child {
+.homeMenu > div > a > p:last-child,
+div.equiposSubmenu > div.submenuContent > div > a > p:last-child,
+div.equiposSubmenu > div.equiposDefault > p:last-child {
   opacity: 0.7;
+}
+
+.equiposDefault {
+  position: relative;
+  display: block;
+  background-color: var(--color-0);
+  color: var(--color-1);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  padding: 20px 30px;
+  font-weight: 500;
+}
+
+.equiposDefault:hover {
+  filter: brightness(1.1);
+  border-radius: 3px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.submenuContent {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.submenuContent > div {
+  width: 50%;
+}
+
+.equiposSubmenu .submenuContent {
+  display: none;
+  z-index: 1;
+}
+
+.equiposSubmenu:hover .submenuContent {
+  display: flex;
+}
+
+.equiposSubmenu .equiposDefault {
+  display: block;
+}
+
+.equiposSubmenu:hover .equiposDefault {
+  display: none;
 }
 
 ul {
