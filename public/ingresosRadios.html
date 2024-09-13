@@ -1,0 +1,211 @@
+<!-- ingreso -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Ingresos Radios- LAB</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="icon" href="img/favicon-emova.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="img/favicon-emova.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body class="flex">
+    <header>
+      <a href="./"><h1>TECNOLOGÍAS DIGITALES - LABORATORIO</h1></a>
+      <div class="menu">
+        <div class="hmb">
+          <img src="./img/icons/menu.png" />
+        </div>
+        <div class="lim">
+          <div class="il">
+            <a class="am" href="/">Home</a>
+          </div>
+          <div class="il" id="equipos">
+            <p class="am">Equipos</p>
+            <div class="equipos">
+              <a class="am" href="./ingreso-equipos">Ingreso</a>
+              <a class="am" href="./listado-equipos">Listado</a>
+            </div>
+          </div>
+          <div class="il" id="radios">
+            <p class="am">Radios</p>
+            <div class="radios">
+              <a class="am" href="./ingreso-radios">Ingreso</a>
+              <a class="am" href="./listado-radios">Listado</a>
+            </div>
+          </div>
+          <div class="il">
+            <a class="am" href="./preventivos">Preventivos</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./internos">Internos</a>
+          </div>
+          <div class="il">
+            <a class="am" href="./formulario-parte">Partes</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <h2>INGRESO DE RADIOS</h2>
+    <form id="ingreso-TT">
+      <div>
+        <label for="modeloRadio">Modelo Radio:</label>
+        <select class="inputs" id="modeloRadio" name="modeloRadio">
+          <option value="MTM5400">MTM5400</option>
+          <option value="MTM800e">MTM800e</option>
+          <option value="MTP3250">MTP3250</option>
+          <option value="MTP850">MTP850</option>
+        </select>
+      </div>
+      <div>
+        <label for="idTT">ID:</label>
+        <input
+          class="inputs"
+          type="number"
+          id="idTT"
+          name="idTT"
+          placeholder="Ingrese ID"
+          maxlength="30"
+          required
+        />
+      </div>
+      <div>
+        <label for="aliasTT">Alias:</label>
+        <input
+          class="inputs"
+          type="text"
+          id="aliasTT"
+          name="aliasTT"
+          placeholder="Ingrese Alias"
+          maxlength="30"
+        />
+      </div>
+      <div>
+        <label for="nSerieTT">N° de Serie:</label>
+        <input
+          class="inputs"
+          type="text"
+          id="nSerieTT"
+          name="nSerieTT"
+          placeholder="Ingrese N° de Serie"
+          maxlength="30"
+        />
+      </div>
+      <div>
+        <label for="lineaTT">Línea:</label>
+        <select class="inputs" id="lineaTT" name="lineaTT">
+          <option value="N/A">N/A</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="H">H</option>
+          <option value="P">P</option>
+        </select>
+      </div>
+      <div class="switch" style="display: none">
+        <label for="modeloTT">Modelo Tren:</label>
+        <select class="inputs" id="modeloTT" name="modeloTT"></select>
+      </div>
+      <div class="switch formacion" style="display: none">
+        <label for="formacionTT">Formación:</label>
+        <input
+          class="inputs"
+          type="text"
+          id="formacionTT"
+          name="formacionTT"
+          placeholder="Ingrese Formación"
+          maxlength="6"
+        />
+      </div>
+      <div class="switch cabina" style="display: none">
+        <label for="cabinaTT">Cabina:</label>
+        <select class="inputs" id="cabinaTT" name="cabinaTT"></select>
+      </div>
+      <div class="sector">
+        <label for="sectorTT">Sector:</label>
+        <input
+          class="inputs"
+          type="text"
+          id="sectorTT"
+          name="sectorTT"
+          placeholder="Ingrese Sector"
+          maxlength="20"
+        />
+      </div>
+      <div>
+        <label for="estadoTT">Estado:</label>
+        <select class="inputs" id="estadoTT" name="estadoTT">
+          <option value="Funciona">Funciona</option>
+          <option value="Falla">Falla</option>
+        </select>
+      </div>
+      <div>
+        <label for="ubicacionTT">Ubicación:</label>
+        <select class="inputs" id="ubicacionTT" name="ubicacionTT">
+          <option value="En Servicio">En Servicio</option>
+          <option value="En Laboratorio">En Laboratorio</option>
+          <option value="En Policia">En Policía</option>
+        </select>
+      </div>
+      <div class="cye">
+        <div class="estadosTT">
+          <label>Estados:</label>
+          <div class="tt">
+            <label for="microfonoTT">Micrófono</label>
+            <input
+              type="checkbox"
+              id="microfonoTT"
+              name="microfonoTT"
+              checked
+            />
+          </div>
+          <div class="tt">
+            <label for="parlanteTT">Parlante</label>
+            <input type="checkbox" id="parlanteTT" name="parlanteTT" checked />
+          </div>
+          <div class="tt">
+            <label for="fuenteTT">Fuente</label>
+            <input type="checkbox" id="fuenteTT" name="fuenteTT" checked />
+          </div>
+          <div class="tt">
+            <label for="antenaTT">Antena</label>
+            <input type="checkbox" id="antenaTT" name="antenaTT" checked />
+          </div>
+          <div class="mtp hidden">
+            <label for="bateriaTT">Batería</label>
+            <input type="checkbox" id="bateriaTT" name="bateriaTT" checked />
+          </div>
+          <div class="mtp hidden">
+            <label for="pttTT">PTT</label>
+            <input type="checkbox" id="pttTT" name="pttTT" checked />
+          </div>
+        </div>
+        <div class="commentDiv">
+          <label for="commentTT-1">Comentarios:</label>
+          <textarea name="commentTT-1" id="commentTT-1"></textarea>
+        </div>
+      </div>
+      <button class="submitbutton" type="submit">Ingresar</button>
+    </form>
+    <footer>
+      <img
+        src="./img/emova-aplicacion-footer-2.png"
+        alt="emova"
+        class="footer-img"
+      />
+    </footer>
+    <script src="menu.js"></script>
+    <script src="ingresoTT.js"></script>
+  </body>
+</html>

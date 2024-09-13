@@ -50,20 +50,16 @@ async function handleContextMenu(event) {
       itemWorker,
     };
 
-    // Guardar los datos en localStorage
     localStorage.setItem("contextMenuData", JSON.stringify(dataToSave));
 
-    // Intentar recuperar los datos para confirmar que se guardaron correctamente
     const savedData = JSON.parse(localStorage.getItem("contextMenuData"));
 
-    // Verificar si los datos guardados coinciden con los datos que intentaste guardar
     if (JSON.stringify(savedData) === JSON.stringify(dataToSave)) {
       console.log("Datos guardados correctamente en localStorage:", savedData);
     } else {
       console.error("Error al guardar los datos en localStorage.");
     }
 
-    // Cargar el archivo workers.json utilizando fetch
     const response = await fetch("workers.json");
     const workers = await response.json();
 
@@ -85,11 +81,9 @@ async function handleContextMenu(event) {
       <span><a href="./parteForm.html" target="_blank" rel="noopener noreferrer">Parte</a></span>
     `;
 
-    // Crear un div contenedor para todos los trabajadores
     const workersContainer = document.createElement("div");
     workersContainer.classList.add("subMenuLi");
 
-    // Iterar sobre cada objeto de trabajador en el arreglo 'workers'
     workers.forEach((worker) => {
       const workerDiv = document.createElement("div");
       workerDiv.classList.add("hover", "p10");
@@ -103,13 +97,11 @@ async function handleContextMenu(event) {
 
     comentarioSubMenu.addEventListener("click", async () => {
       try {
-        // Cierra el menú contextual
         if (activeContextMenu) {
           activeContextMenu.remove();
           activeContextMenu = null;
         }
 
-        // Obtener datos necesarios para el comentarioCard
         const response = await fetch(
           `${SERVER_URL}/obtener-preventivo/${itemType}/${itemId}`
         );
@@ -131,16 +123,13 @@ async function handleContextMenu(event) {
             element !== null && element !== undefined && element !== ""
         );
 
-        // Crear el comentarioCard
         const comentariosCard = document.createElement("div");
         comentariosCard.className = "comments-card";
 
-        // Filtrar comentarios vacíos
         const filteredComentarios = comentarios.filter(
           (comment) => comment.trim() !== ""
         );
 
-        // Crear y agregar contenido al comentarioCard
         comentariosCard.innerHTML = `
           <div>
               <h3>Detalles ${unidad}</h3>        
@@ -172,7 +161,6 @@ async function handleContextMenu(event) {
 
         document.body.appendChild(comentariosCard);
 
-        // Agregar un event listener para cerrar el comentarioCard al hacer clic fuera de él
         document.addEventListener("click", closeCommentCard);
       } catch (error) {
         console.error(error.message);
@@ -253,17 +241,14 @@ async function assignedWorker(itemId, worker, itemType) {
   }
 }
 
-// Función para enviar el comentario a la base de datos
 async function sendComment(itemId, itemType) {
   const commentText = document.getElementById("commentText").value;
 
-  // Verificar si el comentario está vacío
   if (commentText.trim() === "") {
     alert("El comentario está vacío");
     return;
   }
 
-  // Crear la cadena de fecha y hora formateada
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString();
   const formattedTime = currentDate.toLocaleTimeString([], {
@@ -271,7 +256,6 @@ async function sendComment(itemId, itemType) {
     minute: "2-digit",
   });
 
-  // Enviar el comentario a la base de datos
   const response = await fetch(
     `${SERVER_URL}/enviar-comentario/${itemType}/${itemId}`,
     {
@@ -289,11 +273,9 @@ async function sendComment(itemId, itemType) {
     }
   );
 
-  // Verificar si la operación fue exitosa
   if (response.ok) {
     window.location.reload();
   } else {
-    // Manejar el error en caso de que la operación no sea exitosa
     console.error("Error al enviar el comentario a la base de datos");
   }
 }

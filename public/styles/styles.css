@@ -50,6 +50,12 @@ input {
   color: var(--color-0);
 }
 
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -144,6 +150,11 @@ header {
   border-radius: 5px;
 }
 
+.hmb > img {
+  width: 24px;
+  height: 24px;
+}
+
 .material-symbols-outlined {
   color: white;
 }
@@ -175,12 +186,45 @@ header {
   padding: 10px 10px 10px 20px;
   background-color: inherit;
   border-radius: 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .am:hover {
-  border-radius: 3px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  padding: 10px 20px;
+  padding-left: 2rem;
+  background-color: #333;
+}
+
+.active {
+  background-color: #333;
+}
+
+p.am {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.radios > .am:hover,
+.equipos > .am:hover {
+  padding-left: 3rem !important;
+  background-color: #222222;
+}
+
+.il > .equipos > .am,
+.il > .radios > .am {
+  padding-left: 2rem;
+}
+
+.equipos,
+.radios {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.equipos.show,
+.radios.show {
+  max-height: 100px;
 }
 
 #themeBtn {
@@ -211,7 +255,8 @@ h4 {
   font-weight: 400;
 }
 
-#ingreso-form {
+#ingreso-form,
+#ingreso-TT {
   color: var(--color-0);
   display: flex;
   flex-wrap: wrap;
@@ -225,7 +270,13 @@ h4 {
   margin-bottom: 1rem;
 }
 
-#ingreso-form > div {
+#ingreso-TT {
+  justify-content: space-between;
+  padding: 2rem 10rem;
+}
+
+#ingreso-form > div,
+#ingreso-TT > div {
   margin-bottom: 20px;
 }
 
@@ -241,6 +292,63 @@ label {
   margin-bottom: 12px;
   box-sizing: border-box;
   color: var(--color-0);
+}
+
+select.inputs > option {
+  color: var(--color-0);
+}
+
+#idTT::-webkit-inner-spin-button,
+#idTT::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.commentDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-height: 5rem;
+}
+.commentDiv > textarea {
+  resize: none;
+  overflow-y: hidden;
+  width: 250px;
+  height: 100%;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-0);
+  border-radius: 5px;
+}
+.commentDiv > textarea:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.estadosTT {
+  width: 250px;
+  justify-self: start;
+}
+
+.estadosTT > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cye {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: flex !important;
 }
 
 .submitbutton {
@@ -451,12 +559,12 @@ a {
   font-weight: 500;
 }
 
-a:hover {
+/* a:hover {
   filter: brightness(1.1);
   border-radius: 3px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
-}
+} */
 
 div.context-menu > div:nth-child(3) > span > a {
   padding: unset;
@@ -686,7 +794,7 @@ td > button:hover,
 }
 
 #inputComment {
-  margin-top: auto;
+  margin-top: 1rem;
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -835,7 +943,8 @@ li > button:hover {
 }
 
 #teaCards,
-#telemandosCards {
+#telemandosCards,
+#radiosCards {
   padding: 1rem 2rem;
   display: flex;
   flex-direction: row;
@@ -905,6 +1014,69 @@ li > button:hover {
 .vencido {
   border: 3px solid var(--n-color);
   box-shadow: 0px 0px 3px var(--n-color);
+}
+
+.detContainer {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  background-color: #555;
+  z-index: 3;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 10px 10px black;
+}
+
+.detContainer > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.detalles {
+  padding: 1rem 0;
+}
+.detalles > div {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.detalles > div > p:last-child {
+  margin-bottom: 0;
+}
+.detContainer > .RSubMenu > div {
+  padding: 1rem;
+  cursor: pointer;
+}
+.detContainer > .RSubMenu > div:hover {
+  background-color: #333;
+}
+
+#radiosCards > .card.Falla {
+  border: 2px solid var(--n-color);
+  box-shadow: 0 0 3px var(--n-color);
+}
+
+#radiosCards > .card.Funciona {
+  border: 2px solid var(--p-color);
+  box-shadow: 0 0 3px var(--p-color);
+}
+
+.accesorios {
+  border-left: 1px solid black;
+}
+
+.accesorios > p > svg {
+  margin: 0;
+}
+
+.on {
+  fill: var(--p-color);
+  filter: brightness(1.5);
+}
+.undefined {
+  fill: var(--n-color);
+  filter: brightness(2);
 }
 
 .circle {

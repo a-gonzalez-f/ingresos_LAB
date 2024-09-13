@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let limVisible = false;
   let mouseLeaveTimer;
 
+  const equipos = document.getElementById("equipos");
+  const radios = document.getElementById("radios");
+  const lequipos = document.querySelector("#equipos .equipos");
+  const lradios = document.querySelector("#radios .radios");
+
   hmb.forEach(function (item) {
     item.addEventListener("click", function () {
       if (!limVisible) {
@@ -29,4 +34,18 @@ document.addEventListener("DOMContentLoaded", function () {
   menu.addEventListener("mouseenter", function () {
     clearTimeout(mouseLeaveTimer);
   });
+
+  if (equipos && lequipos) {
+    equipos.addEventListener("click", function () {
+      lequipos.classList.toggle("show");
+      equipos.classList.toggle("active");
+    });
+  }
+
+  if (radios && lradios) {
+    radios.addEventListener("click", function () {
+      lradios.classList.toggle("show");
+      radios.classList.toggle("active");
+    });
+  }
 });
